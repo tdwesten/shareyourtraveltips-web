@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="bg-gray-800 antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Name That Icon!</title>
+    <meta
+      name="description"
+      content="A little game to test your knowledge of Font Awesome Icon names"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css" />
+
+    {{content-for "head"}}
+
+    <link
+      integrity=""
+      rel="stylesheet"
+      href="{{rootURL}}assets/name-that-icon.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;200;300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    {{content-for "head-footer"}}
+  </head>
+  <body>
+    {{content-for "body"}}
+
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/name-that-icon.js"></script>
+
+    {{content-for "body-footer"}}
+  </body>
+</html>

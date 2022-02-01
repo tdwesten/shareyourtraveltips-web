@@ -1,0 +1,28 @@
+# unconventional js
+/blueprints/*/files/
+/vendor/
+/types
+/stories
+# compiled output
+/dist/
+/tmp/
+/scripts/
+
+
+# dependencies
+/bower_components/
+/node_modules/
+
+# misc
+/coverage/
+!.*
+.eslintcache
+.storybook/main.js
+.storybook/preview.js
+app/styles/tailwind.config.js
+ember-cli-build.js
+
+# ember-try
+/.node_modules.ember-try/
+/bower.json.ember-try
+/package.json.ember-try
