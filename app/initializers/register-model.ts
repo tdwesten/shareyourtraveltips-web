@@ -1,8 +1,8 @@
 import Application from '@ember/application';
-import Game from '../models/game';
+import User from '../models/user';
 
 export function initialize(application: Application): void {
-  application.register('object:model', Game);
+  application.register('object:model', User);
 }
 
 export default {

@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = function (environment) {
+  // eslint-disable-next-line prefer-const
   let ENV = {
-    modulePrefix: 'name-that-icon',
+    modulePrefix: 'traveltips',
     environment,
     rootURL: '/',
     locationType: 'auto',
@@ -22,6 +23,8 @@ module.exports = function (environment) {
       // when it is created
     },
   };
+
+  ENV['APP']['apiHost'] = 'http://api.traveltips.local/api';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -46,6 +49,18 @@ module.exports = function (environment) {
   if (environment === 'production') {
     // here you can enable a production-specific feature
   }
+
+  ENV['ember-simple-auth'] = {
+    // authorizer: 'authorizer:token',
+  };
+
+  ENV['ember-simple-auth-token'] = {
+    serverTokenEndpoint: ENV['APP']['apiHost'] + '/auth/login',
+    // serverTokenRefreshEndpoint: ENV['APP']['apiHost'] + '/auth/refresh',
+    identificationField: 'email',
+    // refreshAccessTokens: true,
+    // refreshLeeway: 300,
+  };
 
   return ENV;
 };

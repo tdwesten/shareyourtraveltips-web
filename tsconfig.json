@@ -22,8 +22,8 @@
     "module": "es6",
     "experimentalDecorators": true,
     "paths": {
-      "name-that-icon/tests/*": ["tests/*"],
-      "name-that-icon/*": ["app/*"],
+      "traveltips-web/tests/*": ["tests/*"],
+      "traveltips-web/*": ["app/*"],
       "*": ["types/*"]
     },
     "skipLibCheck": true

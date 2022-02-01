@@ -2,14 +2,13 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 // eslint-disable-next-line ember/use-ember-data-rfc-395-imports
 import DS from 'ember-data';
-import Game from '../models/game';
 
 export default class Index extends Route {
   @service declare store: DS.Store;
+  @service private declare session;
 
   model() {
-    return {
-      game: this.store.createRecord(Game.modelName).save(),
-    };
+    console.log(this.session.isAuthenticated);
+    return {};
   }
 }
