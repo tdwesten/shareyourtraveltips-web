@@ -51,13 +51,15 @@ module.exports = function (environment) {
   }
 
   ENV['ember-simple-auth'] = {
-    // authorizer: 'authorizer:token',
+    authorizer: 'authorizer:token',
+    useSessionSetupMethod: true,
   };
 
   ENV['ember-simple-auth-token'] = {
     serverTokenEndpoint: ENV['APP']['apiHost'] + '/auth/login',
     // serverTokenRefreshEndpoint: ENV['APP']['apiHost'] + '/auth/refresh',
     identificationField: 'email',
+    tokenPropertyName: 'access_token',
     // refreshAccessTokens: true,
     // refreshLeeway: 300,
   };

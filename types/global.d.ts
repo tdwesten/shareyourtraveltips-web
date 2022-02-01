@@ -5,9 +5,9 @@ declare module 'traveltips-web/templates/*' {
   export default tmpl;
 }
 
-declare module 'ember-simple-auth-token/authenticators/token' {
-  import TokenAuthenticator from 'ember-simple-auth-token/authenticators/token';
-  export default class extends TokenAuthenticator {
+declare module 'ember-simple-auth/session-stores/local-storage' {
+  import LocalStorageStore from 'ember-simple-auth/session-stores/local-storage';
+  export default class extends LocalStorageStore {
     [x: string]: any;
   }
 }

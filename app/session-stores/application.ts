@@ -1,3 +1,3 @@
-import AdaptiveStore from 'ember-simple-auth/session-stores/adaptive';
+import LocalStorageStore from 'ember-simple-auth/session-stores/local-storage';
 
-export default class ApplicationSessionStore extends AdaptiveStore {}
+export default class ApplicationSessionStore extends LocalStorageStore {}
