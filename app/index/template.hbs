@@ -1,0 +1,11 @@
+<nav>
+  {{#if this.session.isAuthenticated}}
+    <button type='button'>Logout</button>
+
+    {{#if this.currentUser.user}}
+      <p>Signed in as {{this.currentUser.user.name}}</p>
+    {{/if}}
+  {{else}}
+    <button type='button'>Login</button>
+  {{/if}}
+</nav>

@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class User extends Model {
   public static modelName = 'user';
@@ -6,6 +6,7 @@ export default class User extends Model {
   @attr('string') declare name: string;
   @attr('string') declare email: string;
   @attr('string') declare password: string;
+  @hasMany('trip') declare trips: [];
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your models.

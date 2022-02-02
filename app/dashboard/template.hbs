@@ -1,1 +1,12 @@
+<nav>
+  {{#if this.session.isAuthenticated}}
+    <button type='button' {{on 'click' this.logout}}>Logout</button>
+    {{#if this.currentUser.user}}
+      <p>Signed in as {{this.currentUser.user.name}}</p>
+    {{/if}}
+  {{else}}
+    <button type='button' {{on 'click' this.login}}>Login</button>
+  {{/if}}
+</nav>
+
 {{outlet}}

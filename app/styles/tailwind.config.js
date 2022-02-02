@@ -1,7 +1,7 @@
 module.exports = {
   content: [
     './app/**/*.{hbs,ts,js}',
-    'app/index.html',
+    './app/index.html',
     './app/game/controller.ts',
   ],
   theme: {
