@@ -27,7 +27,7 @@ module.exports = function (environment) {
   ENV['APP']['apiHost'] = 'http://api.shareyourtraveltips.local/api';
 
   ENV['ember-google-maps'] = {
-    key: 'AIzaSyA_E7bPYm3hhAvDmY3i1K8UA1kBB8-ZJ4E', // Using .env files in this example
+    key: process.env.GOOGLE_MAPS_API_KEY,
     language: 'nl',
     region: 'NL',
     protocol: 'https',
