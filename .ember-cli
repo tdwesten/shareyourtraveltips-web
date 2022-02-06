@@ -7,6 +7,5 @@
   */
   "disableAnalytics": false,
   "yarn": true,
-  "usePods": true,
-  "tests": false
+  "usePods": true
 }

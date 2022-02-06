@@ -1,40 +1,38 @@
 <!DOCTYPE html>
-<html class="antialiased">
+<html class="antialiased h-full bg-gray-100">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Traveltips</title>
+    <title>Share your travel tips</title>
     <meta
       name="description"
       content="Plan together your trip and get the best tips from your friends"
     />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌴</text></svg>"
+    />
     <link rel="alternate icon" href="/favicon.ico" />
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
     {{content-for "head"}}
 
     <link
       integrity=""
       rel="stylesheet"
-      href="{{rootURL}}assets/traveltips.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;200;300;400;600;700&display=swap"
-      rel="stylesheet"
+      href="{{rootURL}}assets/shareyourtraveltips.css"
     />
 
     {{content-for "head-footer"}}
   </head>
-  <body class="bg-stone-50">
+  <body class="h-full">
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>
-    <script src="{{rootURL}}assets/traveltips.js"></script>
+    <script src="{{rootURL}}assets/shareyourtraveltips.js"></script>
 
     {{content-for "body-footer"}}
   </body>

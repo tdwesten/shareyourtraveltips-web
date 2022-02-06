@@ -1,0 +1,33 @@
+{{page-title @model.title}}
+
+<AppHeader @title={{@model.title}} />
+
+<MapWrapper>
+  <div class='col-span-1'>
+    <TipList @tips={{@model.tips}} />
+  </div>
+  <div class='col-span-3'>
+    <GMap
+      @lat='52.138747542376876'
+      @lng='5.370024842583879'
+      class='w-full h-full'
+      @zoom={{9}}
+      @panControl={{false}}
+      @fullscreenControl={{false}}
+      @streetViewControl={{false}}
+      @onClick={{this.onClick}}
+      as |map|
+    >
+      {{#each @model.tips as |tip|}}
+
+        <map.marker
+          @lat={{tip.getLat}}
+          @lng={{tip.getLng}}
+          @draggable={{false}}
+          @onClick={{fn this.onMarkerClick tip}}
+        />
+      {{/each}}
+
+    </GMap>
+  </div>
+</MapWrapper>

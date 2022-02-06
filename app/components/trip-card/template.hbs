@@ -1,0 +1,23 @@
+<LinkTo
+  @route='authenticated.trip'
+  @model={{@trip.id}}
+  class='shadow rounded-lg relative group bg-white flex flex-col overflow-hidden hover:scale-105 transition-transform duration-200'
+>
+  <div
+    class='bg-cover bg-gray-300 overflow-hidden flex-1 aspect-video p-6 flex justify-end'
+    style="background-image: url('/assets/images/john-o-nolan-6f_ANCcbj3o-unsplash.jpg');"
+  >
+    <FaIcon @icon='arrow-right' class='text-white transform -rotate-45' />
+  </div>
+  <div class='px-5 py-6'>
+    <h3 class='text-lg font-medium'>
+      <a href='#' class='focus:outline-none'>
+        <span class='absolute inset-0' aria-hidden='true'></span>
+        {{@trip.title}}
+      </a>
+    </h3>
+    <p class='mt-2 text-sm text-gray-500'>
+      {{@trip.description}}
+    </p>
+  </div>
+</LinkTo>

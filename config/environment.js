@@ -3,7 +3,7 @@
 module.exports = function (environment) {
   // eslint-disable-next-line prefer-const
   let ENV = {
-    modulePrefix: 'traveltips',
+    modulePrefix: 'shareyourtraveltips',
     environment,
     rootURL: '/',
     locationType: 'auto',
@@ -24,7 +24,20 @@ module.exports = function (environment) {
     },
   };
 
-  ENV['APP']['apiHost'] = 'http://api.traveltips.local/api';
+  ENV['APP']['apiHost'] = 'http://api.shareyourtraveltips.local/api';
+
+  ENV['ember-google-maps'] = {
+    key: 'AIzaSyA_E7bPYm3hhAvDmY3i1K8UA1kBB8-ZJ4E', // Using .env files in this example
+    language: 'nl',
+    region: 'NL',
+    protocol: 'https',
+    version: '3.41',
+    libraries: ['geometry', 'places'], // Optional libraries
+    // client: undefined,
+    // channel: undefined,
+    // baseUrl: '//maps.googleapis.com/maps/api/js',
+    // mapIds: ['1234', '2345'],
+  };
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -57,11 +70,12 @@ module.exports = function (environment) {
 
   ENV['ember-simple-auth-token'] = {
     serverTokenEndpoint: ENV['APP']['apiHost'] + '/auth/login',
-    // serverTokenRefreshEndpoint: ENV['APP']['apiHost'] + '/auth/refresh',
+    serverTokenRefreshEndpoint: ENV['APP']['apiHost'] + '/auth/refresh',
     identificationField: 'email',
     tokenPropertyName: 'access_token',
-    // refreshAccessTokens: true,
-    // refreshLeeway: 300,
+    refreshTokenPropertyName: 'access_token',
+    refreshAccessTokens: true,
+    refreshLeeway: 50,
   };
 
   return ENV;

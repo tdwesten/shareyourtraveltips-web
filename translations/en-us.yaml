@@ -1,1 +1,18 @@
-price_banner: The {product} costs {price, number, ::currency/USD}
+menu.trips: Trips
+menu.tips: Tips
+menu.login: Login
+menu.logout: Logout
+menu.welcome_message: 👋 Hi welcome {name}!
+page_title.login: Login
+page_title.trips: Trips
+header_title.login: Sign in
+header_title.trips: Your Trips
+login_message: Enter your details below
+label.email: Email
+label.password: Password
+placeholder.email: Enter your email
+placeholder.password: Enter your password
+login: Login
+create_new_trip: Create new trip
+tip: tip
+tips: tips

@@ -9,6 +9,7 @@ interface IHeaders {
 }
 export default class ApplicationAdapter extends JSONAPIAdapter {
   @service private declare session;
+  @service private declare router;
 
   host = (ENV.APP.apiHost + '/v1') as string;
 
@@ -35,6 +36,10 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     }
 
     return super.handleResponse(status, headers, payload, requestData);
+  }
+
+  handleAuthentication() {
+    this.router.transitionTo('authenticated.trips');
   }
 }
 

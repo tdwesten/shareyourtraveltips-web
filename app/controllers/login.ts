@@ -1,20 +1,18 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class Login extends Controller {
   @service private declare session: any;
 
-  private declare email: string;
-  private declare password: string;
+  public declare email: string;
+  public declare password: string;
 
   @action
   authenticate(event: Event) {
     event.preventDefault();
 
-    const authenticator = 'authenticator:token'; // or 'authenticator:jwt'
-
-    this.session.authenticate(authenticator, {
+    this.session.authenticate('authenticator:jwt', {
       email: this.email,
       password: this.password,
     });

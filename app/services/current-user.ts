@@ -8,7 +8,7 @@ export default class CurrentUserService extends Service {
   @service private declare session;
   @service private declare store: DS.Store;
 
-  private declare user: User;
+  public declare user: User;
 
   async load() {
     const userId = this.session.data.authenticated.user_id;

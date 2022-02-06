@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     './app/**/*.{hbs,ts,js}',
@@ -6,29 +8,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: [
-        'Overpass',
-        'ui-sans-serif',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        'Segoe UI',
-        'Roboto',
-        'Helvetica Neue',
-        'Arial',
-        'Noto Sans',
-        'sans-serif',
-        'Apple Color Emoji',
-        'Segoe UI Emoji',
-        'Segoe UI Symbol',
-        'Noto Color Emoji',
-      ],
-    },
-    extend: {
-      fontSize: {
-        '12xl': '12rem',
-      },
+      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };

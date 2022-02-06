@@ -22,8 +22,8 @@
     "module": "es6",
     "experimentalDecorators": true,
     "paths": {
-      "traveltips-web/tests/*": ["tests/*"],
-      "traveltips-web/*": ["app/*"],
+      "shareyourtraveltips-web/tests/*": ["tests/*"],
+      "shareyourtraveltips-web/*": ["app/*"],
       "*": ["types/*"]
     },
     "skipLibCheck": true
