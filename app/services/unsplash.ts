@@ -4,7 +4,7 @@ import { Photo } from '../../types/unsplash';
 import ENV from '../config/environment';
 
 export default class Unsplash extends Service {
-  async getImage(keyword: string) {
+  async search(keyword: string) {
     const api = createApi({
       accessKey: ENV.APP.unsplashApiKey as string,
     });
@@ -14,14 +14,14 @@ export default class Unsplash extends Service {
       orientation: 'landscape',
     });
 
-    console.log(photos);
-
-    // return photos.status === 200
-    //   ? (photos.response?.results[0] as Photo)
-    //   : null;
+    return photos.status === 200 ? photos.response?.results : null;
   }
 
-  async getImageById(id: string): Promise<Photo> {
+  async getImageById(id: string): Promise<Photo | null> {
+    if (!id) {
+      return null;
+    }
+
     const api = createApi({
       accessKey: ENV.APP.unsplashApiKey as string,
     });

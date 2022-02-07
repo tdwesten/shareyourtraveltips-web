@@ -21,13 +21,14 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      unsplashApiKey: process.env.unsplashApiKey,
     },
   };
 
   ENV['APP']['apiHost'] = 'http://api.shareyourtraveltips.local/api';
 
   ENV['ember-google-maps'] = {
-    key: process.env.GOOGLE_MAPS_API_KEY,
+    key: process.env.googleMapsApiKey,
     language: 'nl',
     region: 'NL',
     protocol: 'https',

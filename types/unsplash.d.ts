@@ -1,5 +1,5 @@
 export type Photo = {
-  id: number;
+  id: string;
   width: number;
   height: number;
   urls: { large: string; regular: string; raw: string; small: string };

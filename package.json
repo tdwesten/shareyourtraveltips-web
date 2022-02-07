@@ -10,6 +10,9 @@
     "doc": "doc",
     "test": "tests"
   },
+  "resolutions": {
+    "@embroider/macros": "^1.0.0"
+  },
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
@@ -40,14 +43,14 @@
     "@types/ember-resolver": "^5.0.11",
     "@types/ember__application": "^4.0.0",
     "@types/ember__array": "^4.0.1",
-    "@types/ember__component": "^4.0.2",
+    "@types/ember__component": "^4.0.3",
     "@types/ember__controller": "^4.0.0",
     "@types/ember__debug": "^4.0.0",
     "@types/ember__engine": "^4.0.0",
     "@types/ember__error": "^4.0.0",
     "@types/ember__object": "^4.0.0",
     "@types/ember__polyfills": "^4.0.0",
-    "@types/ember__routing": "^4.0.2",
+    "@types/ember__routing": "^4.0.3",
     "@types/ember__runloop": "^4.0.0",
     "@types/ember__service": "^4.0.0",
     "@types/ember__string": "^3.16.3",
@@ -63,6 +66,7 @@
     "els-addon-typed-templates": "^4.2.4",
     "els-intl-addon": "^1.0.5",
     "ember-auto-import": "^2.4.0",
+    "ember-changeset-validations": "^4.0.0-beta.2",
     "ember-cli": "~4.1.1",
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-babel": "^7.26.6",
@@ -74,7 +78,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-string-helpers": "^6.1.0",
     "ember-cli-terser": "^4.0.2",
-    "ember-cli-typescript": "^4.2.1",
+    "ember-cli-typescript": "^5.0.0",
     "ember-cli-typescript-blueprints": "^3.0.0",
     "ember-data": "^4.1.0",
     "ember-export-application-global": "^2.0.1",
@@ -92,6 +96,7 @@
     "ember-template-lint": "^4.0.0",
     "ember-template-lint-typed-templates": "^0.1.7",
     "ember-tracked-nested": "^1.0.11",
+    "ember-wormhole": "^0.6.0",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-ember": "^10.5.4",
@@ -119,9 +124,11 @@
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "autoprefixer": "^10.4.2",
+    "ember-countries": "^2.0.2",
     "postcss": "^8.4.6",
     "postcss-import": "^14.0.2",
     "typescript-eslint": "^0.0.1-alpha.0",
+    "unsplash-js": "^7.0.15",
     "uuid": "^8.3.2",
     "webpack": "5"
   }

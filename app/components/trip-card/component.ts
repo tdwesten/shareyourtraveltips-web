@@ -15,14 +15,16 @@ export default class TripCard extends Component<TripCardArgs> {
   @tracked private declare photo: Photo;
 
   get coverPhoto() {
-    return this.photo?.urls?.small;
+    return this.photo?.urls?.regular;
   }
 
   constructor(owner: unknown, args: TripCardArgs) {
     super(owner, args);
 
     this.unsplash.getImageById(this.args.trip.unsplashPhotoId).then((photo) => {
-      this.photo = photo;
+      if (photo) {
+        this.photo = photo;
+      }
     });
   }
 }

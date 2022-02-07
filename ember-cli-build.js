@@ -12,6 +12,12 @@ module.exports = function (defaults) {
         plugins: [tailwindcss('./app/styles/tailwind.config.js'), autoprefixer],
       },
     },
+    'ember-power-select': {
+      theme: false,
+    },
+    'ember-cli-babel': {
+      placeholderPattern: false,
+    },
   });
 
   return app.toTree();

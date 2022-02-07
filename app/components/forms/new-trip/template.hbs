@@ -1,0 +1,42 @@
+<form
+  {{on 'submit' (action this.addNewTrip)}}
+  class='grid grid-cols-6 gap-6 w-full'
+>
+  <div class='col-span-6'>
+    <label for='email' class='block text-sm font-medium text-gray-700'>
+      {{t 'label.title'}}
+    </label>
+    <Input
+      id='title'
+      tabindex='1'
+      @type='text'
+      placeholder={{t 'placeholder.new_trip_title'}}
+      autocomplete='off'
+      class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+      @value={{this.model.title}}
+    />
+  </div>
+  <div class='col-span-6'>
+    <label for='password' class='block text-sm font-medium text-gray-700'>
+      {{t 'label.description'}}
+    </label>
+    <Textarea
+      id='description'
+      rows='4'
+      tabindex='2'
+      placeholder={{t 'placeholder.new_trip_description'}}
+      class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+      @value={{this.model.description}}
+    />
+  </div>
+  <div class='col-span-6'>
+    <UnsplashImageSearch
+      @tabindex='3'
+      @onSelect={{action this.setCoverPhoto}}
+    />
+
+  </div>
+  <div class='col-span-6'>
+    <Button @type='submit' tabindex='4'>{{t 'create'}}</Button>
+  </div>
+</form>

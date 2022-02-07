@@ -11,22 +11,17 @@ export default class TripsController extends Controller {
   @service private declare intl: IntlService;
 
   @tracked public declare newTrip: Trip;
+  @tracked public declare primaryCountry: string;
 
   constructor() {
     // eslint-disable-next-line prefer-rest-params
     super(...arguments);
-    this.slideOver.setTitle(this.intl.t('create_new_trip'));
   }
 
   @action
   openSlideOver() {
-    this.slideOver.setTitle('Slide Over Title');
+    this.slideOver.setTitle(this.intl.t('create_new_trip'));
     this.slideOver.open();
-  }
-
-  @action
-  addNewTrip() {
-    console.log(this.newTrip);
   }
 }
 

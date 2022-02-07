@@ -17,9 +17,12 @@ placeholder.email: Enter your email
 placeholder.password: Enter your password
 placeholder.new_trip_title: Enter a title for your trip
 placeholder.new_trip_description: Enter a fancy description for your trip
+placeholder.search_for_cover_photo: Search for a cover photo, eg. "London"
 login: Login
 save: Save
 create: Create
+label.primary_country: Select a primary country for your trip
+description.primary_country: This will be the country that you will be traveling to primarily.
 create_new_trip: Create new trip
 tip: tip
 tips: tips

@@ -3,8 +3,8 @@ import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class SlideOverService extends Service {
-  @tracked isOpen = true;
-  @tracked showOverlay = true;
+  @tracked isOpen = false;
+  @tracked showOverlay = false;
   @tracked title = '';
 
   get isSlideOverOpen() {
