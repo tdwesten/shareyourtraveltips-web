@@ -10,9 +10,17 @@ header_title.trips: Your Trips
 login_message: Enter your details below
 label.email: Email
 label.password: Password
+label.title: Title
+label.image: Image
+label.description: Description
 placeholder.email: Enter your email
 placeholder.password: Enter your password
+placeholder.new_trip_title: Enter a title for your trip
+placeholder.new_trip_description: Enter a fancy description for your trip
 login: Login
+save: Save
+create: Create
 create_new_trip: Create new trip
 tip: tip
 tips: tips
+trips: trips

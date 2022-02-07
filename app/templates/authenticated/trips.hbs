@@ -4,10 +4,62 @@
 
 <PageWrapper>
   <div class='grid grid-cols-3 gap-6'>
-    <EmptyTripCard />
+    <EmptyTripCard {{on 'click' (action this.openSlideOver)}} />
     {{#each @model as |trip|}}
       <TripCard @trip={{trip}} />
     {{/each}}
 
   </div>
 </PageWrapper>
+
+{{#ember-wormhole to='slide-over'}}
+
+  <form
+    {{on 'submit' (action this.addNewTrip)}}
+    class='grid grid-cols-6 gap-6 w-full'
+  >
+    <div class='col-span-6'>
+      <label for='email' class='block text-sm font-medium text-gray-700'>
+        {{t 'label.title'}}
+      </label>
+      <Input
+        id='text'
+        tabindex='1'
+        @type='text'
+        placeholder={{t 'placeholder.new_trip_title'}}
+        autocomplete='email'
+        class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+        @value={{this.newTrip.title}}
+      />
+    </div>
+    <div class='col-span-6'>
+      <label for='password' class='block text-sm font-medium text-gray-700'>
+        {{t 'label.description'}}
+      </label>
+      <Textarea
+        id='description'
+        rows='4'
+        tabindex='2'
+        placeholder={{t 'placeholder.new_trip_description'}}
+        class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+        @value={{this.newTrip.description}}
+      />
+    </div>
+    <div class='col-span-6'>
+      <label for='email' class='block text-sm font-medium text-gray-700'>
+        {{t 'label.image'}}
+      </label>
+      <Input
+        id='text'
+        @type='text'
+        placeholder={{t 'placeholder.new_trip_title'}}
+        autocomplete='email'
+        class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+        @value={{this.newTrip.unsplashPhotoId}}
+      />
+    </div>
+    <div class='col-span-6'>
+      <Button @type='submit' tabindex='4'>{{t 'create'}}</Button>
+    </div>
+  </form>
+{{/ember-wormhole}}
