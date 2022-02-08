@@ -12,5 +12,5 @@
 </PageWrapper>
 
 {{#ember-wormhole to='slide-over'}}
-  <Forms::NewTrip />
+  <Forms::NewTrip @onSuccess={{action this.closeSlideOver}} />
 {{/ember-wormhole}}

@@ -8,7 +8,9 @@ import { Photo } from '../../../../types/unsplash';
 import Trip from '../../../models/trip';
 import CurrentUserService from '../../../services/current-user';
 
-interface FormsNewTripArgs {}
+interface FormsNewTripArgs {
+  onSuccess: CallableFunction;
+}
 
 export default class FormsNewTrip extends Component<FormsNewTripArgs> {
   @service public declare store: Store;
@@ -36,6 +38,8 @@ export default class FormsNewTrip extends Component<FormsNewTripArgs> {
   addNewTrip(e: Event) {
     e.preventDefault();
 
-    this.model.save();
+    this.model.save().then(() => {
+      this.args.onSuccess();
+    });
   }
 }

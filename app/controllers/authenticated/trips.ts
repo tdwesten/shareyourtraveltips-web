@@ -23,6 +23,11 @@ export default class TripsController extends Controller {
     this.slideOver.setTitle(this.intl.t('create_new_trip'));
     this.slideOver.open();
   }
+
+  @action
+  closeSlideOver() {
+    this.slideOver.close();
+  }
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
