@@ -13,11 +13,11 @@ export default class Tip extends Model {
   @belongsTo('user') declare user: User;
   @belongsTo('category') declare category: Category;
 
-  get getLat() {
+  get getLng() {
     return this.location?.coordinates[0];
   }
 
-  get getLng() {
+  get getLat() {
     return this.location?.coordinates[1];
   }
 }

@@ -5,12 +5,11 @@ import { Photo } from '../../../types/unsplash';
 import Trip from '../../models/trip';
 import Unsplash from '../../services/unsplash';
 
-interface TripCardArgs {
+interface TripHeaderArgs {
   model: Trip;
-  hasHover: boolean;
 }
 
-export default class TripCard extends Component<TripCardArgs> {
+export default class TripHeader extends Component<TripHeaderArgs> {
   @service unsplash!: Unsplash;
 
   @tracked private declare photo: Photo;
@@ -27,7 +26,7 @@ export default class TripCard extends Component<TripCardArgs> {
     return this.coverPhoto ? `background-image: url(${this.coverPhoto})` : '';
   }
 
-  constructor(owner: unknown, args: TripCardArgs) {
+  constructor(owner: unknown, args: TripHeaderArgs) {
     super(owner, args);
 
     this.unsplash

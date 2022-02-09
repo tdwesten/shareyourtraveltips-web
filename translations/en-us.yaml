@@ -27,3 +27,4 @@ create_new_trip: Create new trip
 tip: tip
 tips: tips
 trips: trips
+add_tip: Add a tip

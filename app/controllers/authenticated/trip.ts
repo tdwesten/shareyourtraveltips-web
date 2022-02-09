@@ -5,7 +5,7 @@ export default class TripController extends Controller {
     console.log(event);
   }
 
-  onClick(event: Event) {
+  onMapClick(event: Event) {
     console.log(event);
   }
 }

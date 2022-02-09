@@ -1,31 +1,42 @@
-<div class='py-6 px-5'>
-  <div class='pb-5'>
-    <h3 class='text-lg leading-6 font-medium text-gray-900'>
-      {{titleize (t 'tips')}}
-    </h3>
-    <p class='mt-1 max-w-2xl text-sm text-gray-500'>All shared and collected
-      tips for this trip</p>
-  </div>
+<div class='bg-white border-t border-gray-200'>
+  <div class='px-4 py-5 border-b border-gray-200 sm:px-6'>
+    <div
+      class='-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap'
+    >
+      <div class='ml-4 mt-2'>
+        <h3 class='text-lg leading-6 font-medium text-gray-900'>
+          {{titleize (t 'tips')}}
+        </h3>
+        <p class='mt-1 text-sm text-gray-500'>Lorem ipsum dolor sit amet
+          consectetur adipisicing elit quam corrupti consectetur.</p>
 
-  <div class='bg-white border border-gray-300 overflow-hidden rounded-md'>
-    <ul role='list' class='divide-y divide-gray-300'>
-      {{#each @tips as |tip|}}
-        <li class='px-3 py-4 hover:bg-gray-50 cursor-pointer flex items-start'>
-          <span
-            class='w-9 h-9 bg-blue-900 text-blue-100 flex items-center justify-center rounded-full mr-3'
-          >
-            <FaIcon @icon={{tip.category.icon}} />
-          </span>
-          <span>
-            <span class='text-sm font-medium text-orange-500 block'>
-              {{tip.title}}
-            </span>
-            <span class='text-xs text-gray-500 block truncate'>
-              {{tip.description}}
-            </span>
-          </span>
-        </li>
-      {{/each}}
-    </ul>
+      </div>
+      <div class='ml-4 mt-2 flex-shrink-0'>
+        <Button>
+          {{t 'add_tip'}}
+        </Button>
+      </div>
+    </div>
   </div>
+  <ul role='list' class=''>
+    {{#each @tips as |tip|}}
+      <li
+        class='px-3 py-4 hover:bg-gray-50 cursor-pointer flex items-start border-b border-gray-200'
+      >
+        <span
+          class='w-9 h-9 bg-blue-900 text-blue-100 flex items-center justify-center rounded-full mr-3'
+        >
+          <FaIcon @icon={{tip.category.icon}} />
+        </span>
+        <span>
+          <span class='text-sm font-medium text-orange-500 block'>
+            {{tip.title}}
+          </span>
+          <span class='text-xs text-gray-500 block truncate'>
+            {{tip.description}}
+          </span>
+        </span>
+      </li>
+    {{/each}}
+  </ul>
 </div>
