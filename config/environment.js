@@ -6,7 +6,7 @@ module.exports = function (environment) {
     modulePrefix: 'shareyourtraveltips',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'history',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -33,7 +33,7 @@ module.exports = function (environment) {
     region: 'NL',
     protocol: 'https',
     version: '3.41',
-    libraries: ['geometry', 'places'], // Optional libraries
+    // libraries: ['geometry', 'places'], // Optional libraries
     // client: undefined,
     // channel: undefined,
     // baseUrl: '//maps.googleapis.com/maps/api/js',
@@ -71,12 +71,13 @@ module.exports = function (environment) {
 
   ENV['ember-simple-auth-token'] = {
     serverTokenEndpoint: ENV['APP']['apiHost'] + '/auth/login',
-    serverTokenRefreshEndpoint: ENV['APP']['apiHost'] + '/auth/refresh',
     identificationField: 'email',
     tokenPropertyName: 'access_token',
+    tokenExpireName: 'expires_in',
+    serverTokenRefreshEndpoint: ENV['APP']['apiHost'] + '/auth/refresh',
     refreshTokenPropertyName: 'access_token',
-    refreshAccessTokens: true,
-    refreshLeeway: 50,
+    refreshAccessTokens: false,
+    refreshLeeway: 60,
   };
 
   return ENV;

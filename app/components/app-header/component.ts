@@ -24,7 +24,7 @@ export default class AppHeader extends Component<AppHeaderArgs> {
     {
       title: 'menu.categories',
       route: 'authenticated.categories',
-      currentWhen: 'authenticated.categories authenticated.category',
+      currentWhen: 'authenticated.categories',
     },
   ];
 

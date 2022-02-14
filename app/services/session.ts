@@ -9,7 +9,7 @@ export default class SessionService extends SimpleAuthSessionService {
 
   handleAuthentication() {
     this.loadCurrentUser();
-    this.router.transitionTo('authenticated.trips');
+    // this.router.transitionTo('authenticated.trips');
   }
 
   /**
@@ -22,6 +22,7 @@ export default class SessionService extends SimpleAuthSessionService {
       const user = await this.currentUser.load();
       return user;
     } catch (err) {
+      console.error(err);
       await this.session.invalidate();
     }
   }

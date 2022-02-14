@@ -18,6 +18,9 @@ module.exports = function (defaults) {
     'ember-cli-babel': {
       placeholderPattern: false,
     },
+    'ember-simple-auth': {
+      useSessionSetupMethod: true,
+    },
   });
 
   return app.toTree();
