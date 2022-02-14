@@ -29,6 +29,9 @@ module.exports = {
     require('tailwindcss-ember-power-select').plugin(({ theme }) => {
       return {
         borderColor: theme('colors.gray.300'),
+        focusBorderColor: theme('colors.orange.500'),
+        highlightedBackgroundColor: theme('colors.orange.500'),
+        triggerFocusBoxShadow: theme('colors.orange.500'),
       };
     }),
     require('@tailwindcss/forms'),

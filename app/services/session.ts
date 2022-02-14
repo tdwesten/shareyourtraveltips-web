@@ -8,8 +8,9 @@ export default class SessionService extends SimpleAuthSessionService {
   @service private declare currentUser: CurrentUserService;
 
   handleAuthentication() {
-    this.loadCurrentUser();
-    // this.router.transitionTo('authenticated.trips');
+    this.loadCurrentUser().then(() => {
+      this.router.transitionTo('authenticated.trips');
+    });
   }
 
   /**

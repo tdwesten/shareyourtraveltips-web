@@ -27,8 +27,6 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
       headers.Authorization = `Bearer ${this.session.data.authenticated.access_token}`;
     }
 
-    console.log(headers);
-
     return headers;
   }
 
@@ -41,11 +39,6 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   }
 
   handleAuthentication() {
-    console.log(
-      '🚀 ~ file: application.ts ~ line 42 ~ handleAuthentication ~ handleAuthentication',
-      'handleAuthentication'
-    );
-
     this.router.transitionTo('authenticated.trips');
   }
 }
