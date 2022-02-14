@@ -12,5 +12,6 @@ Router.map(function () {
   this.route('authenticated', { path: 'app' }, function () {
     this.route('trips');
     this.route('trip', { path: 'trips/:id' });
+    this.route('categories');
   });
 });

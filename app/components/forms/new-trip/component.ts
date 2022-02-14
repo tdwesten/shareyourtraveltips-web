@@ -10,6 +10,7 @@ import CurrentUserService from '../../../services/current-user';
 
 interface FormsNewTripArgs {
   onSuccess: CallableFunction;
+  onCancel: CallableFunction;
 }
 
 export default class FormsNewTrip extends Component<FormsNewTripArgs> {

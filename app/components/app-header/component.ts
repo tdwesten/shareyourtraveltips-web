@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 
 interface AppHeaderArgs {
   title: string;
+  isSmall: boolean;
 }
 
 export default class AppHeader extends Component<AppHeaderArgs> {
@@ -19,6 +20,11 @@ export default class AppHeader extends Component<AppHeaderArgs> {
       title: 'menu.trips',
       route: 'authenticated.trips',
       currentWhen: 'authenticated.trips authenticated.trip',
+    },
+    {
+      title: 'menu.categories',
+      route: 'authenticated.categories',
+      currentWhen: 'authenticated.categories authenticated.category',
     },
   ];
 

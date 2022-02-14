@@ -1,8 +1,9 @@
 <div
   class='fixed inset-0 overflow-hidden {{if this.hideOverlay "hidden"}}'
-  aria-labelledby='slide-over-title'
+  aria-labelledby={{this.getTitle}}
   role='dialog'
   aria-modal='true'
+  {{did-insert this.onInsert}}
 >
   <div class='absolute inset-0 overflow-hidden'>
     <!-- Background overlay, show/hide based on slide-over state. -->
@@ -22,7 +23,7 @@
                     {{this.getTitle}}
                   </h2>
                   <div class='ml-3 h-7 flex items-center'>
-                    <button
+                    {{!-- <button
                       type='button'
                       class='bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500'
                       aria-label='{{t "close"}}'
@@ -30,7 +31,7 @@
                     >
                       <span class='sr-only'>{{t 'close'}}</span>
                       <FaIcon @icon='times' class='h-5 w-5' />
-                    </button>
+                    </button> --}}
                   </div>
                 </div>
               </div>

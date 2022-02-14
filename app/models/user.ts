@@ -3,7 +3,8 @@ import Model, { attr, hasMany } from '@ember-data/model';
 export default class User extends Model {
   public static modelName = 'user';
 
-  @attr('string') declare name: string;
+  @attr('string') declare firstName: string;
+  @attr('string') declare lastName: string;
   @attr('string') declare email: string;
   @attr('string') declare password: string;
   @hasMany('trip') declare trips: [];

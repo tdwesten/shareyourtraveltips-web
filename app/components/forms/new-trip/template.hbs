@@ -37,6 +37,14 @@
 
   </div>
   <div class='col-span-6'>
+    <SecondaryButton
+      @type='button'
+      tabindex='5'
+      class='mr-3'
+      {{on 'click' @onCancel}}
+    >
+      {{t 'cancel'}}
+    </SecondaryButton>
     <Button @type='submit' tabindex='4'>{{t 'create'}}</Button>
   </div>
 </form>

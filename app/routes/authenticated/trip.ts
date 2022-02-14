@@ -11,6 +11,8 @@ export default class TripRoute extends Route {
   @service public declare store: Store;
 
   model(params: TripRouteParams) {
-    return this.store.findRecord(Trip.modelName, params.id);
+    return this.store.findRecord(Trip.modelName, params.id, {
+      include: 'tips',
+    });
   }
 }

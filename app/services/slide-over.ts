@@ -15,12 +15,16 @@ export default class SlideOverService extends Service {
     return this.title;
   }
 
-  open() {
+  open(title: string | undefined = undefined) {
+    if (title) {
+      this.setTitle(title);
+    }
+
     this.showOverlay = true;
 
     later(() => {
       this.isOpen = true;
-    }, 100);
+    }, 10);
   }
 
   close() {
@@ -28,7 +32,7 @@ export default class SlideOverService extends Service {
 
     later(() => {
       this.showOverlay = false;
-    }, 500);
+    }, 250);
   }
 
   setTitle(title: string) {

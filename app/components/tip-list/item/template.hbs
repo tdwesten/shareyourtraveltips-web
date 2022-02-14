@@ -1,0 +1,23 @@
+<li
+  class='px-3 py-4 cursor-pointer flex items-start border-b
+    {{if @model.isHovered "bg-gray-100" "bg-white"}}'
+  onmouseenter={{action this.toggleHoverState}}
+  onmouseleave={{action this.toggleHoverState}}
+  ...attributes
+>
+  <span
+    class='w-9 h-9 flex-shrink-0
+      {{this.backgroundColor}}
+      text-white flex items-center justify-center rounded-full'
+  >
+    <FaIcon @icon={{this.getIcon}} />
+  </span>
+  <span class='flex-1 overflow-hidden pl-3'>
+    <span class='text-sm font-medium text-orange-500 block'>
+      {{@model.title}}
+    </span>
+    <p class='text-xs text-gray-500 truncate text-ellipsis'>
+      {{@model.description}}
+    </p>
+  </span>
+</li>

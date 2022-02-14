@@ -8,7 +8,7 @@ export default class TripsRoute extends Route {
 
   model() {
     return this.store.findAll(Trip.modelName).then((trips) => {
-      return trips.filter((trip) => !trip.isNew);
+      return trips.filterBy('isNew', false);
     });
   }
 }

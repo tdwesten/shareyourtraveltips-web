@@ -1,34 +1,54 @@
 {{page-title @model.title}}
+<div class='fixed h-screen w-screen'>
 
-<AppHeader />
+  <AppHeader @isSmall={{true}} />
 
-<MapWrapper>
-  <div class='col-span-1'>
-    <TripHeader @model={{@model}} />
+  <main
+    class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 right-0 grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
+  >
 
-    <TipList @tips={{@model.tips}} />
-  </div>
-  <div class='col-span-3 shadow-inner'>
-    <GMap
-      @lat='52.138747542376876'
-      @lng='5.370024842583879'
-      class='w-full h-full'
-      @zoom={{9}}
-      @panControl={{false}}
-      @fullscreenControl={{false}}
-      @streetViewControl={{false}}
-      @onClick={{this.onMapClick}}
-      as |map|
+    <div class='md:col-span-2 col-span-1 flex flex-col h-[calc(100vh-4rem)]'>
+      <TripHeader @model={{@model}} />
+      <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
+    </div>
+    <div
+      class='col-span-3 shadow-inner sticky top-0 scroll-mt-16 lg:col-span-5'
     >
-      {{#each @model.tips as |tip|}}
-        <map.marker
-          @lat={{tip.getLat}}
-          @lng={{tip.getLng}}
-          @draggable={{false}}
-          @onClick={{fn this.onMarkerClick tip}}
-        />
-      {{/each}}
+      <GMap
+        @lat='52.138747542376876'
+        @lng='5.370024842583879'
+        class='w-full h-full'
+        @zoom={{9}}
+        @panControl={{false}}
+        @fullscreenControl={{false}}
+        @streetViewControl={{false}}
+        @styles={{this.getMapStyles}}
+        @onClick={{action this.onMapClick}}
+        as |map|
+      >
+        {{#each this.getTips as |tip|}}
+          <map.overlay
+            @lat={{tip.getLat}}
+            @lng={{tip.getLng}}
+            @onMouseover={{fn (mut tip.isHovered) true}}
+            @onMouseleave={{fn (mut tip.isHovered) false}}
+          >
+            <MapMarker
+              @tip={{tip}}
+              {{on 'click' (action this.onMarkerClick tip)}}
+            />
 
-    </GMap>
-  </div>
-</MapWrapper>
+          </map.overlay>
+        {{/each}}
+
+      </GMap>
+    </div>
+  </main>
+</div>
+{{#ember-wormhole to='slide-over'}}
+  <Forms::EditTip
+    @onSubmit={{action this.saveAndSlideOver}}
+    @model={{this.selectTip}}
+    @onCancel={{action this.closeSlideOver}}
+  />
+{{/ember-wormhole}}

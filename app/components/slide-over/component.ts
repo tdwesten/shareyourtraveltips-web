@@ -2,13 +2,24 @@ import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import SlideOverService from '../../services/slide-over';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 interface SlideOverArgs {}
 
 export default class SlideOver extends Component<SlideOverArgs> {
   @service private declare slideOver: SlideOverService;
 
+  @tracked public declare element: HTMLElement;
+
+  constructor(owner: unknown, args: SlideOverArgs) {
+    super(owner, args);
+  }
+
   get isSlideOverOpen() {
+    if (this.slideOver.isSlideOverOpen) {
+      this.focusFirstElement();
+    }
+
     return this.slideOver.isSlideOverOpen;
   }
 
@@ -18,6 +29,19 @@ export default class SlideOver extends Component<SlideOverArgs> {
 
   get getTitle() {
     return this.slideOver.getTitle;
+  }
+
+  focusFirstElement() {
+    const firstElement = this.element.querySelector('input');
+
+    if (firstElement) {
+      firstElement.focus();
+    }
+  }
+
+  @action
+  onInsert(element: HTMLElement) {
+    this.element = element;
   }
 
   @action

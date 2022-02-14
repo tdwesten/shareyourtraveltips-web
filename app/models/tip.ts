@@ -11,14 +11,15 @@ export default class Tip extends Model {
   @attr() declare location: { coordinates: [number, number] };
   @belongsTo('trip') declare trip: Trip;
   @belongsTo('user') declare user: User;
-  @belongsTo('category') declare category: Category;
+  @belongsTo('category', { async: true }) declare category: Category;
+  public declare isHovered: boolean;
 
   get getLng() {
-    return this.location?.coordinates[0];
+    return this.location?.coordinates[1];
   }
 
   get getLat() {
-    return this.location?.coordinates[1];
+    return this.location?.coordinates[0];
   }
 }
 

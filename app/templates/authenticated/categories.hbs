@@ -1,0 +1,15 @@
+{{page-title (t 'page_title.categories')}}
+
+<AppHeader @title={{t 'header_title.categories'}} />
+
+<PageWrapper>
+  <div class='p-3'>
+    <Table @headers={{this.tableHeaders}} @rows={{this.tableRows}} />
+
+  </div>
+
+</PageWrapper>
+
+{{#ember-wormhole to='slide-over'}}
+  {{!-- <Forms::NewTrip @onSuccess={{action this.closeSlideOver}} /> --}}
+{{/ember-wormhole}}
