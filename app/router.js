@@ -14,4 +14,5 @@ Router.map(function () {
     this.route('trip', { path: 'trips/:id' });
     this.route('categories');
   });
+  this.route('register');
 });

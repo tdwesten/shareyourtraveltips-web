@@ -74,11 +74,8 @@ export default class TripController extends Controller {
   onMapClick(event: OnMapClickEvent) {
     this.selectTip = this.store.createRecord('tip', {
       location: {
-        type: 'Point',
-        coordinates: [
-          event.googleEvent.latLng.lat(),
-          event.googleEvent.latLng.lng(),
-        ],
+        lat: event.googleEvent.latLng.lat(),
+        lng: event.googleEvent.latLng.lng(),
       },
       trip: this.model,
     });
@@ -91,6 +88,13 @@ export default class TripController extends Controller {
   saveAndSlideOver(e: Event) {
     e.preventDefault();
     this.slideOver.close();
+    this.selectTip.save();
+  }
+
+  @action
+  deleteAndSlideOver() {
+    this.slideOver.close();
+    this.selectTip.deleteRecord();
     this.selectTip.save();
   }
 

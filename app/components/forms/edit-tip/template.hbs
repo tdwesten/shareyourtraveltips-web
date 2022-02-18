@@ -42,15 +42,31 @@
       {{t (concat 'category.' category.name)}}
     </PowerSelect>
   </div>
-  <div class='col-span-6 flex items-center mt-3 py-3 border-t border-gray-300'>
-    <SecondaryButton
-      @type='button'
-      tabindex='5'
-      class='mr-3'
-      {{on 'click' @onCancel}}
-    >
-      {{t 'cancel'}}
-    </SecondaryButton>
-    <Button @type='submit' tabindex='4'>{{t this.getSuccesButtonText}}</Button>
+  <div
+    class='col-span-6 flex items-center mt-3 py-3 border-t border-gray-300 justify-between'
+  >
+    {{#if this.showDeleteButton}}
+      <SecondaryButton
+        @type='button'
+        tabindex='6'
+        class='mr-3 text-red-500 hover:text-red-700 hover:bg-red-200 border-red-500 hover:border-red-700'
+        {{on 'click' @onDelete}}
+      >
+        {{t 'delete'}}
+      </SecondaryButton>
+    {{/if}}
+    <div>
+      <SecondaryButton
+        @type='button'
+        tabindex='5'
+        class='mr-3'
+        {{on 'click' @onCancel}}
+      >
+        {{t 'cancel'}}
+      </SecondaryButton>
+      <Button @type='submit' tabindex='4'>{{t
+          this.getSuccesButtonText
+        }}</Button>
+    </div>
   </div>
 </form>

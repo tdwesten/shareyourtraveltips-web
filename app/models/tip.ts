@@ -8,18 +8,18 @@ export default class Tip extends Model {
 
   @attr('string') declare title: string;
   @attr('string') declare description: string;
-  @attr() declare location: { coordinates: [number, number] };
+  @attr() declare location: { lat: number; lng: number };
   @belongsTo('trip') declare trip: Trip;
   @belongsTo('user') declare user: User;
   @belongsTo('category', { async: true }) declare category: Category;
   public declare isHovered: boolean;
 
-  get getLng() {
-    return this.location?.coordinates[1];
+  get getLat() {
+    return this.location?.lat;
   }
 
-  get getLat() {
-    return this.location?.coordinates[0];
+  get getLng() {
+    return this.location?.lng;
   }
 }
 

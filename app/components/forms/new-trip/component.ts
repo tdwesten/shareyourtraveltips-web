@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { COUNTRIES_LIST } from 'ember-countries';
 import { Photo } from '../../../../types/unsplash';
 import Trip from '../../../models/trip';
 import CurrentUserService from '../../../services/current-user';
@@ -24,10 +23,6 @@ export default class FormsNewTrip extends Component<FormsNewTripArgs> {
     super(owner, args);
 
     this.model = this.store.createRecord('trip');
-  }
-
-  get countries() {
-    return COUNTRIES_LIST;
   }
 
   @action

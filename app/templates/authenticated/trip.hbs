@@ -51,7 +51,8 @@
 {{#ember-wormhole to='slide-over'}}
   <Forms::EditTip
     @onSubmit={{action this.saveAndSlideOver}}
-    @model={{this.selectTip}}
     @onCancel={{action this.closeSlideOver}}
+    @onDelete={{action this.deleteAndSlideOver}}
+    @model={{this.selectTip}}
   />
 {{/ember-wormhole}}

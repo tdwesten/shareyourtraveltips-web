@@ -13,8 +13,8 @@ interface UnsplashImageSearchArgs {
 export default class UnsplashImageSearch extends Component<UnsplashImageSearchArgs> {
   @service private declare unsplash: Unsplash;
 
-  @tracked private searchQuery = '';
-  @tracked private declare results: Photo[];
+  @tracked public searchQuery = '';
+  @tracked public declare results: Photo[];
   @tracked private declare loading: boolean;
   @tracked private currentSelectedImageIndex = 0;
 
@@ -30,6 +30,12 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
     }
 
     return image?.urls.regular;
+  }
+
+  get coverPhotoStyle() {
+    return this.currentImage
+      ? `background-image: url(${this.currentImage})`
+      : '';
   }
 
   async doSearch() {

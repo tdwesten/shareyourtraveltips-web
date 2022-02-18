@@ -8,18 +8,23 @@ menu.logout: Logout
 menu.categories: Categories
 menu.welcome_message: 👋 Hi welcome {name}!
 page_title.login: Login
+page_title.register: Register
 page_title.trips: Trips
 page_title.categories: Categories
 header_title.login: Sign in
+header_title.register: Register
 header_title.trips: Your Trips
 header_title.categories: Categories
-login_message: Enter your details below
+login_message: Enter your details below or register if you don't have an account.
+register_message: Enter your details below to register or login if you already have an account.
 label.email: Email
 label.password: Password
 label.title: Title
 label.image: Image
 label.description: Description
 label.category: Category
+label.first_name: First Name
+label.last_name: Last Name
 placeholder.email: Enter your email
 placeholder.password: Enter your password
 placeholder.new_trip_title: Enter a title for your trip
@@ -28,10 +33,14 @@ placeholder.tip_title: Enter a title for your tip
 placeholder.tip_description: Enter a fancy description for your tip
 placeholder.search_for_cover_photo: Search for a cover photo, eg. "London"
 placeholder.category: Select a category
+placeholder.first_name: Enter your first name
+placeholder.last_name: Enter your last name
 login: Login
+register: Register
 save: Save
 cancel: Cancel
 create: Create
+delete: Delete
 label.primary_country: Select a primary country for your trip
 description.primary_country: This will be the country that you will be traveling to primarily.
 create_new_trip: Create new trip

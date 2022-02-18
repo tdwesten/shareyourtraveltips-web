@@ -8,6 +8,8 @@ import CurrentUserService from '../../../services/current-user';
 
 interface FormsEditTipArgs {
   onSuccess: CallableFunction;
+  onCancel: CallableFunction;
+  onDelete: CallableFunction;
   model: Tip;
   isVisible: boolean;
 }
@@ -24,6 +26,10 @@ export default class FormsEditTip extends Component<FormsEditTipArgs> {
 
   get getSuccesButtonText() {
     return this.args.model?.get('isNew') ? 'create' : 'save';
+  }
+
+  get showDeleteButton() {
+    return !this.args.model?.get('isNew');
   }
 
   constructor(owner: unknown, args: FormsEditTipArgs) {
