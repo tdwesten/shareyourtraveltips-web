@@ -39,7 +39,11 @@
       @noMatchesMessage={{t 'no_matches_message'}}
       as |category|
     >
-      {{t (concat 'category.' category.name)}}
+      <span>
+        <FaIcon @icon={{category.icon}} class='w-4 mr-1 text-gray-600' />
+        {{t (concat 'category.' category.name)}}
+
+      </span>
     </PowerSelect>
   </div>
   <div

@@ -11,7 +11,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   @service private declare session;
   @service private declare router;
 
-  host = (ENV.APP.apiHost + '/v1') as string;
+  public host = (ENV.APP.apiHost + '/v1') as string;
 
   @computed(
     // eslint-disable-next-line ember/use-brace-expansion

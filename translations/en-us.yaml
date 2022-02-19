@@ -25,6 +25,7 @@ label.description: Description
 label.category: Category
 label.first_name: First Name
 label.last_name: Last Name
+label.cover_photo: Cover Photo
 placeholder.email: Enter your email
 placeholder.password: Enter your password
 placeholder.new_trip_title: Enter a title for your trip
@@ -48,12 +49,14 @@ tip: tip
 tips: tips
 trips: trips
 category.restaurant: Restaurant
-category.accomodation: Accomodation
+category.accommodation: Accomodation
 category.wildcamping: Wild camping
 category.sightseeing: Sightseeing
 category.activity: Activity
-category.rv_park: RV park
+category.parking: RV park / Parking
 category.campground: Campground
+category.other: Other
+category.cafe: Cafe
 edit_tip: Edit tip
 edit_trip: Edit trip
 create_new_tip: Add new tip

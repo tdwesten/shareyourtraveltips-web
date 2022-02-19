@@ -10,6 +10,7 @@ export default class Trip extends Model {
   @hasMany('tips') declare tips: Tip[];
   @belongsTo('user') declare user: User;
   @attr('string') declare unsplashPhotoId: string;
+  @attr('boolean') declare public: boolean;
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your models.

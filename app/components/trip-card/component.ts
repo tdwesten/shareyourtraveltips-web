@@ -12,7 +12,6 @@ interface TripCardArgs {
 
 export default class TripCard extends Component<TripCardArgs> {
   @service unsplash!: Unsplash;
-
   @tracked private declare photo: Photo;
 
   get loadingClass() {
@@ -25,6 +24,10 @@ export default class TripCard extends Component<TripCardArgs> {
 
   get coverPhotoStyle() {
     return this.coverPhoto ? `background-image: url(${this.coverPhoto})` : '';
+  }
+
+  get getPublicStatusIcon() {
+    return this.args.model.public ? 'globe' : 'lock';
   }
 
   constructor(owner: unknown, args: TripCardArgs) {
