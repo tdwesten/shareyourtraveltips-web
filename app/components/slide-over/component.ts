@@ -57,4 +57,13 @@ export default class SlideOver extends Component<SlideOverArgs> {
 
     return this.isSlideOverOpen ? leaving : entering;
   }
+
+  get animationBackgroundClasses() {
+    const entering =
+      'opacity transition ease-in-out duration-500 opacity-0 bg-black bg-opacity-50';
+    const leaving =
+      'opacity transition ease-in-out duration-500 opacity-100 bg-black bg-opacity-50';
+
+    return this.isSlideOverOpen ? leaving : entering;
+  }
 }

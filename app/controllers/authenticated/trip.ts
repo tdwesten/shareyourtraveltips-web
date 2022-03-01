@@ -32,16 +32,14 @@ export default class TripController extends Controller {
   @service public declare slideOver: SlideOverService;
   @service public declare currentUser: CurrentUserService;
   @service public declare intl: IntlService;
-
-  @service googleMapsApi: any;
-
-  get google() {
-    return this.googleMapsApi.google;
-  }
-
   @tracked public declare selectTip: Tip;
+  @tracked public isEdittingTrip = false;
+  public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
+  public defaultMapZoom = 5;
 
-  map!: any;
+  declare map: google.maps.Map;
+  declare geocoder: google.maps.Geocoder;
+
   model!: Trip;
 
   get getMapStyles() {
@@ -57,16 +55,29 @@ export default class TripController extends Controller {
   }
 
   @action
-  onMarkerClick(tip: Tip, event: PointerEvent) {
-    event.stopPropagation();
+  editTrip() {
+    this.isEdittingTrip = true;
+    this.slideOver.open(this.intl.t('edit_trip'));
+  }
 
+  @action
+  onMarkerClick(tip: Tip, _map: any, event: PointerEvent) {
+    event.stopPropagation();
     this.selectTip = tip;
-    this.slideOver.open(this.intl.t('edit_tip'));
+    this.editTip(this.selectTip);
   }
 
   @action
   onTipClick(tip: Tip) {
     this.selectTip = tip;
+    this.editTip(this.selectTip);
+  }
+
+  @action
+  editTip(tip: Tip) {
+    this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
+    this.map.panBy(224, 0);
+
     this.slideOver.open(this.intl.t('edit_tip'));
   }
 
@@ -80,7 +91,28 @@ export default class TripController extends Controller {
       trip: this.model,
     });
 
-    this.slideOver.open();
+    this.map.panTo({
+      lat: this.selectTip.location.lat,
+      lng: this.selectTip.location.lng,
+    });
+    this.map.panBy(224, 0);
+
+    this.geocoder.geocode(
+      {
+        location: {
+          lat: this.selectTip.location.lat,
+          lng: this.selectTip.location.lng,
+        },
+      },
+      (results, status) => {
+        if (results && results.length > 0 && status === 'OK') {
+          // @ts-ignore
+          const address = results[0].formatted_address;
+          this.selectTip.address = address;
+        }
+      }
+    );
+
     this.slideOver.open(this.intl.t('create_new_tip'));
   }
 
@@ -100,13 +132,53 @@ export default class TripController extends Controller {
 
   @action
   closeSlideOver() {
+    this.isEdittingTrip = false;
     this.slideOver.close();
+  }
+
+  @action
+  saveTrip() {
+    this.model.save();
+    this.slideOver.close();
+  }
+
+  @action
+  cancelAddNewTip() {
+    this.slideOver.close();
+
+    this.map.panBy(-200, 0);
 
     if (this.selectTip.get('isNew') === true) {
       this.selectTip.deleteRecord();
     }
 
     this.selectTip.save();
+  }
+
+  @action
+  onMapLoad({ map }: { map: google.maps.Map }) {
+    this.map = map;
+    this.geocoder = new google.maps.Geocoder();
+
+    this.centralize();
+  }
+
+  @action
+  centralize() {
+    const bounds = new google.maps.LatLngBounds();
+    // @ts-ignore
+    this.model.get('tips').then((tips: Tip[]) => {
+      tips.forEach((tip) => {
+        bounds.extend({
+          lat: tip.location.lat,
+          lng: tip.location.lng,
+        });
+      });
+
+      if (!bounds.isEmpty()) {
+        this.map.fitBounds(bounds);
+      }
+    });
   }
 }
 

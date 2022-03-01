@@ -1,4 +1,6 @@
 import { service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
+import { SafeString } from '@ember/template/-private/handlebars';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { Photo } from '../../../types/unsplash';
@@ -7,6 +9,7 @@ import Unsplash from '../../services/unsplash';
 
 interface TripHeaderArgs {
   model: Trip;
+  editTrip: CallableFunction;
 }
 
 export default class TripHeader extends Component<TripHeaderArgs> {
@@ -14,27 +17,17 @@ export default class TripHeader extends Component<TripHeaderArgs> {
 
   @tracked private declare photo: Photo;
 
-  get loadingClass() {
-    return this.coverPhoto ? '' : 'animate-pulse';
-  }
-
-  get coverPhoto() {
-    return this.photo?.urls?.regular;
-  }
-
   get coverPhotoStyle() {
-    return this.coverPhoto ? `background-image: url(${this.coverPhoto})` : '';
+    return this.args.model.unsplashPhotoUrl
+      ? `background-image: url(${this.args.model.unsplashPhotoUrl})`
+      : '';
+  }
+
+  get coverPhotoCredits(): SafeString {
+    return htmlSafe(this.args.model.unsplashPhotoCredits);
   }
 
   constructor(owner: unknown, args: TripHeaderArgs) {
     super(owner, args);
-
-    this.unsplash
-      .getImageById(this.args.model.unsplashPhotoId)
-      .then((photo) => {
-        if (photo) {
-          this.photo = photo;
-        }
-      });
   }
 }

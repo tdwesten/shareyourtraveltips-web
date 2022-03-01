@@ -8,15 +8,26 @@ import { debounce } from '@ember/runloop';
 
 interface UnsplashImageSearchArgs {
   onSelect: (photo: Photo) => void;
+  imageId: string;
 }
 
 export default class UnsplashImageSearch extends Component<UnsplashImageSearchArgs> {
   @service private declare unsplash: Unsplash;
 
   @tracked public searchQuery = '';
-  @tracked public declare results: Photo[];
+  @tracked public results: Photo[] = [];
   @tracked private declare loading: boolean;
   @tracked private currentSelectedImageIndex = 0;
+
+  constructor(owner: unknown, args: UnsplashImageSearchArgs) {
+    super(owner, args);
+
+    this.unsplash.getImageById(this.args.imageId).then((photo) => {
+      if (photo) {
+        this.results = [photo];
+      }
+    });
+  }
 
   get imagesCount() {
     return this.results?.length;

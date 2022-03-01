@@ -1,11 +1,11 @@
 <div
-  class='fixed inset-0 overflow-hidden {{if this.hideOverlay "hidden"}}'
+  class='fixed overflow-hidden {{if this.hideOverlay "hidden"}}'
   aria-labelledby={{this.getTitle}}
   role='dialog'
   aria-modal='true'
   {{did-insert this.onInsert}}
 >
-  <div class='absolute inset-0 overflow-hidden'>
+  <div class='absolute overflow-hidden'>
     <!-- Background overlay, show/hide based on slide-over state. -->
     <div class='absolute inset-0' aria-hidden='true'>
       <div class='fixed inset-y-0 right-0 pl-10 max-w-full flex'>

@@ -4,6 +4,7 @@ import Tip from '../../../models/tip';
 
 interface TipListItemArgs {
   model: Tip;
+  onHover: CallableFunction;
 }
 
 export default class TipListItem extends Component<TipListItemArgs> {

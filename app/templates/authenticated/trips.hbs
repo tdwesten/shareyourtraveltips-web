@@ -5,7 +5,8 @@
 <PageWrapper>
   <div class='grid grid-cols-3 gap-6'>
     <EmptyTripCard {{on 'click' (action this.openSlideOver)}} />
-    {{#each @model as |trip|}}
+
+    {{#each @model.trips as |trip|}}
       <LinkTo
         @route='authenticated.trip'
         @model={{trip}}
@@ -18,8 +19,9 @@
 </PageWrapper>
 
 {{#ember-wormhole to='slide-over'}}
-  <Forms::NewTrip
+  <Forms::EditTrip
     @onSuccess={{action this.closeSlideOver}}
     @onCancel={{action this.closeSlideOver}}
+    @model={{@model.newTrip}}
   />
 {{/ember-wormhole}}

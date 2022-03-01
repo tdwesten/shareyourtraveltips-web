@@ -1,14 +1,20 @@
 import Store from '@ember-data/store';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { hash } from 'rsvp';
 import Trip from '../../models/trip';
+import CurrentUserService from '../../services/current-user';
 
 export default class TripsRoute extends Route {
   @service public declare store: Store;
+  @service private declare currentUser: CurrentUserService;
 
   model() {
-    return this.store.findAll(Trip.modelName).then((trips) => {
-      return trips.filterBy('isNew', false);
+    return hash({
+      trips: this.store.query(Trip.modelName, {
+        user: this.currentUser.user.id,
+      }),
+      newTrip: this.store.createRecord(Trip.modelName),
     });
   }
 }

@@ -26,6 +26,7 @@ label.category: Category
 label.first_name: First Name
 label.last_name: Last Name
 label.cover_photo: Cover Photo
+label.public: Make this a public trip
 placeholder.email: Enter your email
 placeholder.password: Enter your password
 placeholder.new_trip_title: Enter a title for your trip
@@ -36,10 +37,12 @@ placeholder.search_for_cover_photo: Search for a cover photo, eg. "London"
 placeholder.category: Select a category
 placeholder.first_name: Enter your first name
 placeholder.last_name: Enter your last name
+placeholder.public: Make this a public trip
 login: Login
 register: Register
 save: Save
 cancel: Cancel
+edit: Edit
 create: Create
 delete: Delete
 label.primary_country: Select a primary country for your trip

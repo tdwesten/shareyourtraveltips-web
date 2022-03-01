@@ -15,4 +15,5 @@ Router.map(function () {
     this.route('categories');
   });
   this.route('register');
+  this.route('register-success');
 });

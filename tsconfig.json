@@ -26,7 +26,8 @@
       "shareyourtraveltips-web/*": ["app/*"],
       "*": ["types/*"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["googlemaps"]
   },
   "include": [
     "app/**/*",

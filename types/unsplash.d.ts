@@ -6,6 +6,7 @@ export type Photo = {
   color: string | null;
   user: {
     username: string;
-    name: string;
+    first_name: string;
+    last_name: string;
   };
 };
