@@ -47,7 +47,7 @@ jobs:
         run: yarn build --silent
 
       - name: Deploy with rsync
-        run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/shareyourtravel.tips/${{ secrets.SSH_PATH }}
+        run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
 
       - name: Notify
         run: curl -X POST "https://pushmore.io/webhook/89q9qQjuhSE8L4dhny7LvnMN" --data "Shareyourtavel.trips => Successful deployment"
