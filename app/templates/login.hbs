@@ -12,56 +12,58 @@
       <span class='text-xs p-3 bg-white bg-opacity-30 rounded-tr'>
         Photo by
         <a
-          href='https://unsplash.com/@johnonolan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+          href='https://unsplash.com/@johnonolan?utm_source=shareyourtravel.tips&amp;utm_medium=referral '
         >John O'Nolan</a>
         on
         <a
-          href='https://unsplash.com/s/photos/norway-travel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
-        >Unsplash</a></span>
+          href='https://unsplash.com?utm_source=shareyourtravel.tips&amp;utm_medium=referral'
+        >Unsplash</a>
+      </span>
 
     </div>
     <div class='py-16 px-5 col-span-4 flex items-center'>
-
-      <form
-        {{on 'submit' this.authenticate}}
+      <Form
+        @model={{this.model}}
+        @onSubmit={{action this.authenticate}}
+        @validations={{this.validations}}
         class='grid grid-cols-6 gap-6 w-full px-6'
+        as |form isInvalid|
       >
         <div class='col-span-6'>
           <h1 class='text-3xl font-bold py-3'>{{t 'header_title.login'}}</h1>
-          <p>{{t 'login_message' url='/register' htmlSafe=true}}</p>
+          <p>{{t 'login_message' register_url='/register' htmlSafe=true}}</p>
         </div>
         <div class='col-span-6'>
-          <label for='email' class='block text-sm font-medium text-gray-700'>
-            {{t 'label.email'}}
-          </label>
-          <Input
-            id='email'
+          <ValidatedInput
+            @changeset={{form.changeset}}
+            @id='email'
             @type='text'
-            placeholder={{t 'placeholder.email'}}
-            autocomplete='email'
-            class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-            @value={{this.email}}
+            @label={{t 'label.email'}}
+            @placeholder={{t 'placeholder.email'}}
+            @autocomplete='email'
+            @value={{form.changeset.email}}
           />
         </div>
         <div class='col-span-6'>
-
-          <label for='password' class='block text-sm font-medium text-gray-700'>
-            {{t 'label.password'}}
-          </label>
-
-          <Input
-            id='password'
+          <ValidatedInput
+            @changeset={{form.changeset}}
+            @id='password'
+            @label={{t 'label.password'}}
             @type='password'
-            autocomplete='current-password'
-            placeholder={{t 'placeholder.password'}}
-            class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-            @value={{this.password}}
+            @autocomplete='current-password'
+            @placeholder={{t 'placeholder.password'}}
+            @value={{form.changeset.password}}
           />
         </div>
         <div class='col-span-6'>
-          <Button @type='submit'>{{t 'login'}}</Button>
+          {{#if this.hasErrors}}
+            <FlashMessage>{{t (concat 'errors.' this.errors)}}</FlashMessage>
+          {{/if}}
+          <Button @type='submit' @disabled={{isInvalid}}>
+            {{t 'login'}}
+          </Button>
         </div>
-      </form>
+      </Form>
     </div>
   </div>
 </PageWrapper>

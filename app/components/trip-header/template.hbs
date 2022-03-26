@@ -23,7 +23,13 @@
           @icon='gear'
           class='-ml-1.5 mr-2 a'
         />
-        {{t 'edit'}}
+        {{t 'edit_trip'}}
+      </SecondaryButton>
+      <SecondaryButton {{on 'click' @shareTrip}}><FaIcon
+          @icon='share'
+          class='-ml-1.5 mr-2 a'
+        />
+        {{t 'share_trip'}}
       </SecondaryButton>
     </div>
     <h3 class='text-lg font-medium flex justify-between'>

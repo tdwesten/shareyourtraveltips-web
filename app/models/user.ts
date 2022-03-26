@@ -7,6 +7,7 @@ export default class User extends Model {
   @attr('string') declare lastName: string;
   @attr('string') declare email: string;
   @attr('string') declare password: string;
+  @attr('string') declare locale: string;
   @hasMany('trip') declare trips: [];
 }
 

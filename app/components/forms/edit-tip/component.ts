@@ -2,10 +2,7 @@ import Store from '@ember-data/store';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { Changeset } from 'ember-changeset';
-import lookupValidator from 'ember-changeset-validations';
 import { BufferedChangeset } from 'validated-changeset';
-import Category from '../../../models/category';
 import Tip from '../../../models/tip';
 import CurrentUserService from '../../../services/current-user';
 import TIPVALIDATIONS from '../../../validations/tip';
@@ -21,6 +18,7 @@ interface FormsEditTipArgs {
 export default class FormsEditTip extends Component<FormsEditTipArgs> {
   @service public declare store: Store;
   @service public declare currentUser: CurrentUserService;
+  validations = TIPVALIDATIONS;
 
   public declare categories;
   public declare changeset: BufferedChangeset;
@@ -41,26 +39,10 @@ export default class FormsEditTip extends Component<FormsEditTipArgs> {
     super(owner, args);
 
     this.categories = this.store.findAll('category');
-
-    if (this.args.model) {
-      this.changeset = Changeset(
-        this.args.model,
-        lookupValidator(TIPVALIDATIONS),
-        TIPVALIDATIONS
-      );
-      console.log(this.changeset);
-    }
   }
 
   @action
-  setCategory(category: Category) {
-    this.args.model.set('category', category);
-  }
-
-  @action
-  addNewTrip(e: Event) {
-    e.preventDefault();
-
+  addNewTrip() {
     this.args.model.save().then(() => {
       this.args.onSuccess();
     });

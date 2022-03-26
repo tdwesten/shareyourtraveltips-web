@@ -7,5 +7,8 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     "**/node_modules": false
-  }
+  },
+  "i18n-ally.localesPaths": ["translations"],
+  "i18n-ally.sourceLanguage": "en-us",
+  "i18n-ally.keystyle": "nested"
 }

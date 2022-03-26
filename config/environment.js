@@ -33,7 +33,7 @@ module.exports = function (environment) {
     region: 'NL',
     protocol: 'https',
     version: '3.41',
-    // libraries: ['geometry', 'places'], // Optional libraries
+    libraries: ['geometry', 'places'], // Optional libraries
     // client: undefined,
     // channel: undefined,
     // baseUrl: '//maps.googleapis.com/maps/api/js',

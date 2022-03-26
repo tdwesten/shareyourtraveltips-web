@@ -13,7 +13,7 @@ export default class Tip extends Model {
   @attr() declare location: { lat: number; lng: number };
   @belongsTo('trip') declare trip: Trip;
   @belongsTo('user') declare user: User;
-  @belongsTo('category', { async: true }) declare category: Category;
+  @belongsTo('category') declare category: Category;
 
   @tracked
   public declare isHovered: boolean;

@@ -1,12 +1,18 @@
 // validations/employee.js
-import { validatePresence } from 'ember-changeset-validations/validators';
+import {
+  validateLength,
+  validatePresence,
+} from 'ember-changeset-validations/validators';
 
 const TRIPVALIDATIONS = {
-  title: [validatePresence({ presence: true, message: 'validations.title' })],
+  title: [
+    validatePresence({ presence: true, message: 'validations.title' }),
+    validateLength({ min: 1 }),
+  ],
   description: [
     validatePresence({ presence: true, message: 'validations.description' }),
   ],
-  unsplashPhotoId: [
+  unsplashPhotoUrl: [
     validatePresence({ presence: true, message: 'validations.photo' }),
   ],
 };

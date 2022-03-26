@@ -7,6 +7,7 @@ import User from '../models/user';
 export default class CurrentUserService extends Service {
   @service private declare session;
   @service private declare store: DS.Store;
+  @service private declare intl;
 
   public declare user: User;
 
@@ -15,6 +16,7 @@ export default class CurrentUserService extends Service {
 
     if (userId) {
       const user = await this.store.findRecord('user', userId);
+      this.intl.setLocale([user.locale]);
       this.user = user;
     }
   }
