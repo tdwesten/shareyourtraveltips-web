@@ -1,21 +1,30 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import SessionService from '../services/session';
+import LOGIN_VALIDATIONS from '../validations/login';
 
 export default class Login extends Controller {
-  @service private declare session: any;
+  @service private declare session: SessionService;
+  validations = LOGIN_VALIDATIONS;
+  @tracked model = { email: '', password: '' };
+  @tracked errors = '';
 
-  public declare email: string;
-  public declare password: string;
+  get hasErrors() {
+    return this.errors !== '';
+  }
 
   @action
-  authenticate(event: Event) {
-    event.preventDefault();
-
-    this.session.authenticate('authenticator:jwt', {
-      email: this.email,
-      password: this.password,
-    });
+  authenticate() {
+    this.session
+      .authenticate('authenticator:jwt', {
+        email: this.model.email,
+        password: this.model.password,
+      })
+      .catch((error) => {
+        this.errors = error.json.error;
+      });
   }
 }
 

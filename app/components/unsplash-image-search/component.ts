@@ -1,14 +1,14 @@
 import { action } from '@ember/object';
+import { debounce } from '@ember/runloop';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { Photo } from '../../../types/unsplash';
 import Unsplash from '../../services/unsplash';
-import { debounce } from '@ember/runloop';
 
 interface UnsplashImageSearchArgs {
   onSelect: (photo: Photo) => void;
-  imageId: string;
+  imageUrl: string;
 }
 
 export default class UnsplashImageSearch extends Component<UnsplashImageSearchArgs> {
@@ -22,11 +22,18 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   constructor(owner: unknown, args: UnsplashImageSearchArgs) {
     super(owner, args);
 
-    this.unsplash.getImageById(this.args.imageId).then((photo) => {
-      if (photo) {
-        this.results = [photo];
-      }
-    });
+    if (this.args.imageUrl) {
+      this.results = [
+        {
+          id: '',
+          width: 0,
+          height: 0,
+          color: '',
+          user: { first_name: '', last_name: '', username: '' },
+          urls: { regular: this.args.imageUrl, large: '', small: '', raw: '' },
+        },
+      ];
+    }
   }
 
   get imagesCount() {

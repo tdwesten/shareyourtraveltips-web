@@ -6,7 +6,12 @@ import { tracked } from '@glimmer/tracking';
 import { Photo } from '../../../../types/unsplash';
 import Trip from '../../../models/trip';
 import CurrentUserService from '../../../services/current-user';
-
+import TRIPVALIDATIONS from '../../../validations/trip';
+import {
+  BufferedChangeset,
+  Changeset,
+  lookupValidator,
+} from 'validated-changeset';
 interface FormsEditTripArgs {
   onSuccess: CallableFunction;
   onCancel: CallableFunction;
@@ -17,7 +22,7 @@ export default class FormsEditTrip extends Component<FormsEditTripArgs> {
   @service public declare store: Store;
   @service public declare currentUser: CurrentUserService;
 
-  @tracked public declare primaryCountry: string;
+  @tracked public changeset: BufferedChangeset;
 
   get getSuccesButtonText() {
     return this.args.model?.get('isNew') ? 'create' : 'save';
@@ -25,6 +30,12 @@ export default class FormsEditTrip extends Component<FormsEditTripArgs> {
 
   constructor(owner: unknown, args: FormsEditTripArgs) {
     super(owner, args);
+
+    this.changeset = Changeset(
+      this.args.model,
+      lookupValidator(TRIPVALIDATIONS),
+      TRIPVALIDATIONS
+    );
   }
 
   @action

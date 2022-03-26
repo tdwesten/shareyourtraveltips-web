@@ -21,7 +21,7 @@
 {{#ember-wormhole to='slide-over'}}
   <Forms::EditTrip
     @onSuccess={{action this.closeSlideOver}}
-    @onCancel={{action this.closeSlideOver}}
+    @onCancel={{action this.closeSlideOverOnCancel}}
     @model={{@model.newTrip}}
   />
 {{/ember-wormhole}}

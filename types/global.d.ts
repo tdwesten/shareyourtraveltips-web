@@ -19,6 +19,9 @@ declare module 'ember-page-title/services/page-title' {
   }
 }
 
+declare type Errors<T> = {
+  [s: string]: IErr<T>;
+};
 declare module 'ember-intl/services/intl' {
   export default class IntlService {
     locale: string;

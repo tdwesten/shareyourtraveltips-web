@@ -7,11 +7,13 @@ export default class Trip extends Model {
 
   @attr('string') declare title: string;
   @attr('string') declare description: string;
-  @hasMany('tips') declare tips: Tip[];
-  @belongsTo('user') declare user: User;
   @attr('string') declare unsplashPhotoUrl: string;
   @attr('string') declare unsplashPhotoCredits: string;
   @attr('boolean') declare public: boolean;
+
+  @belongsTo('user') declare user: User;
+  @hasMany('tips') declare tips: Tip[];
+  @hasMany('user') declare contributors: User[];
 
   get getPublicStatusIcon() {
     return this.public ? 'globe' : 'lock';

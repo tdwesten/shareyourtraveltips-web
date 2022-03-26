@@ -31,76 +31,62 @@
           <p>{{t 'register_message'}}</p>
         </div>
         <div class='col-span-3'>
-          <label
-            for='first_name'
-            class='block text-sm font-medium text-gray-700'
-          >
-            {{t 'label.first_name'}}
-          </label>
-          <Input
-            id='first_name'
+          <ValidatedInput
+            @changeset={{this.changeset}}
+            @id='first_name'
+            @label={{t 'label.first_name'}}
             @type='text'
-            placeholder={{t 'placeholder.first_name'}}
-            autocomplete='given-name'
-            autofocus
-            tabindex='1'
-            class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
-            @value={{this.user.first_name}}
+            @placeholder={{t 'placeholder.first_name'}}
+            @autocomplete='given-name'
+            @autofocus={{true}}
+            @value={{this.changeset.first_name}}
           />
         </div>
         <div class='col-span-3'>
-          <label
-            for='last_name'
-            class='block text-sm font-medium text-gray-700'
-          >
-            {{t 'label.last_name'}}
-          </label>
-          <Input
-            id='last_name'
+          <ValidatedInput
+            @changeset={{this.changeset}}
+            @id='last_name'
+            @label={{t 'label.last_name'}}
             @type='text'
-            placeholder={{t 'placeholder.last_name'}}
-            autocomplete='family-name'
-            tabindex='2'
-            class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
-            @value={{this.user.last_name}}
+            @placeholder={{t 'placeholder.last_name'}}
+            @autocomplete='family-name'
+            @autofocus={{true}}
+            @value={{this.changeset.last_name}}
           />
         </div>
         <div class='col-span-6'>
-          <label for='email' class='block text-sm font-medium text-gray-700'>
-            {{t 'label.email'}}
-          </label>
-          <Input
-            id='email'
-            @type='text'
-            tabindex='3'
-            placeholder={{t 'placeholder.email'}}
-            autocomplete='email'
-            class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
-            @value={{this.user.email}}
+          <ValidatedInput
+            @changeset={{this.changeset}}
+            @id='email'
+            @label={{t 'label.email'}}
+            @type='email'
+            @placeholder={{t 'placeholder.email'}}
+            @autocomplete='email'
+            @autofocus={{true}}
+            @value={{this.changeset.email}}
           />
         </div>
         <div class='col-span-6'>
-
-          <label for='password' class='block text-sm font-medium text-gray-700'>
-            {{t 'label.password'}}
-          </label>
-
-          <Input
-            id='password'
+          <ValidatedInput
+            @changeset={{this.changeset}}
+            @id='password'
+            @label={{t 'label.password'}}
             @type='password'
-            tabindex='4'
-            pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}'
-            autocomplete='new-password'
-            placeholder={{t 'placeholder.password'}}
-            class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none sm:text-sm valid:border-green-500 valid:ring-green-500 invalid:border-red-500 invalid:ring-red-500'
-            @value={{this.user.password}}
+            @placeholder={{t 'placeholder.password'}}
+            @autocomplete='new-password'
+            @autofocus={{true}}
+            @value={{this.changeset.password}}
           />
         </div>
         <div
-          class='col-span-6 flex justify-between border-t border-gray-200 pt-4'
+          class='col-span-6 flex justify-between flex-row-reverse border-t border-gray-200 pt-4'
         >
-          <SecondaryButton tabindex='6'>{{t 'login'}}</SecondaryButton>
-          <Button @type='submit' tabindex='5'>{{t 'register'}}</Button>
+          <Button @type='submit' @disabled={{this.changeset.isInvalid}}>
+            {{t 'register'}}
+          </Button>
+          <SecondaryButton {{on 'click' this.toLogin}}>
+            {{t 'login'}}
+          </SecondaryButton>
         </div>
       </form>
     </div>

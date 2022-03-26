@@ -1,19 +1,29 @@
 {{page-title @model.title}}
 <div class='fixed h-screen w-screen'>
-
   <AppHeader @isSmall={{true}} />
 
   <main
     class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 right-0 grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
   >
-
     <div class='md:col-span-2 col-span-1 flex flex-col h-[calc(100vh-4rem)]'>
-      <TripHeader @model={{@model}} @editTrip={{action this.editTrip}} />
+      <TripHeader
+        @model={{@model}}
+        @editTrip={{action this.editTrip}}
+        @shareTrip={{action this.shareTrip}}
+      />
       <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
     </div>
     <div
       class='col-span-3 shadow-inner sticky top-0 scroll-mt-16 lg:col-span-5'
     >
+      {{#if this.map}}
+        <Searchbox
+          @searchQuery={{this.searchQuery}}
+          @map={{this.map}}
+          @onSelect={{this.handleOnSearchSelect}}
+        />
+      {{/if}}
+
       <GMap
         @lat={{this.defaultMapCenterLocation.lat}}
         @lng={{this.defaultMapCenterLocation.lng}}
@@ -22,10 +32,10 @@
         @panControl={{false}}
         @fullscreenControl={{false}}
         @streetViewControl={{false}}
-        @panControl={{false}}
         @disableDefaultUI={{true}}
         @zoomControl={{true}}
         @styles={{this.getMapStyles}}
+        @maxZoom={{this.defaultMaxZoom}}
         @onClick={{action this.onMapClick}}
         @onceOnIdle={{this.onMapLoad}}
         as |map|
@@ -36,6 +46,7 @@
             @lng={{tip.getLng}}
             @onMouseover={{fn (mut tip.isHovered) true}}
             @onMouseleave={{fn (mut tip.isHovered) false}}
+            @draggable={{true}}
           >
             <MapMarker
               @tip={{tip}}
@@ -58,6 +69,7 @@
         @onCancel={{action this.closeSlideOver}}
       />
     {{else}}
+
       <Forms::EditTip
         @onSubmit={{action this.saveAndSlideOver}}
         @onCancel={{action this.cancelAddNewTip}}

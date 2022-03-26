@@ -29,7 +29,16 @@ export default class TripsController extends Controller {
   @action
   closeSlideOver() {
     this.slideOver.close();
-    this.model.newTrip.save();
+
+    if (this.model.isDirty) {
+      this.model.newTrip.save();
+    }
+  }
+
+  @action
+  closeSlideOverOnCancel() {
+    this.slideOver.close();
+    this.model.newTrip.rollbackAttributes();
   }
 }
 

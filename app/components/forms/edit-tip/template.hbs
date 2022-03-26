@@ -1,76 +1,83 @@
-<form {{on 'submit' @onSubmit}} class='grid grid-cols-6 gap-6 w-full'>
-  <div class='col-span-6'>
-    <label for='email' class='block text-sm font-medium text-gray-700'>
-      {{t 'label.title'}}
-    </label>
-    <Input
-      id='title'
-      tabindex='1'
-      @type='text'
-      placeholder={{t 'placeholder.tip_title'}}
-      autocomplete='off'
-      class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
-      @value={{@model.title}}
-    />
-  </div>
-  <div class='col-span-6'>
-    <label for='password' class='block text-sm font-medium text-gray-700'>
-      {{t 'label.description'}}
-    </label>
-    <Textarea
-      id='description'
-      rows='4'
-      tabindex='2'
-      placeholder={{t 'placeholder.tip_description'}}
-      class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
-      @value={{@model.description}}
-    />
-  </div>
-  <div class='col-span-6'>
-    <label for='password' class='block text-sm font-medium text-gray-700 mb-1'>
-      {{t 'label.category'}}
-    </label>
-    <PowerSelect
-      @tabindex='3'
-      @selected={{@model.category}}
-      @options={{this.getFormatedCategories}}
-      @onChange={{action this.setCategory}}
-      @placeholder={{t 'placeholder.category'}}
-      @noMatchesMessage={{t 'no_matches_message'}}
-      as |category|
-    >
-      <span>
-        <FaIcon @icon={{category.icon}} class='w-4 mr-1 text-gray-600' />
-        {{t (concat 'category.' category.name)}}
-
-      </span>
-    </PowerSelect>
-  </div>
-  <div
-    class='col-span-6 flex items-center mt-3 py-3 border-t border-gray-300 justify-between'
+{{#if @model}}
+  <Form
+    @model={{@model}}
+    @onSubmit={{this.addNewTrip}}
+    @validations={{this.validations}}
+    class='grid grid-cols-6 gap-6 w-full'
+    as |form|
   >
-    {{#if this.showDeleteButton}}
-      <SecondaryButton
-        @type='button'
-        tabindex='6'
-        class='mr-3 text-red-500 hover:text-red-700 hover:bg-red-200 border-red-500 hover:border-red-700'
-        {{on 'click' @onDelete}}
-      >
-        {{t 'delete'}}
-      </SecondaryButton>
-    {{/if}}
-    <div>
-      <SecondaryButton
-        @type='button'
-        tabindex='5'
-        class='mr-3'
-        {{on 'click' @onCancel}}
-      >
-        {{t 'cancel'}}
-      </SecondaryButton>
-      <Button @type='submit' tabindex='4'>{{t
-          this.getSuccesButtonText
-        }}</Button>
+    <div class='col-span-6'>
+      <ValidatedInput
+        @label={{t 'label.title'}}
+        @id='title'
+        @tabindex='1'
+        @type='text'
+        @placeholder={{t 'placeholder.tip_title'}}
+        @autocomplete='off'
+        @changeset={{form.changeset}}
+        @value={{form.changeset.title}}
+      />
     </div>
-  </div>
-</form>
+    <div class='col-span-6'>
+      <ValidatedInput
+        @label={{t 'label.description'}}
+        @id='description'
+        @tabindex='2'
+        @type='textarea'
+        @placeholder={{t 'placeholder.tip_title'}}
+        @autocomplete='off'
+        @changeset={{form.changeset}}
+        @value={{form.changeset.description}}
+      />
+    </div>
+    <div class='col-span-6'>
+      <label
+        for='password'
+        class='block text-sm font-medium text-gray-700 mb-1'
+      >
+        {{t 'label.category'}}
+      </label>
+
+      <PowerSelect
+        @tabindex='3'
+        @selected={{form.changeset.category}}
+        @options={{this.getFormatedCategories}}
+        @onChange={{action (mut form.changeset.category)}}
+        @placeholder={{t 'placeholder.category'}}
+        as |category|
+      >
+        <span>
+          <FaIcon @icon={{category.icon}} class='w-4 mr-1 text-gray-600' />
+          {{t (concat 'category.' category.name)}}
+        </span>
+      </PowerSelect>
+    </div>
+    <div
+      class='col-span-6 flex items-center mt-3 py-3 border-t border-gray-300 justify-between'
+    >
+      {{#if this.showDeleteButton}}
+        <SecondaryButton
+          @type='button'
+          tabindex='6'
+          class='mr-3 text-red-500 hover:text-red-700 hover:bg-red-200 border-red-500 hover:border-red-700'
+          {{on 'click' @onDelete}}
+        >
+          {{t 'delete'}}
+        </SecondaryButton>
+      {{/if}}
+      <div>
+        <SecondaryButton
+          @type='button'
+          tabindex='5'
+          class='mr-3'
+          {{on 'click' @onCancel}}
+        >
+          {{t 'cancel'}}
+        </SecondaryButton>
+        <Button @type='submit' tabindex='4'>
+          {{t this.getSuccesButtonText}}
+        </Button>
+      </div>
+    </div>
+  </Form>
+{{/if}}

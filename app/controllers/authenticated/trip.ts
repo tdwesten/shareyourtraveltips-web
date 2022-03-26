@@ -34,10 +34,12 @@ export default class TripController extends Controller {
   @service public declare intl: IntlService;
   @tracked public declare selectTip: Tip;
   @tracked public isEdittingTrip = false;
+  @tracked public searchQuery = '';
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
   public defaultMapZoom = 5;
+  public defaultMaxZoom = 15;
 
-  declare map: google.maps.Map;
+  @tracked declare map: google.maps.Map;
   declare geocoder: google.maps.Geocoder;
 
   model!: Trip;
@@ -61,6 +63,11 @@ export default class TripController extends Controller {
   }
 
   @action
+  shareTrip() {
+    this.slideOver.open(this.intl.t('share_trip'));
+  }
+
+  @action
   onMarkerClick(tip: Tip, _map: any, event: PointerEvent) {
     event.stopPropagation();
     this.selectTip = tip;
@@ -79,6 +86,27 @@ export default class TripController extends Controller {
     this.map.panBy(224, 0);
 
     this.slideOver.open(this.intl.t('edit_tip'));
+  }
+
+  @action
+  handleOnSearchSelect(place: google.maps.places.PlaceResult) {
+    if (place.geometry) {
+      this.selectTip = this.store.createRecord(Tip.modelName, {
+        title: place.name,
+        location: {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+        },
+        trip: this.model,
+        formatted_address: place.formatted_address,
+      });
+      this.map.panTo({
+        lat: this.selectTip.location.lat,
+        lng: this.selectTip.location.lng,
+      });
+
+      this.slideOver.open(this.intl.t('edit_tip'));
+    }
   }
 
   @action
@@ -133,6 +161,7 @@ export default class TripController extends Controller {
   @action
   closeSlideOver() {
     this.isEdittingTrip = false;
+    this.selectTip.deleteRecord();
     this.slideOver.close();
   }
 
