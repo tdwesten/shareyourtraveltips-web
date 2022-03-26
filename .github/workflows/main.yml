@@ -40,6 +40,9 @@ jobs:
       # - name: Linting
       # run: yarn lint --silent
 
+      - name: set .env
+        run: echo "{{ secrets.ENV_VARS }}" > .env
+
       - name: Build application
         run: yarn build --silent
 
