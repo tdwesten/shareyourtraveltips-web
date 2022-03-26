@@ -37,8 +37,8 @@ jobs:
       - name: Install deps
         run: yarn install --silent
 
-      - name: Linting
-        run: yarn lint --silent
+      # - name: Linting
+      # run: yarn lint --silent
 
       - name: Build application
         run: yarn build --silent
