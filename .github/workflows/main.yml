@@ -44,7 +44,7 @@ jobs:
         run: echo "${{ secrets.ENV_VARS }}" > .env
 
       - name: Build application
-        run: ember build --environment=${{ENV_NAME}} --silent
+        run: ember build --environment=${{secrets.ENV_NAME}} --silent
 
       - name: Deploy with rsync
         run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
