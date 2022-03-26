@@ -41,10 +41,10 @@ jobs:
       # run: yarn lint --silent
 
       - name: set .env
-        run: echo "${{ secrets.ENV_VARS }}" > .env
+        run: echo "${{ env.ENV_VARS }}" > .env
 
       - name: Build application
-        run: yarn run build --environment=${{secrets.ENV_NAME}} --silent
+        run: yarn run build --environment=${{env.ENV_NAME}} --silent
 
       - name: Deploy with rsync
         run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
