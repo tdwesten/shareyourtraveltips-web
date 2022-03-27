@@ -11,7 +11,7 @@ export default class Trip extends Model {
   @attr('string') declare unsplashPhotoCredits: string;
   @attr('boolean') declare public: boolean;
 
-  @belongsTo('user') declare user: User;
+  @belongsTo('user', { inverse: null }) declare user: User;
   @hasMany('tips') declare tips: Tip[];
   @hasMany('user') declare contributors: User[];
 
