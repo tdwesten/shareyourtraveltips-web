@@ -40,9 +40,7 @@ export default class FormsEditTrip extends Component<FormsEditTripArgs> {
 
   @action
   setCoverPhoto(photo: Photo) {
-    this.args.model.set('unsplashPhotoUrl', photo.urls.regular);
-    const credits = `Photo by <a href="https://unsplash.com/@${photo.user.username}?utm_source=shareyourtravel.tips&amp;utm_medium=referral ">${photo.user.first_name} ${photo.user.last_name}</a> on <a href="https://unsplash.com?utm_source=shareyourtravel.tips&amp;utm_medium=referral">Unsplash</a>)`;
-    this.args.model.set('unsplashPhotoCredits', credits);
+    this.args.model.set('unsplashPhoto', photo);
   }
 
   @action

@@ -8,12 +8,11 @@ import Unsplash from '../../services/unsplash';
 
 interface UnsplashImageSearchArgs {
   onSelect: (photo: Photo) => void;
-  imageUrl: string;
+  image: Photo | null;
 }
 
 export default class UnsplashImageSearch extends Component<UnsplashImageSearchArgs> {
   @service private declare unsplash: Unsplash;
-
   @tracked public searchQuery = '';
   @tracked public results: Photo[] = [];
   @tracked private declare loading: boolean;
@@ -22,17 +21,12 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   constructor(owner: unknown, args: UnsplashImageSearchArgs) {
     super(owner, args);
 
-    if (this.args.imageUrl) {
-      this.results = [
-        {
-          id: '',
-          width: 0,
-          height: 0,
-          color: '',
-          user: { first_name: '', last_name: '', username: '' },
-          urls: { regular: this.args.imageUrl, large: '', small: '', raw: '' },
-        },
-      ];
+    if (this.args.image) {
+      this.unsplash.getImageById(this.args.image.id).then((img) => {
+        if (img) {
+          this.results = [img];
+        }
+      });
     }
   }
 

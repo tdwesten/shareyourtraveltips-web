@@ -76,3 +76,4 @@ create_new_tip: Add new tip
 errors.Unauthorized: Incorrect email or password, please try again.
 no_matches_message: No matches found
 share_trip: Share trip
+invite contributors: Invite contributors

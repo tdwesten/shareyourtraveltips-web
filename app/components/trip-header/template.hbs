@@ -3,40 +3,28 @@
     class='bg-cover bg-gray-300 overflow-hidden flex-1 aspect-video p-6 flex justify-end relative'
     style={{this.coverPhotoStyle}}
   >
-    <div
-      class='bg-white shadow w-8 h-8 mr-2 rounded-full flex items-center justify-center'
-    >
-      <FaIcon
-        @icon={{@model.getPublicStatusIcon}}
-        class='text-orange-500 transform text-xs'
-      />
-    </div>
     <span
       class='text-xs p-2 bg-white bg-opacity-30 rounded-tr absolute left-0 bottom-0 text-gray-800'
     >
-      {{this.coverPhotoCredits}}
+      {{@model.unsplashPhotoCredits}}
     </span>
   </div>
   <div class='px-5 py-6 relative'>
-    <div class='absolute -top-4 right-4'>
-      <SecondaryButton {{on 'click' @editTrip}}><FaIcon
-          @icon='gear'
-          class='-ml-1.5 mr-2 a'
-        />
-        {{t 'edit_trip'}}
-      </SecondaryButton>
-      <SecondaryButton {{on 'click' @shareTrip}}><FaIcon
-          @icon='share'
-          class='-ml-1.5 mr-2 a'
-        />
-        {{t 'share_trip'}}
-      </SecondaryButton>
-    </div>
     <h3 class='text-lg font-medium flex justify-between'>
       {{@model.title}}
     </h3>
     <p class='mt-2 text-sm text-gray-500'>
       {{@model.description}}
     </p>
+    <div class='mt-4'>
+      <SecondaryButton {{on 'click' @editTrip}}>
+        <FaIcon @icon='pen' class='-ml-1.5 mr-2 a' />
+        {{t 'edit_trip'}}
+      </SecondaryButton>
+      <SecondaryButton {{on 'click' @shareTrip}}>
+        <FaIcon @icon='user' class='-ml-1.5 mr-2 a' />
+        {{t 'invite contributors'}}
+      </SecondaryButton>
+    </div>
   </div>
 </div>

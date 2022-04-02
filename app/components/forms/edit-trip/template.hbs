@@ -1,6 +1,6 @@
 <form
   {{on 'submit' (action this.addNewTrip)}}
-  class='grid grid-cols-6 gap-6 w-full'
+  class='grid w-full grid-cols-6 gap-6'
 >
   <div class='col-span-6'>
     <ValidatedInput
@@ -20,38 +20,37 @@
       id='description'
       rows='4'
       placeholder={{t 'placeholder.new_trip_description'}}
-      class='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
+      class='block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
       @value={{@model.description}}
     />
   </div>
-  <div class='col-span-6'>
+  {{!-- <div class='col-span-6'>
     <label
       for='public'
-      class='text-sm font-medium text-gray-700 flex items-center'
+      class='flex items-center text-sm font-medium text-gray-700'
     >
       <Input
         id='public'
         @type='checkbox'
         placeholder={{t 'placeholder.public'}}
-        class='focus:outline-none focus:ring-orange-500 focus:border-orange-500 rounded-sm mr-2'
+        class='mr-2 rounded-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500'
         @checked={{@model.public}}
       />
       {{t 'label.public'}}
     </label>
-
-  </div>
+  </div> --}}
   <div class='col-span-6'>
-    <label for='' class='block text-sm mb-1 font-medium text-gray-700'>
+    <label for='' class='block mb-1 text-sm font-medium text-gray-700'>
       {{t 'label.cover_photo'}}
     </label>
 
     <UnsplashImageSearch
       @onSelect={{action this.setCoverPhoto}}
-      @imageUrl={{@model.unsplashPhotoUrl}}
+      @image={{@model.unsplashPhoto}}
     />
 
   </div>
-  <div class='col-span-6 flex flex-row-reverse'>
+  <div class='flex flex-row-reverse col-span-6'>
     {{log this.changeset}}
     <Button @type='submit' @disabled={{this.changeset.isInvalid}}>
       {{t this.getSuccesButtonText}}
