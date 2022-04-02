@@ -24,7 +24,7 @@ export default class Register extends Controller {
   };
 
   // eslint-disable-next-line no-shadow-restricted-names
-  constructor(args: any) {
+  constructor(args: object | undefined) {
     super(args);
 
     this.changeset = Changeset(

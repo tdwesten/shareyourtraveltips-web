@@ -3,7 +3,6 @@ import { inject as service } from '@ember/service';
 import CurrentUserService from './current-user';
 
 export default class SessionService extends SimpleAuthSessionService {
-  [x: string]: any;
   @service private declare router;
   @service private declare currentUser: CurrentUserService;
 

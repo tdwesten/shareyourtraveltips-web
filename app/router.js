@@ -9,11 +9,13 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('login');
   this.route('logout');
+  this.route('register');
+  this.route('register-success');
   this.route('authenticated', { path: 'app' }, function () {
     this.route('trips');
     this.route('trip', { path: 'trips/:id' });
     this.route('categories');
   });
-  this.route('register');
-  this.route('register-success');
+
+  this.route('trip-invite', { path: 'invite/:trip_id/:token' });
 });

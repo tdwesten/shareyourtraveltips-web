@@ -11,6 +11,7 @@
         @editTrip={{action this.editTrip}}
         @shareTrip={{action this.shareTrip}}
       />
+
       <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
     </div>
     <div
@@ -69,7 +70,6 @@
         @onCancel={{action this.closeSlideOver}}
       />
     {{else}}
-
       <Forms::EditTip
         @onSubmit={{action this.saveAndSlideOver}}
         @onCancel={{action this.cancelAddNewTip}}

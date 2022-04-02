@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import IntlService from 'ember-intl/services/intl';
+import Trip from '../../models/trip';
 import SlideOverService from '../../services/slide-over';
 
 export default class TripsController extends Controller {
@@ -11,7 +12,7 @@ export default class TripsController extends Controller {
   @service private declare intl: IntlService;
   @service public declare store: Store;
 
-  model: any;
+  declare model: { newTrip: Trip };
 
   @tracked public declare primaryCountry: string;
 
@@ -30,7 +31,7 @@ export default class TripsController extends Controller {
   closeSlideOver() {
     this.slideOver.close();
 
-    if (this.model.isDirty) {
+    if (this.model.newTrip.isDirty) {
       this.model.newTrip.save();
     }
   }
