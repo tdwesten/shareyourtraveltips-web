@@ -25,7 +25,7 @@ module.exports = function (environment) {
     },
   };
 
-  ENV['APP']['apiHost'] = 'http://api.shareyourtraveltips.local/api';
+  ENV['APP']['apiHost'] = process.env.apiServer;
 
   ENV['ember-google-maps'] = {
     key: process.env.googleMapsApiKey,
