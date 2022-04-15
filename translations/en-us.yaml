@@ -13,7 +13,7 @@ page_title.trips: Trips
 page_title.categories: Categories
 header_title.login: Sign in
 header_title.register: Register
-header_title.trips: Your Trips
+header_title.trips: Trips
 header_title.categories: Categories
 login_message: >-
   Enter your details below or <a href="{register_url}" class="text-orange-500
@@ -77,3 +77,14 @@ errors.Unauthorized: Incorrect email or password, please try again.
 no_matches_message: No matches found
 share_trip: Share trip
 invite contributors: Invite contributors
+select_image: Select photo
+unsplash_credits:
+  'on': 'on'
+  photo_by: Photo by
+select: Select
+contributors: Contributors
+header_title:
+  trips: Trips
+heading:
+  trips_contributed_to: Trips contributed to
+  your_trips: Your trips

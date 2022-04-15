@@ -11,9 +11,8 @@ export default class TripsRoute extends Route {
 
   model() {
     return hash({
-      trips: this.store.query(Trip.modelName, {
-        user: this.currentUser.user.id,
-      }),
+      trips: this.currentUser.user.trips,
+      tripsContributedTo: this.currentUser.user.tripsContributedTo,
       newTrip: this.store.createRecord(Trip.modelName),
     });
   }

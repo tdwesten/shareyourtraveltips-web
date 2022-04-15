@@ -1,0 +1,18 @@
+<div
+  class='text-xs p-2 bg-white bg-opacity-30 rounded-tr absolute left-0 bottom-0 text-gray-800'
+>
+  {{t 'unsplash_credits.photo_by'}}
+
+  <a
+    href='https://unsplash.com/{{@photo.user.username}}?utm_source=shareyourtravel.tips&amp;utm_medium=referral'
+  >
+    {{@photo.user.first_name}}
+    {{@photo.user.last_name}}
+  </a>
+  {{t 'unsplash_credits.on'}}
+  <a
+    href='https://unsplash.com?utm_source=shareyourtravel.tips&amp;utm_medium=referral'
+  >
+    Unsplash
+  </a>
+</div>

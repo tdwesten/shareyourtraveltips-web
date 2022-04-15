@@ -11,13 +11,13 @@ import {
 import Trip from '../../../models/trip';
 import CurrentUserService from '../../../services/current-user';
 import TRIPVALIDATIONS from '../../../validations/trip';
-interface FormsEditTripArgs {
+interface EditContributorsArgs {
   onSuccess: CallableFunction;
   onCancel: CallableFunction;
   model: Trip;
 }
 
-export default class FormsEditTrip extends Component<FormsEditTripArgs> {
+export default class EditContributors extends Component<EditContributorsArgs> {
   @service public declare store: Store;
   @service public declare currentUser: CurrentUserService;
   @tracked public changeset: BufferedChangeset;
@@ -28,7 +28,7 @@ export default class FormsEditTrip extends Component<FormsEditTripArgs> {
     return this.args.model?.get('isNew') ? 'create' : 'save';
   }
 
-  constructor(owner: unknown, args: FormsEditTripArgs) {
+  constructor(owner: unknown, args: EditContributorsArgs) {
     super(owner, args);
 
     this.changeset = Changeset(

@@ -35,6 +35,8 @@ export default class TripController extends Controller {
   @tracked public declare selectedTip: Tip | null;
   @tracked public declare map: google.maps.Map;
   @tracked public isEdittingTrip = false;
+  @tracked public isEdittingTip = false;
+  @tracked public isEdittingTripContributors = false;
   @tracked public searchQuery = '';
   @tracked public model!: Trip;
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
@@ -61,8 +63,9 @@ export default class TripController extends Controller {
   }
 
   @action
-  shareTrip() {
-    this.slideOver.open(this.intl.t('share_trip'));
+  showContributors() {
+    this.slideOver.open(this.intl.t('contributors'));
+    this.isEdittingTripContributors = true;
   }
 
   @action
@@ -82,7 +85,7 @@ export default class TripController extends Controller {
   editTip(tip: Tip) {
     this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
     this.map.panBy(224, 0);
-
+    this.isEdittingTip = true;
     this.slideOver.open(this.intl.t('edit_tip'));
   }
 
@@ -112,6 +115,7 @@ export default class TripController extends Controller {
 
   @action
   onMapClick(event: OnMapClickEvent) {
+    this.isEdittingTip = true;
     this.selectedTip = this.store.createRecord('tip', {
       location: {
         lat: event.googleEvent.latLng.lat(),
@@ -119,10 +123,12 @@ export default class TripController extends Controller {
       },
       trip: this.model,
     });
+
     this.map.panTo({
       lat: this.selectedTip.location.lat,
       lng: this.selectedTip.location.lng,
     });
+
     this.map.panBy(224, 0);
 
     this.geocoder.geocode(
@@ -150,31 +156,21 @@ export default class TripController extends Controller {
   }
 
   @action
-  saveAndSlideOver(e: Event) {
-    e.preventDefault();
-    this.slideOver.close();
-    this.selectedTip ? this.selectedTip.save() : null;
-  }
-
-  @action
   deleteAndSlideOver() {
-    this.slideOver.close();
     if (this.selectedTip) {
       this.selectedTip.deleteRecord();
       this.selectedTip.save();
     }
+
+    this.slideOver.close();
   }
 
   @action
   closeSlideOver() {
     this.isEdittingTrip = false;
-    this.selectedTip ? this.selectedTip.deleteRecord() : null;
-    this.slideOver.close();
-  }
+    this.isEdittingTip = false;
+    this.selectedTip = null;
 
-  @action
-  saveTrip() {
-    this.model.save();
     this.slideOver.close();
   }
 

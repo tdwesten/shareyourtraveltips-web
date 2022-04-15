@@ -11,13 +11,18 @@
             {{#if this.session.isAuthenticated}}
               <LinkTo @route='authenticated.trips'>
                 <h1 class='text-white font-semibold'>ShareYourTravel.tips
-                  <span
-                    class='uppercase font-bold opacity-75 text-xs'
-                  >Béta</span></h1>
+                  <span class='uppercase font-bold opacity-75 text-xs'>
+                    Béta
+                  </span>
+                </h1>
               </LinkTo>
             {{else}}
               <LinkTo @route='index'>
-                <h1 class='text-white font-semibold'>ShareYourTravel.tips</h1>
+                <h1 class='text-white font-semibold'>ShareYourTravel.tips
+                  <span class='uppercase font-bold opacity-75 text-xs'>
+                    Béta
+                  </span>
+                </h1>
               </LinkTo>
             {{/if}}
           </div>

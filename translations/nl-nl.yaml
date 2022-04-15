@@ -25,7 +25,7 @@ header_title:
   categories: Categorieën
   login: Aanmelden
   register: Register
-  trips: Uw reizen
+  trips: Reizen
 icon: Icoon
 label:
   category: Categorie
@@ -91,3 +91,12 @@ validation:
 no_matches_message: Geen match gevonden
 share_trip: Delen
 invite contributors: Andere uitnodigen
+select_image: Selecteer foto
+unsplash_credits:
+  photo_by: Foto van
+  'on': op
+select: selecteer
+contributors: Bijdragers
+heading:
+  trips_contributed_to: Gedeelde reizen
+  your_trips: Jouw reizen

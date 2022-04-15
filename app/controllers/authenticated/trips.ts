@@ -30,10 +30,7 @@ export default class TripsController extends Controller {
   @action
   closeSlideOver() {
     this.slideOver.close();
-
-    if (this.model.newTrip.isDirty) {
-      this.model.newTrip.save();
-    }
+    this.model.newTrip.save();
   }
 
   @action

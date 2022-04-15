@@ -3,12 +3,14 @@ import { debounce } from '@ember/runloop';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { BufferedChangeset } from 'validated-changeset';
 import { Photo } from '../../../types/unsplash';
 import Unsplash from '../../services/unsplash';
 
 interface UnsplashImageSearchArgs {
-  onSelect: (photo: Photo) => void;
   image: Photo | null;
+  changeset: BufferedChangeset;
+  id: string;
 }
 
 export default class UnsplashImageSearch extends Component<UnsplashImageSearchArgs> {
@@ -17,6 +19,7 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   @tracked public results: Photo[] = [];
   @tracked private declare loading: boolean;
   @tracked private currentSelectedImageIndex = 0;
+  @tracked errors: Errors<string> = [];
 
   constructor(owner: unknown, args: UnsplashImageSearchArgs) {
     super(owner, args);
@@ -28,18 +31,36 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
         }
       });
     }
+
+    this.args.changeset.on('afterValidation', () => {
+      this.errors = this.args.changeset.errors.filter(
+        (error: { key: string }) => error.key === this.args.id
+      );
+    });
+  }
+
+  get errorMessage() {
+    return this.errors.length > 0 ? this.errors[0]?.validation[0] : undefined;
+  }
+
+  get hasError() {
+    return this.errors.length > 0;
   }
 
   get imagesCount() {
     return this.results?.length;
   }
 
+  get hasMultipleImages() {
+    return this.results?.length > 1;
+  }
+
+  get noResults() {
+    return this.results?.length === 0;
+  }
+
   get currentImage() {
     const image = this.results?.[this.currentSelectedImageIndex];
-
-    if (image && this.args.onSelect) {
-      this.args.onSelect(image);
-    }
 
     return image?.urls.regular;
   }
@@ -55,6 +76,16 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
 
     if (results !== null) {
       this.results = results as unknown as Photo[];
+    }
+  }
+
+  @action
+  setImage() {
+    if (this.results?.[this.currentSelectedImageIndex]) {
+      this.args.changeset.set(
+        this.args.id,
+        this.results?.[this.currentSelectedImageIndex]
+      );
     }
   }
 

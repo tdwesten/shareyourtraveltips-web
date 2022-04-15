@@ -5,11 +5,13 @@
   <main
     class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 right-0 grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
   >
-    <div class='md:col-span-2 col-span-1 flex flex-col h-[calc(100vh-4rem)]'>
+    <div
+      class='md:col-span-2 col-span-1 flex flex-col h-[calc(100vh-4rem)] border-r border-gray-300'
+    >
       <TripHeader
         @model={{@model}}
         @editTrip={{action this.editTrip}}
-        @shareTrip={{action this.shareTrip}}
+        @showContributors={{action this.showContributors}}
       />
 
       <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
@@ -24,7 +26,6 @@
           @onSelect={{this.handleOnSearchSelect}}
         />
       {{/if}}
-
       <GMap
         @lat={{this.defaultMapCenterLocation.lat}}
         @lng={{this.defaultMapCenterLocation.lng}}
@@ -66,15 +67,25 @@
     {{#if this.isEdittingTrip}}
       <Forms::EditTrip
         @model={{@model}}
-        @onSuccess={{action this.saveTrip}}
+        @onSuccess={{action this.closeSlideOver}}
         @onCancel={{action this.closeSlideOver}}
       />
-    {{else}}
+    {{/if}}
+
+    {{#if this.isEdittingTip}}
       <Forms::EditTip
-        @onSubmit={{action this.saveAndSlideOver}}
+        @model={{this.selectedTip}}
+        @onSubmit={{action this.closeSlideOver}}
         @onCancel={{action this.cancelAddNewTip}}
         @onDelete={{action this.deleteAndSlideOver}}
-        @model={{this.selectedTip}}
+      />
+    {{/if}}
+
+    {{#if this.isEdittingTripContributors}}
+      <Forms::EditContributors
+        @model={{@model}}
+        @onSuccess={{action this.closeSlideOver}}
+        @onCancel={{action this.closeSlideOver}}
       />
     {{/if}}
   </div>
