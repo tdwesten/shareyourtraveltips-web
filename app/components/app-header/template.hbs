@@ -8,23 +8,13 @@
       >
         <div class='px-2 flex items-center lg:px-0'>
           <div class='flex-shrink-0'>
-            {{#if this.session.isAuthenticated}}
-              <LinkTo @route='authenticated.trips'>
-                <h1 class='text-white font-semibold'>ShareYourTravel.tips
-                  <span class='uppercase font-bold opacity-75 text-xs'>
-                    Béta
-                  </span>
-                </h1>
-              </LinkTo>
-            {{else}}
-              <LinkTo @route='index'>
-                <h1 class='text-white font-semibold'>ShareYourTravel.tips
-                  <span class='uppercase font-bold opacity-75 text-xs'>
-                    Béta
-                  </span>
-                </h1>
-              </LinkTo>
-            {{/if}}
+            <LinkTo @route='index'>
+              <h1 class='text-white font-semibold'>ShareYourTravel.tips
+                <span class='uppercase font-bold opacity-75 text-xs'>
+                  Béta
+                </span>
+              </h1>
+            </LinkTo>
           </div>
           <div class='hidden lg:block lg:ml-10'>
             <div class='flex space-x-4'>
@@ -61,26 +51,42 @@
           </button>
         </div>
         <div class='hidden lg:block lg:ml-4'>
-          {{#if this.session.isAuthenticated}}
-            <span class='text-white py-2 px-3 text-sm font-medium italic'>
-              {{t 'menu.welcome_message' name=this.currentUser.user.firstName}}
-            </span>
+          <div class='flex space-x-4'>
 
-            <LinkTo
-              @route='logout'
-              @activeClass='bg-orange-700 text-white'
-              class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
-            >
-              {{t 'menu.logout'}}
-            </LinkTo>
-          {{else}}
-            <LinkTo
-              @route='login'
-              class='text-orange-700 bg-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
-            >
-              {{t 'menu.login'}}
-            </LinkTo>
-          {{/if}}
+            {{#if this.session.isAuthenticated}}
+              <span class='text-white py-2 px-3 text-sm font-medium'>
+                <FaIcon @icon='user' class='mr-1' />
+
+                {{t
+                  'menu.welcome_message'
+                  name=this.currentUser.user.firstName
+                }}
+              </span>
+
+              <LinkTo
+                @route='logout'
+                @activeClass='bg-orange-700 text-white'
+                class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
+              >
+                {{t 'menu.logout'}}
+              </LinkTo>
+            {{else}}
+              <LinkTo
+                @route='register'
+                @activeClass='bg-orange-700 text-white'
+                class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
+              >
+                {{t 'menu.register'}}
+              </LinkTo>
+              <LinkTo
+                @route='login'
+                @activeClass='bg-orange-700 text-white'
+                class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
+              >
+                {{t 'menu.login'}}
+              </LinkTo>
+            {{/if}}
+          </div>
         </div>
 
       </div>

@@ -6,8 +6,9 @@ menu.shared_trips: Shared Trips
 menu.tips: Tips
 menu.login: Login
 menu.logout: Logout
+menu.register: Register
 menu.categories: Categories
-menu.welcome_message: 👋 Hi welcome {name}!
+menu.welcome_message: Hi welcome {name}!
 page_title.login: Login
 page_title.register: Register
 page_title.trips: Your Trips

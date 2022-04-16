@@ -52,6 +52,7 @@ menu:
   tips: Tips
   trips: Reizen
   welcome_message: 👋 Hallo welkom {name}!
+  register: ''
 name: Naam
 page_title:
   categories: Categorieën
