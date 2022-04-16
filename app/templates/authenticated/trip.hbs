@@ -5,12 +5,15 @@
   <main
     class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 right-0 grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
   >
-    <div class='md:col-span-2 col-span-1 flex flex-col h-[calc(100vh-4rem)]'>
+    <div
+      class='md:col-span-2 col-span-1 flex flex-col h-[calc(100vh-4rem)] border-r border-gray-300'
+    >
       <TripHeader
         @model={{@model}}
         @editTrip={{action this.editTrip}}
-        @shareTrip={{action this.shareTrip}}
+        @showContributors={{action this.showContributors}}
       />
+
       <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
     </div>
     <div
@@ -23,7 +26,6 @@
           @onSelect={{this.handleOnSearchSelect}}
         />
       {{/if}}
-
       <GMap
         @lat={{this.defaultMapCenterLocation.lat}}
         @lng={{this.defaultMapCenterLocation.lng}}
@@ -65,17 +67,46 @@
     {{#if this.isEdittingTrip}}
       <Forms::EditTrip
         @model={{@model}}
-        @onSuccess={{action this.saveTrip}}
+        @onSuccess={{action this.closeSlideOver}}
         @onCancel={{action this.closeSlideOver}}
       />
-    {{else}}
+    {{/if}}
 
+    {{#if this.isEdittingTip}}
       <Forms::EditTip
-        @onSubmit={{action this.saveAndSlideOver}}
+        @model={{this.selectedTip}}
+        @onSubmit={{action this.closeSlideOver}}
         @onCancel={{action this.cancelAddNewTip}}
         @onDelete={{action this.deleteAndSlideOver}}
-        @model={{this.selectTip}}
       />
+    {{/if}}
+
+    {{#if this.isEdittingTripContributors}}
+      <div>
+        <div class='flex p-3 justify-center'>
+          <div
+            class='w-48 h-48 flex justify-center items-center bg-gray-100 rounded-full'
+          >
+            <FaIcon @icon='user-group' class='text-orange-500 text-5xl' />
+          </div>
+        </div>
+
+        <div class='text-gray-600 text-center mt-4'>
+          <p class='text-gray-900 font-semibold mb-4'>
+            Let's share this trip!
+          </p>
+          <p>
+            This tool was built to ask others for there the best tips for this
+            trip. Please share the link below with someone who can help you with
+            tips for this trip.
+          </p>
+        </div>
+
+        <Input
+          class='mt-6 block w-full border rounded-md shadow-sm py-2 px-3 focus:outline-none sm:text-sm border-gray-300 focus:ring-orange-500 focus:border-orange-500'
+          @value={{this.shareLink}}
+        />
+      </div>
     {{/if}}
   </div>
 {{/ember-wormhole}}

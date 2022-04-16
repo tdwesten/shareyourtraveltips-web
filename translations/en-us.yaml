@@ -1,19 +1,23 @@
 name: Name
 icon: Icon
 background_color: Background Color
-menu.trips: Trips
+menu.trips: Your Trips
+menu.shared_trips: Shared Trips
 menu.tips: Tips
 menu.login: Login
 menu.logout: Logout
+menu.register: Register
 menu.categories: Categories
-menu.welcome_message: 👋 Hi welcome {name}!
+menu.welcome_message: Hi welcome {name}!
 page_title.login: Login
 page_title.register: Register
-page_title.trips: Trips
+page_title.trips: Your Trips
+page_title.shared_trips: Shared Trips
 page_title.categories: Categories
 header_title.login: Sign in
 header_title.register: Register
 header_title.trips: Your Trips
+header_title.shared_trips: Shared Trips
 header_title.categories: Categories
 login_message: >-
   Enter your details below or <a href="{register_url}" class="text-orange-500
@@ -76,3 +80,17 @@ create_new_tip: Add new tip
 errors.Unauthorized: Incorrect email or password, please try again.
 no_matches_message: No matches found
 share_trip: Share trip
+invite contributors: Invite contributors
+select_image: Select photo
+unsplash_credits:
+  'on': 'on'
+  photo_by: Photo by
+select: Select
+contributors: Contributors
+header_title:
+  trips: Your Trips
+heading:
+  trips_contributed_to: Trips contributed to
+  your_trips: Your trips
+not_tips_found: Start adding tips by clicking on the map
+invite_contributors: Invite contributors

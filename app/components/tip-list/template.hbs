@@ -3,8 +3,17 @@
 >
 
   <ul role='list' class='overflow-y-scroll flex-1'>
-    {{#each @tips as |tip|}}
-      <TipList::Item @model={{tip}} {{on 'click' (fn @onOpen tip)}} />
-    {{/each}}
+    {{#if @tips.length}}
+      {{#each @tips as |tip|}}
+        <TipList::Item @model={{tip}} {{on 'click' (fn @onOpen tip)}} />
+      {{/each}}
+    {{else}}
+      <div class='text-gray-600 p-10 flex rounded justify-center items-center'>
+        <FaIcon @icon='lightbulb' class='text-xl mr-3 text-yellow-400' />
+        <div>
+          {{t 'not_tips_found'}}
+        </div>
+      </div>
+    {{/if}}
   </ul>
 </div>

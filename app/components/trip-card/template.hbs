@@ -5,20 +5,7 @@
     class='bg-cover bg-gray-300 overflow-hidden flex-1 aspect-video p-3 flex justify-end relative'
     style={{this.coverPhotoStyle}}
   >
-    <div
-      class='bg-white shadow w-8 h-8 rounded-full flex items-center justify-center'
-    >
-      <FaIcon
-        @icon={{@model.getPublicStatusIcon}}
-        class='text-orange-500 transform text-xs'
-      />
-    </div>
-
-    <span
-      class='text-xs p-2 bg-white bg-opacity-30 rounded-tr absolute left-0 bottom-0 text-gray-800'
-    >
-      {{this.coverPhotoCredits}}
-    </span>
+    <UnsplashCredits @photo={{@model.unsplashPhoto}} />
   </div>
   <div class='px-5 py-6'>
     <h3 class='text-lg font-medium'>

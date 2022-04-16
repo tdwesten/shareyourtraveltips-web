@@ -3,6 +3,7 @@
 /vendor/
 /types
 /stories
+/tests
 # compiled output
 /dist/
 /tmp/

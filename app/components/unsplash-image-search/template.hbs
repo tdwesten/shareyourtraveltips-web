@@ -1,9 +1,14 @@
 <div class='col-span-1 bg-white rounded-lg border border-gray-300'>
+
+  {{#if this.hasError}}
+    <InputErrorMessage @message={{t this.errorMessage}} />
+  {{/if}}
   <div
     class='bg-cover bg-gray-300 overflow-hidden flex-1 aspect-video p-6 flex justify-end rounded-t relative'
     style={{this.coverPhotoStyle}}
   >
-    {{#if this.results}}
+
+    {{#if this.hasMultipleImages}}
       <button
         type='button'
         class='absolute left-5 top-1/2 -translate-y-1/2 cursor-pointer'
@@ -24,16 +29,21 @@
           class='text-white transform hover:scale-110 text-2xl'
         />
       </button>
-    {{else}}
+    {{/if}}
+    {{#if this.noResults}}
       <div class='flex items-center justify-center w-full'>
         <FaIcon @icon='image' class='text-gray-500 text-4xl' />
       </div>
     {{/if}}
+    {{#if this.loading}}
+      <div class='flex items-center justify-center w-full'>
+        <FaIcon @icon='spinner' class='text-gray-500 text-4xl animate-spin' />
+      </div>
+    {{/if}}
   </div>
-  <div class='w-full flex items-center justify-between px-6 py-5'>
+  <div class='w-full flex items-center justify-between px-6 py-5 gap-4'>
     <Input
       id='title'
-      tabindex={{@tabindex}}
       type='search'
       placeholder={{t 'placeholder.search_for_cover_photo'}}
       autocomplete='off'
