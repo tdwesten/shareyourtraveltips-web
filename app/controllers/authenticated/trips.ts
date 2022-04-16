@@ -30,7 +30,8 @@ export default class TripsController extends Controller {
   @action
   closeSlideOver() {
     this.slideOver.close();
-    this.model.newTrip.save();
+
+    this.model.newTrip = this.store.createRecord('trip');
   }
 
   @action

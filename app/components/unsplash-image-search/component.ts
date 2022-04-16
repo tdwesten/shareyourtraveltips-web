@@ -17,7 +17,7 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   @service private declare unsplash: Unsplash;
   @tracked public searchQuery = '';
   @tracked public results: Photo[] = [];
-  @tracked private declare loading: boolean;
+  @tracked public loading = false;
   @tracked private currentSelectedImageIndex = 0;
   @tracked errors: Errors<string> = [];
 
@@ -56,7 +56,7 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   }
 
   get noResults() {
-    return this.results?.length === 0;
+    return this.results?.length === 0 && this.loading === false;
   }
 
   get currentImage() {
@@ -72,10 +72,14 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   }
 
   async doSearch() {
+    this.results = [];
     const results = await this.unsplash.search(this.searchQuery);
 
     if (results !== null) {
+      this.loading = false;
       this.results = results as unknown as Photo[];
+      this.currentSelectedImageIndex = 0;
+      this.setImage();
     }
   }
 
@@ -92,18 +96,21 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   @action
   searchResults() {
     if (this.searchQuery.length > 1) {
-      debounce(this, this.doSearch, 500);
+      this.loading = true;
+      debounce(this, this.doSearch, 200);
     }
   }
 
   @action
   previousImage() {
     this.currentSelectedImageIndex = this.getPreviousImageIndex();
+    this.setImage();
   }
 
   @action
   nextImage() {
     this.currentSelectedImageIndex = this.getNextImageIndex();
+    this.setImage();
   }
 
   getNextImageIndex() {

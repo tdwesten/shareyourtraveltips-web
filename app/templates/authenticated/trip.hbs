@@ -82,11 +82,31 @@
     {{/if}}
 
     {{#if this.isEdittingTripContributors}}
-      <Forms::EditContributors
-        @model={{@model}}
-        @onSuccess={{action this.closeSlideOver}}
-        @onCancel={{action this.closeSlideOver}}
-      />
+      <div>
+        <div class='flex p-3 justify-center'>
+          <div
+            class='w-48 h-48 flex justify-center items-center bg-gray-100 rounded-full'
+          >
+            <FaIcon @icon='user-group' class='text-orange-500 text-5xl' />
+          </div>
+        </div>
+
+        <div class='text-gray-600 text-center mt-4'>
+          <p class='text-gray-900 font-semibold mb-4'>
+            Let's share this trip!
+          </p>
+          <p>
+            This tool was built to ask others for there the best tips for this
+            trip. Please share the link below with someone who can help you with
+            tips for this trip.
+          </p>
+        </div>
+
+        <Input
+          class='mt-6 block w-full border rounded-md shadow-sm py-2 px-3 focus:outline-none sm:text-sm border-gray-300 focus:ring-orange-500 focus:border-orange-500'
+          @value={{this.shareLink}}
+        />
+      </div>
     {{/if}}
   </div>
 {{/ember-wormhole}}

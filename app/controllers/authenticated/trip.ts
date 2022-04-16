@@ -1,6 +1,7 @@
 import Store from '@ember-data/store';
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import RouterService from '@ember/routing/router-service';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import IntlService from 'ember-intl/services/intl';
@@ -32,6 +33,8 @@ export default class TripController extends Controller {
   @service public declare slideOver: SlideOverService;
   @service public declare currentUser: CurrentUserService;
   @service public declare intl: IntlService;
+  @service public declare router: RouterService;
+
   @tracked public declare selectedTip: Tip | null;
   @tracked public declare map: google.maps.Map;
   @tracked public isEdittingTrip = false;
@@ -56,6 +59,12 @@ export default class TripController extends Controller {
     return this.getTips.filterBy('isNew', false);
   }
 
+  get shareLink() {
+    return `${window.location.protocol}${
+      window.location.host
+    }${this.router.urlFor('trip-invite', this.model)}`;
+  }
+
   @action
   editTrip() {
     this.isEdittingTrip = true;
@@ -64,7 +73,7 @@ export default class TripController extends Controller {
 
   @action
   showContributors() {
-    this.slideOver.open(this.intl.t('contributors'));
+    this.slideOver.open(this.intl.t('invite_contributors'));
     this.isEdittingTripContributors = true;
   }
 

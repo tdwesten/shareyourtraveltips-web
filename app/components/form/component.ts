@@ -43,8 +43,6 @@ export default class Form extends Component<FormArgs> {
       this.isValid = this.changeset.isValid;
       this.errors = this.changeset.error;
 
-      console.log('errors', this.errors, this.changeset);
-
       if (this.changeset.isValid) {
         this.changeset.save().then(() => {
           this.args.onSubmit(event);

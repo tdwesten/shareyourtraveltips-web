@@ -26,6 +26,7 @@ header_title:
   login: Aanmelden
   register: Register
   trips: Reizen
+  shared_trips: Gedeelde reizen
 icon: Icoon
 label:
   category: Categorie
@@ -100,3 +101,5 @@ contributors: Bijdragers
 heading:
   trips_contributed_to: Gedeelde reizen
   your_trips: Jouw reizen
+not_tips_found: Begin met het toevoegen van tips door op de kaart te klikken
+invite_contributors: Nodig andere uit

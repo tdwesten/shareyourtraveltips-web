@@ -1,0 +1,18 @@
+{{page-title (t 'page_title.shared_trips')}}
+
+<AppHeader @title={{t 'header_title.shared_trips'}} />
+
+<PageWrapper>
+  <div class='grid grid-cols-3 gap-6 mb-6'>
+
+    {{#each @model.trips as |trip|}}
+      <LinkTo
+        @route='authenticated.trip'
+        @model={{trip}}
+        class='hover:scale-105 transition-transform duration-200'
+      >
+        <TripCard @model={{trip}} />
+      </LinkTo>
+    {{/each}}
+  </div>
+</PageWrapper>

@@ -1,4 +1,5 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import RouterService from '@ember/routing/router-service';
 import { inject as service } from '@ember/service';
 import { Photo } from '../../types/unsplash';
 import CurrentUserService from '../services/current-user';
@@ -6,6 +7,7 @@ import Tip from './tip';
 import User from './user';
 export default class Trip extends Model {
   @service() declare currentUser: CurrentUserService;
+  @service() declare router: RouterService;
 
   [x: string]: any;
   public static modelName = 'trip';
