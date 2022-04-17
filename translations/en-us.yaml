@@ -65,15 +65,18 @@ create_new_trip: Create new trip
 tip: tip
 tips: tips
 trips: trips
-category.restaurant: Restaurant
-category.accommodation: Accomodation
-category.wildcamping: Wild camping
-category.sightseeing: Sightseeing
-category.activity: Activity
-category.parking: RV park / Parking
-category.campground: Campground
-category.other: Other
-category.cafe: Cafe
+category:
+  restaurant: Restaurant
+  accommodation: Accomodation
+  wildcamping: Wild camping
+  sightseeing: Sightseeing
+  activity: Activity
+  parking: RV park / Parking
+  campground: Campground
+  other: Other
+  cafe: Cafe
+  hiking: Hiking
+  route: Route
 edit_tip: Edit tip
 edit_trip: Edit trip
 create_new_tip: Add new tip
