@@ -35,6 +35,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
+    "@sentry/ember": "^6.19.6",
     "@types/ember-data": "^4.0.0",
     "@types/ember-data__adapter": "^4.0.0",
     "@types/ember-data__model": "^4.0.0",
