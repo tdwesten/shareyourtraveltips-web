@@ -7,7 +7,7 @@ interface SearchboxArgs {
 }
 
 export default class Searchbox extends Component<SearchboxArgs> {
-  @tracked selectedResult: any;
+  @tracked selectedResult: unknown;
   @tracked public declare element: HTMLInputElement;
 
   constructor(owner: unknown, args: SearchboxArgs) {
