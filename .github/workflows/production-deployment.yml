@@ -1,14 +1,12 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Linting & deployment
+name: Staging deployment
 
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [develop, master]
+    branches: [master]
   pull_request:
-    branches: [develop, master]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,45 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build-staging:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    environment: staging
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Install deps
-        run: yarn install --silent
-
-      # - name: Linting
-      # run: yarn lint --silent
-
-      - name: set .env
-        run: echo "${{ secrets.ENV_VARS }}" > .env
-
-      - name: Build application
-        run: yarn run build --environment=${{secrets.ENV_NAME}} --silent
-
-      - name: Deploy with rsync
-        run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
-
-      - name: Notify
-        run: curl -X POST "https://pushmore.io/webhook/89q9qQjuhSE8L4dhny7LvnMN" --data "Shareyourtavel.trips [${{secrets.ENV_NAME}}] => Successful deployment"
-
-  # This workflow contains a single job called "build"
-  build-production:
+  build-and-deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: production
@@ -77,7 +37,7 @@ jobs:
         run: yarn install --silent
 
       # - name: Linting
-      # run: yarn lint --silent
+      #   run: yarn lint --silent
 
       - name: set .env
         run: echo "${{ secrets.ENV_VARS }}" > .env
