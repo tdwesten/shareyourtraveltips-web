@@ -9,7 +9,6 @@ export default class Trip extends Model {
   @service() declare currentUser: CurrentUserService;
   @service() declare router: RouterService;
 
-  [x: string]: any;
   public static modelName = 'trip';
 
   @attr('string') declare title: string;

@@ -14,14 +14,14 @@ import SlideOverService from '../../services/slide-over';
 interface OnMapClickEvent {
   event: PointerEvent;
   components: {
-    markers: any[];
+    markers: unknown[];
   };
-  map: any;
-  target: any;
+  map: unknown;
+  target: unknown;
   eventName: string;
   googleEvent: {
     domEvent: MouseEvent;
-    jb: any;
+    jb: unknown;
     latLng: {
       lat: CallableFunction;
       lng: CallableFunction;
@@ -151,10 +151,10 @@ export default class TripController extends Controller {
         if (
           results &&
           results.length > 0 &&
+          results.firstObject &&
           status === 'OK' &&
           this.selectedTip
         ) {
-          // @ts-ignore
           const address = results.firstObject.formatted_address;
           this.selectedTip.address = address;
         }
@@ -207,19 +207,16 @@ export default class TripController extends Controller {
   @action
   centralize() {
     const bounds = new google.maps.LatLngBounds();
-    // @ts-ignore
-    this.model.get('tips').then((tips: Tip[]) => {
-      tips.forEach((tip) => {
-        bounds.extend({
-          lat: tip.location.lat,
-          lng: tip.location.lng,
-        });
+    this.model.get('tips').forEach((tip) => {
+      bounds.extend({
+        lat: tip.location.lat,
+        lng: tip.location.lng,
       });
-
-      if (!bounds.isEmpty()) {
-        this.map.fitBounds(bounds);
-      }
     });
+
+    if (!bounds.isEmpty()) {
+      this.map.fitBounds(bounds);
+    }
   }
 }
 
