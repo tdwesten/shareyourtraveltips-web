@@ -75,7 +75,7 @@
     {{#if this.isEdittingTip}}
       <Forms::EditTip
         @model={{this.selectedTip}}
-        @onSubmit={{action this.closeSlideOver}}
+        @onSuccess={{action this.closeSlideOver}}
         @onCancel={{action this.cancelAddNewTip}}
         @onDelete={{action this.deleteAndSlideOver}}
       />
