@@ -1,6 +1,7 @@
 import Store from '@ember-data/store';
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import RouterService from '@ember/routing/router-service';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import IntlService from 'ember-intl/services/intl';
@@ -13,14 +14,14 @@ import SlideOverService from '../../services/slide-over';
 interface OnMapClickEvent {
   event: PointerEvent;
   components: {
-    markers: any[];
+    markers: unknown[];
   };
-  map: any;
-  target: any;
+  map: unknown;
+  target: unknown;
   eventName: string;
   googleEvent: {
     domEvent: MouseEvent;
-    jb: any;
+    jb: unknown;
     latLng: {
       lat: CallableFunction;
       lng: CallableFunction;
@@ -32,9 +33,13 @@ export default class TripController extends Controller {
   @service public declare slideOver: SlideOverService;
   @service public declare currentUser: CurrentUserService;
   @service public declare intl: IntlService;
+  @service public declare router: RouterService;
+
   @tracked public declare selectedTip: Tip | null;
   @tracked public declare map: google.maps.Map;
   @tracked public isEdittingTrip = false;
+  @tracked public isEdittingTip = false;
+  @tracked public isEdittingTripContributors = false;
   @tracked public searchQuery = '';
   @tracked public model!: Trip;
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
@@ -54,6 +59,12 @@ export default class TripController extends Controller {
     return this.getTips.filterBy('isNew', false);
   }
 
+  get shareLink() {
+    return `${window.location.protocol}${
+      window.location.host
+    }${this.router.urlFor('trip-invite', this.model)}`;
+  }
+
   @action
   editTrip() {
     this.isEdittingTrip = true;
@@ -61,8 +72,9 @@ export default class TripController extends Controller {
   }
 
   @action
-  shareTrip() {
-    this.slideOver.open(this.intl.t('share_trip'));
+  showContributors() {
+    this.slideOver.open(this.intl.t('invite_contributors'));
+    this.isEdittingTripContributors = true;
   }
 
   @action
@@ -82,7 +94,7 @@ export default class TripController extends Controller {
   editTip(tip: Tip) {
     this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
     this.map.panBy(224, 0);
-
+    this.isEdittingTip = true;
     this.slideOver.open(this.intl.t('edit_tip'));
   }
 
@@ -112,6 +124,7 @@ export default class TripController extends Controller {
 
   @action
   onMapClick(event: OnMapClickEvent) {
+    this.isEdittingTip = true;
     this.selectedTip = this.store.createRecord('tip', {
       location: {
         lat: event.googleEvent.latLng.lat(),
@@ -119,10 +132,12 @@ export default class TripController extends Controller {
       },
       trip: this.model,
     });
+
     this.map.panTo({
       lat: this.selectedTip.location.lat,
       lng: this.selectedTip.location.lng,
     });
+
     this.map.panBy(224, 0);
 
     this.geocoder.geocode(
@@ -136,10 +151,10 @@ export default class TripController extends Controller {
         if (
           results &&
           results.length > 0 &&
+          results.firstObject &&
           status === 'OK' &&
           this.selectedTip
         ) {
-          // @ts-ignore
           const address = results.firstObject.formatted_address;
           this.selectedTip.address = address;
         }
@@ -150,31 +165,21 @@ export default class TripController extends Controller {
   }
 
   @action
-  saveAndSlideOver(e: Event) {
-    e.preventDefault();
-    this.slideOver.close();
-    this.selectedTip ? this.selectedTip.save() : null;
-  }
-
-  @action
   deleteAndSlideOver() {
-    this.slideOver.close();
     if (this.selectedTip) {
       this.selectedTip.deleteRecord();
       this.selectedTip.save();
     }
+
+    this.slideOver.close();
   }
 
   @action
   closeSlideOver() {
     this.isEdittingTrip = false;
-    this.selectedTip ? this.selectedTip.deleteRecord() : null;
-    this.slideOver.close();
-  }
+    this.isEdittingTip = false;
+    this.selectedTip = null;
 
-  @action
-  saveTrip() {
-    this.model.save();
     this.slideOver.close();
   }
 
@@ -202,19 +207,16 @@ export default class TripController extends Controller {
   @action
   centralize() {
     const bounds = new google.maps.LatLngBounds();
-    // @ts-ignore
-    this.model.get('tips').then((tips: Tip[]) => {
-      tips.forEach((tip) => {
-        bounds.extend({
-          lat: tip.location.lat,
-          lng: tip.location.lng,
-        });
+    this.model.get('tips').forEach((tip) => {
+      bounds.extend({
+        lat: tip.location.lat,
+        lng: tip.location.lng,
       });
-
-      if (!bounds.isEmpty()) {
-        this.map.fitBounds(bounds);
-      }
     });
+
+    if (!bounds.isEmpty()) {
+      this.map.fitBounds(bounds);
+    }
   }
 }
 

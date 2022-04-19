@@ -12,9 +12,6 @@ const TRIPVALIDATIONS = {
   description: [
     validatePresence({ presence: true, message: 'validations.description' }),
   ],
-  unsplashPhotoUrl: [
-    validatePresence({ presence: true, message: 'validations.photo' }),
-  ],
 };
 
 export default TRIPVALIDATIONS;

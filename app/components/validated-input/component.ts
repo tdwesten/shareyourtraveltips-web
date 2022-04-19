@@ -16,8 +16,6 @@ export default class ValidatedInput extends Component<ValidatedInputArgs> {
     super(owner, args);
 
     this.args.changeset.on('afterValidation', () => {
-      console.log('afterValidation - input');
-
       this.errors = this.args.changeset.errors.filter(
         (error: { key: string }) => error.key === this.args.id
       );

@@ -19,12 +19,12 @@ export default class AppHeader extends Component<AppHeaderArgs> {
     {
       title: 'menu.trips',
       route: 'authenticated.trips',
-      currentWhen: 'authenticated.trips authenticated.trip',
+      currentWhen: 'authenticated.trips',
     },
     {
-      title: 'menu.categories',
-      route: 'authenticated.categories',
-      currentWhen: 'authenticated.categories',
+      title: 'menu.shared_trips',
+      route: 'authenticated.sharedtrips',
+      currentWhen: 'authenticated.sharedtrips',
     },
   ];
 

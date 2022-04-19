@@ -15,7 +15,9 @@ Router.map(function () {
     this.route('trips');
     this.route('trip', { path: 'trips/:id' });
     this.route('categories');
+    this.route('sharedtrips', { path: 'shared-trips' });
+    this.route('sharedtrip', { path: 'shared-trips/:id' });
   });
 
-  this.route('trip-invite', { path: 'invite/:trip_id/:token' });
+  this.route('trip-invite', { path: 'invite/:trip_id' });
 });

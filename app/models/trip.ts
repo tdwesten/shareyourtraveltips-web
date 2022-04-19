@@ -1,18 +1,20 @@
-import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import RouterService from '@ember/routing/router-service';
+import { inject as service } from '@ember/service';
 import { Photo } from '../../types/unsplash';
+import CurrentUserService from '../services/current-user';
 import Tip from './tip';
 import User from './user';
-import { htmlSafe } from '@ember/template';
-import { SafeString } from '@ember/template/-private/handlebars';
 export default class Trip extends Model {
-  [x: string]: any;
+  @service() declare currentUser: CurrentUserService;
+  @service() declare router: RouterService;
+
   public static modelName = 'trip';
 
   @attr('string') declare title: string;
   @attr('string') declare description: string;
   @attr() declare unsplashPhoto: Photo;
   @attr('boolean') declare public: boolean;
-
   @belongsTo('user', { inverse: null }) declare user: User;
   @hasMany('tips') declare tips: Tip[];
   @hasMany('user') declare contributors: User[];
@@ -28,14 +30,8 @@ export default class Trip extends Model {
     return this.unsplashPhoto.urls.regular;
   }
 
-  get unsplashPhotoCredits(): SafeString | null {
-    if (!this.unsplashPhoto) {
-      return null;
-    }
-
-    return htmlSafe(
-      `Photo by <a href="https://unsplash.com/@${this.unsplashPhoto.user.username}?utm_source=shareyourtravel.tips&amp;utm_medium=referral ">${this.unsplashPhoto.user.first_name} ${this.unsplashPhoto.user.last_name}</a> on (<a href="https://unsplash.com?utm_source=shareyourtravel.tips&amp;utm_medium=referral">Unsplash</a>)`
-    );
+  get isTripOwner() {
+    return this.currentUser.user.get('id') === this.user.get('id');
   }
 }
 

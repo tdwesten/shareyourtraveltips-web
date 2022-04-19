@@ -1,11 +1,14 @@
 {{#if @model}}
   <Form
     @model={{@model}}
-    @onSubmit={{@onSuccess}}
+    @onSubmit={{this.addNewTrip}}
     @validations={{this.validations}}
     class='grid w-full grid-cols-6 gap-6'
     as |form|
   >
+    {{#each form.changeset.contributors as |contributor|}}
+      {{contributor.firstName}}
+    {{/each}}
     <div class='col-span-6'>
       <ValidatedInput
         @label={{t 'label.title'}}
@@ -27,33 +30,6 @@
         @changeset={{form.changeset}}
         @value={{form.changeset.description}}
       />
-    </div>
-    {{!-- <div class='col-span-6'>
-    <label
-      for='public'
-      class='flex items-center text-sm font-medium text-gray-700'
-    >
-      <Input
-        id='public'
-        @type='checkbox'
-        placeholder={{t 'placeholder.public'}}
-        class='mr-2 rounded-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500'
-        @checked={{@model.public}}
-      />
-      {{t 'label.public'}}
-    </label>
-  </div> --}}
-    <div class='col-span-6'>
-      <label for='' class='block mb-1 text-sm font-medium text-gray-700'>
-        {{t 'label.cover_photo'}}
-      </label>
-
-      <UnsplashImageSearch
-        @changeset={{form.changeset}}
-        @id='unsplashPhoto'
-        @image={{form.changeset.unsplashPhoto}}
-      />
-
     </div>
 
     <div
