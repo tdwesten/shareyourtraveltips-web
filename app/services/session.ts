@@ -12,6 +12,12 @@ export default class SessionService extends SimpleAuthSessionService {
     });
   }
 
+  handleInvalidation() {
+    this.router.transitionTo('login');
+
+    this.session.invalidate();
+  }
+
   /**
    * Loads the current authenticated user
    *

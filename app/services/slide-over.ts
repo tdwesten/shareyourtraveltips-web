@@ -1,11 +1,15 @@
 import { later } from '@ember/runloop';
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class SlideOverService extends Service {
   @tracked isOpen = false;
   @tracked showOverlay = false;
   @tracked title = '';
+
+  constructor() {
+    super();
+  }
 
   get isSlideOverOpen() {
     return this.isOpen;
