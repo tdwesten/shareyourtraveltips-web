@@ -86,6 +86,10 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   @action
   setImage() {
     if (this.results?.[this.currentSelectedImageIndex]) {
+      const photo = this.results[this.currentSelectedImageIndex];
+      if (photo) {
+        this.unsplash.hitDownloadEvent(photo);
+      }
       this.args.changeset.set(
         this.args.id,
         this.results?.[this.currentSelectedImageIndex]

@@ -21,11 +21,17 @@ export default class Register extends Controller {
     first_name: '',
     last_name: '',
     password: '',
+    invitedAsContributorForTrip: '',
   };
 
   // eslint-disable-next-line no-shadow-restricted-names
   constructor(args: object | undefined) {
     super(args);
+
+    const params = new URLSearchParams(window.location.search);
+    this.user.invitedAsContributorForTrip = params.get(
+      'invitedAsContributorForTrip'
+    ) as unknown as string;
 
     this.changeset = Changeset(
       this.user,
@@ -50,10 +56,10 @@ export default class Register extends Controller {
             body: JSON.stringify(this.user),
           })
             .then(() => {
-              this.session.authenticate('authenticator:jwt', {
-                email: this.user.email,
-                password: this.user.password,
-              });
+              // this.session.authenticate('authenticator:jwt', {
+              //   email: this.user.email,
+              //   password: this.user.password,
+              // });
             })
             .catch((error) => console.error('Error:', error));
         });

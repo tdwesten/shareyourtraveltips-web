@@ -30,6 +30,18 @@ export default class Unsplash extends Service {
       return results.response as unknown as Photo;
     });
   }
+
+  hitDownloadEvent(photo: Photo) {
+    const api = createApi({
+      accessKey: ENV.APP.unsplashApiKey as string,
+    });
+
+    console.log(photo);
+
+    api.photos.trackDownload({
+      downloadLocation: photo.links.download_location,
+    });
+  }
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your services.
