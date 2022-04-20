@@ -14,6 +14,8 @@ page_title.register: Register
 page_title.trips: Your Trips
 page_title.shared_trips: Shared Trips
 page_title.categories: Categories
+page_title.email.verify.success: Email address verified
+page_description.email.verify.success: Top, your email address has been verified successfully.
 header_title.login: Sign in
 header_title.register: Register
 header_title.trips: Your Trips
@@ -97,3 +99,9 @@ heading:
   your_trips: Your trips
 not_tips_found: Start adding tips by clicking on the map
 invite_contributors: Invite contributors
+navigate_to_trips: Start planning your trip
+login_and_navigate_to_trips: Login en start planning your trip
+page_title:
+  email:
+    verify:
+      success: Emailaddress verified
