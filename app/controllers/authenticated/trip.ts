@@ -60,6 +60,8 @@ export default class TripController extends Controller {
   }
 
   get shareLink() {
+    this.model.inviteContributor({ email: 'j.doe@example.com' });
+
     return `${window.location.protocol}//${
       window.location.host
     }${this.router.urlFor('trip-invite', this.model)}`;

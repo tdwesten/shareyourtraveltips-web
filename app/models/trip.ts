@@ -1,10 +1,12 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import RouterService from '@ember/routing/router-service';
 import { inject as service } from '@ember/service';
+import { memberAction } from 'ember-api-actions';
 import { Photo } from '../../types/unsplash';
 import CurrentUserService from '../services/current-user';
 import Tip from './tip';
 import User from './user';
+
 export default class Trip extends Model {
   @service() declare currentUser: CurrentUserService;
   @service() declare router: RouterService;
@@ -18,6 +20,11 @@ export default class Trip extends Model {
   @belongsTo('user', { inverse: null }) declare user: User;
   @hasMany('tips') declare tips: Tip[];
   @hasMany('user') declare contributors: User[];
+
+  inviteContributor = memberAction({
+    path: '-actions/invite-contributor',
+    type: 'post',
+  });
 
   get getPublicStatusIcon() {
     return this.public ? 'globe' : 'lock';

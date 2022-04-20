@@ -67,6 +67,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "els-addon-typed-templates": "^4.2.4",
     "els-intl-addon": "^1.0.5",
+    "ember-api-actions": "^0.2.9",
     "ember-auto-import": "^2.4.1",
     "ember-autofocus-modifier": "^3.0.0",
     "ember-changeset": "^4.0.0",
