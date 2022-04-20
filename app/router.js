@@ -20,4 +20,10 @@ Router.map(function () {
   });
 
   this.route('trip-invite', { path: 'invite/:trip_id' });
+
+  this.route('email', function () {
+    this.route('verify', function () {
+      this.route('success');
+    });
+  });
 });
