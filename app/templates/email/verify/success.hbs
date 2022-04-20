@@ -1,0 +1,32 @@
+{{page-title (t 'page_title.email.verify.success')}}
+
+<main class='bg-orange-600 bg-topography min-h-screen flex flex-col'>
+  <Navigation />
+  <div class='flex justify-center items-center flex-1'>
+    <div class='rounded-lg shadow-md bg-white max-w-xl mx-auto p-12'>
+      <div class='flex flex-col items-center text-gray-700'>
+
+        <IconHolder @icon='envelope-circle-check' />
+        <h1
+          class='text-center text-3xl mt-3 font-bold font-headings tracking-normal'
+        >
+          {{t 'page_title.email.verify.success'}}
+        </h1>
+        <p class='text-center text-lg mt-2'>
+          {{t 'page_description.email.verify.success'}}
+        </p>
+        <div class='mt-8'>
+          {{#if @model}}
+            <Button @route='login'>
+              {{t 'navigate_to_trips'}}
+            </Button>
+          {{else}}
+            <Button @route='authenticated.trips'>
+              {{t 'login_and_navigate_to_trips'}}
+            </Button>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
