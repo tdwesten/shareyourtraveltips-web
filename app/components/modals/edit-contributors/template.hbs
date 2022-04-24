@@ -1,0 +1,85 @@
+<div>
+  <IconHolder @icon='users' />
+
+  <div class='mt-4 text-center text-gray-600'>
+    <p class='mb-4 font-semibold text-gray-900'>
+      {{t 'inviteContributors.title'}}
+
+    </p>
+    <p>
+      {{t 'inviteContributors.description'}}
+    </p>
+  </div>
+</div>
+<div class='pt-6'>
+  <Form
+    @model={{this.newContributor}}
+    @onSubmit={{this.onSuccess}}
+    @validations={{this.validations}}
+    class='rounded border border-gray-300 p-4'
+    as |form|
+  >
+    <h3
+      class='text-lg font-medium flex justify-between mb-4 border-b border-gray-300 pb-2'
+    >
+      {{t 'invite_contributors'}}
+    </h3>
+    {{#if this.contributorSuccessfullAdded}}
+      <FlashMessage @type={{this.flashmessageTypes.Error}}>
+        {{t 'errors.inviteContributorsError'}}
+      </FlashMessage>
+    {{/if}}
+    {{#if this.errors}}
+      <FlashMessage @type={{this.flashmessageTypes.Success}}>
+        {{t 'contributorSucessfullAdded'}}
+      </FlashMessage>
+    {{/if}}
+    <div class='col-span-6'>
+      <ValidatedInput
+        @label={{t 'label.email'}}
+        @id='email'
+        @type='email'
+        @placeholder={{t 'placeholder.inviteContributorEmail'}}
+        @autocomplete='off'
+        @changeset={{form.changeset}}
+        @value={{form.changeset.email}}
+      />
+    </div>
+
+    <div
+      class='flex items-center justify-between col-span-6 py-3 mt-3 border-t border-gray-300'
+    >
+      <div>
+        <Button @type='submit'>
+          {{t 'invite contributor'}}
+        </Button>
+      </div>
+    </div>
+  </Form>
+</div>
+
+<div class='pt-6'>
+  <h3
+    class='text-lg font-medium flex justify-between mb-4 border-b border-gray-300 pb-2'
+  >
+    {{t 'contributors'}}
+  </h3>
+  <ul class='rounded border border-gray-300'>
+    {{#if this.getContributors.isPending}}
+      <li class='p-3 text-sm border-b border-gray-300 last:border-none'>
+        <div class='h-4 bg-gray-200 animate-pulse'></div>
+      </li>
+    {{/if}}
+    {{#each this.getContributors as |contributor|}}
+      <li class='p-3 text-sm border-b border-gray-300 last:border-none'>
+        {{contributor.fullName}}<br />
+        <span class='text-gray-400'>{{contributor.email}}</span>
+      </li>
+    {{/each}}
+    {{#unless this.getContributors}}
+      <li class='p-3 text-sm border-b border-gray-300 last:border-none'>
+        {{t 'emptyState.noContributors'}}
+      </li>
+    {{/unless}}
+  </ul>
+</div>

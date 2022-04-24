@@ -21,6 +21,9 @@ module.exports = function (defaults) {
     'ember-simple-auth': {
       useSessionSetupMethod: true,
     },
+    'ember-promise-modals': {
+      excludeCSS: true,
+    },
   });
 
   return app.toTree();

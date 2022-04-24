@@ -36,8 +36,6 @@ export default class Unsplash extends Service {
       accessKey: ENV.APP.unsplashApiKey as string,
     });
 
-    console.log(photo);
-
     api.photos.trackDownload({
       downloadLocation: photo.links.download_location,
     });

@@ -1,0 +1,54 @@
+import { FlashMessageType } from '../../../enum/flash-message-type.enum';
+import Tip from '../../../models/tip';
+import TIPVALIDATIONS from '../../../validations/tip';
+import ModalsModal from '../modal/component';
+import { inject as service } from '@ember/service';
+import Store from '@ember-data/store';
+import CurrentUserService from '../../../services/current-user';
+import ModalOptions from '../../../interfaces/modal-options.interface';
+import { action } from '@ember/object';
+
+interface ModalsModalArgs<M> {
+  options: ModalOptions<M>;
+}
+
+export default class ModalsEditTip extends ModalsModal<Tip> {
+  @service public declare store: Store;
+  @service public declare currentUser: CurrentUserService;
+
+  validations = TIPVALIDATIONS;
+  flashmessageTypes = FlashMessageType;
+  public declare categories;
+
+  get getFormatedCategories() {
+    return this.categories ? this.categories : [];
+  }
+
+  constructor(owner: unknown, args: ModalsModalArgs<Tip>) {
+    super(owner, args);
+
+    this.categories = this.store.findAll('category');
+  }
+
+  get getSuccesButtonText() {
+    return this.args.options.model?.get('isNew') ? 'create' : 'save';
+  }
+
+  get showDeleteButton() {
+    return !this.args.options.model?.get('isNew');
+  }
+
+  @action
+  addNewTrip() {
+    this.args.options.model.save().then(() => {
+      this.onSuccess();
+    });
+  }
+
+  @action
+  onDelete() {
+    this.args.options.model.deleteRecord();
+    this.args.options.model.save();
+    this.onCancel();
+  }
+}

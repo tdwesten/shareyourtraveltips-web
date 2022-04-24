@@ -1,14 +1,21 @@
+import Model from '@ember-data/model';
 import { later } from '@ember/runloop';
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import ModalOptions from '../interfaces/modal-options.interface';
 
 export default class SlideOverService extends Service {
   @tracked isOpen = false;
   @tracked showOverlay = false;
   @tracked title = '';
+  @tracked declare options: ModalOptions<Model>;
 
   constructor() {
     super();
+  }
+
+  get getOptions() {
+    return this.options;
   }
 
   get isSlideOverOpen() {
@@ -16,24 +23,23 @@ export default class SlideOverService extends Service {
   }
 
   get getTitle() {
-    return this.title;
+    return this.options?.title;
   }
 
-  open(title: string | undefined = undefined) {
-    if (this.isOpen) {
-      this.close(0);
+  get getCurrentModal() {
+    return this.options?.modal;
+  }
 
-      setTimeout(() => {
-        this.isOpen = false;
-        this.open(title);
-      }, 350);
+  closeOnEscape(e: KeyboardEvent) {
+    if (this.isOpen && e.key == 'Escape') {
+      this.close();
     }
+  }
 
-    if (title) {
-      this.setTitle(title);
-    }
-
+  open(options: ModalOptions<Model>) {
+    this.setOptions(options);
     this.showOverlay = true;
+    document.body.addEventListener('keyup', this.closeOnEscape.bind(this));
 
     later(() => {
       this.isOpen = true;
@@ -43,13 +49,22 @@ export default class SlideOverService extends Service {
   close(timeout = 250) {
     this.isOpen = false;
 
+    if (this.options.callback) {
+      this.options.callback();
+    }
+    document.body.removeEventListener(
+      'keyup',
+      this.closeOnEscape.bind(this),
+      true
+    );
+
     later(() => {
       this.showOverlay = false;
     }, timeout);
   }
 
-  setTitle(title: string) {
-    this.title = title;
+  setOptions(options: ModalOptions<Model>) {
+    this.options = options;
   }
 }
 

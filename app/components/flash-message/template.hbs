@@ -1,10 +1,16 @@
-<div class='bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-3'>
+<div
+  class='{{this.getColors.backgroundColor}}
+    border-l-4
+    {{this.getColors.leftBorderColor}}
+    p-4 mb-3
+    {{@classes}}'
+>
   <div class='flex'>
-    <div class='flex-shrink-0 text-yellow-400'>
+    <div class='flex-shrink-0 {{this.getColors.iconColor}} '>
       <FaIcon icon='exclamation-triangle' />
     </div>
     <div class='ml-3'>
-      <p class='text-sm text-yellow-700'>
+      <p class='text-sm {{this.getColors.textColor}} '>
         {{yield}}
       </p>
     </div>

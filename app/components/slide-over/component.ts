@@ -3,16 +3,22 @@ import { inject as service } from '@ember/service';
 import SlideOverService from '../../services/slide-over';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { Modals } from '../../enum/modals.enum';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SlideOverArgs {}
 
 export default class SlideOver extends Component<SlideOverArgs> {
   @service private declare slideOver: SlideOverService;
-
-  @tracked public declare element: HTMLElement;
+  @tracked public declare elm: HTMLElement;
+  public modals = Modals;
 
   constructor(owner: unknown, args: SlideOverArgs) {
     super(owner, args);
+  }
+
+  get getOptions() {
+    return this.slideOver.getOptions;
   }
 
   get isSlideOverOpen() {
@@ -21,6 +27,10 @@ export default class SlideOver extends Component<SlideOverArgs> {
     }
 
     return this.slideOver.isSlideOverOpen;
+  }
+
+  get getCurrentModal() {
+    return this.slideOver?.getCurrentModal;
   }
 
   get hideOverlay() {
@@ -32,7 +42,7 @@ export default class SlideOver extends Component<SlideOverArgs> {
   }
 
   focusFirstElement() {
-    const firstElement = this.element.querySelector('input');
+    const firstElement = this.elm.querySelector('input');
 
     if (firstElement) {
       firstElement.focus();
@@ -41,7 +51,7 @@ export default class SlideOver extends Component<SlideOverArgs> {
 
   @action
   onInsert(element: HTMLElement) {
-    this.element = element;
+    this.elm = element;
   }
 
   @action

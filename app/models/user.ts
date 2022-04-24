@@ -14,6 +14,10 @@ export default class User extends Model {
   @attr('string') declare locale: string;
   @hasMany('trip') declare trips: [];
 
+  get fullName() {
+    return this.firstName + ' ' + this.lastName;
+  }
+
   get tripsContributedTo() {
     return this.store.query('trip', {
       filter: { contributors: { id: [this.id] } },

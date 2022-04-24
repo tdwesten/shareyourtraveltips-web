@@ -8,7 +8,7 @@ interface SearchboxArgs {
 
 export default class Searchbox extends Component<SearchboxArgs> {
   @tracked selectedResult: unknown;
-  @tracked public declare element: HTMLInputElement;
+  @tracked public declare searchElement: HTMLInputElement;
 
   constructor(owner: unknown, args: SearchboxArgs) {
     super(owner, args);
@@ -16,9 +16,9 @@ export default class Searchbox extends Component<SearchboxArgs> {
 
   @action
   onInsert(element: HTMLInputElement) {
-    this.element = element;
+    this.searchElement = element;
 
-    const searchBox = new google.maps.places.SearchBox(this.element);
+    const searchBox = new google.maps.places.SearchBox(this.searchElement);
 
     this.args.map.addListener('bounds_changed', () => {
       searchBox.setBounds(
@@ -33,7 +33,7 @@ export default class Searchbox extends Component<SearchboxArgs> {
         return;
       }
 
-      this.element.value = '';
+      this.searchElement.value = '';
 
       this.args.onSelect(places.firstObject);
     });

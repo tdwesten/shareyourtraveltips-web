@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import IntlService from 'ember-intl/services/intl';
 import { MAPSTYLES } from '../../components/map-wrapper/map-styles';
+import { Modals } from '../../enum/modals.enum';
 import Tip from '../../models/tip';
 import Trip from '../../models/trip';
 import CurrentUserService from '../../services/current-user';
@@ -69,35 +70,55 @@ export default class TripController extends Controller {
 
   @action
   editTrip() {
-    this.isEdittingTrip = true;
-    this.slideOver.open(this.intl.t('edit_trip'));
+    this.slideOver.open({
+      modal: Modals.EditTrip,
+      model: this.model,
+      title: this.intl.t('edit_trip'),
+      showCloseButton: true,
+      showOverlay: false,
+    });
   }
 
   @action
   showContributors() {
-    this.slideOver.open(this.intl.t('invite_contributors'));
-    this.isEdittingTripContributors = true;
+    this.slideOver.open({
+      modal: Modals.EditContributors,
+      title: this.intl.t('invite_contributors') as string,
+      model: this.model,
+      showCloseButton: true,
+      showOverlay: true,
+    });
   }
 
   @action
   onMarkerClick(tip: Tip, _map: any, event: PointerEvent) {
     event.stopPropagation();
+
     this.selectedTip = tip;
-    this.editTip(this.selectedTip);
+    this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
+    this.map.panBy(224, 0);
+
+    this.slideOver.open({
+      modal: Modals.EditTip,
+      model: tip,
+      title: this.intl.t('edit_tip'),
+      showCloseButton: true,
+      showOverlay: false,
+    });
   }
 
   @action
   onTipClick(tip: Tip) {
     this.selectedTip = tip;
-    this.editTip(this.selectedTip);
-  }
-
-  @action
-  editTip(tip: Tip) {
     this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
     this.map.panBy(224, 0);
-    this.isEdittingTip = true;
-    this.slideOver.open(this.intl.t('edit_tip'));
+    this.slideOver.open({
+      modal: Modals.EditTip,
+      model: tip,
+      title: this.intl.t('edit_tip'),
+      showCloseButton: true,
+      showOverlay: false,
+    });
   }
 
   @action
@@ -120,7 +141,16 @@ export default class TripController extends Controller {
         });
       }
 
-      this.slideOver.open(this.intl.t('edit_tip'));
+      if (this.selectedTip) {
+        this.slideOver.open({
+          modal: Modals.EditTip,
+          model: this.selectedTip,
+          title: this.intl.t('edit_tip'),
+          showCloseButton: true,
+          showOverlay: false,
+          callback: this.markerModalClose.bind(this),
+        });
+      }
     }
   }
 
@@ -163,39 +193,25 @@ export default class TripController extends Controller {
       }
     );
 
-    this.slideOver.open(this.intl.t('create_new_tip'));
+    this.slideOver.open({
+      modal: Modals.EditTip,
+      model: this.selectedTip,
+      title: this.intl.t('edit_tip'),
+      showCloseButton: true,
+      showOverlay: false,
+      callback: this.markerModalClose.bind(this),
+    });
   }
 
-  @action
-  deleteAndSlideOver() {
-    if (this.selectedTip) {
-      this.selectedTip.deleteRecord();
-      this.selectedTip.save();
-    }
-
-    this.slideOver.close();
-  }
-
-  @action
-  closeSlideOver() {
-    this.isEdittingTrip = false;
-    this.isEdittingTip = false;
-    this.selectedTip = null;
-
-    this.slideOver.close();
-  }
-
-  @action
-  cancelAddNewTip() {
-    this.slideOver.close();
+  markerModalClose() {
     this.map.panBy(-200, 0);
 
-    if (this.selectedTip?.get('isNew') === true) {
-      this.selectedTip.deleteRecord();
+    if (this.selectedTip) {
+      if (this.selectedTip.get('isNew') === true) {
+        this.selectedTip.deleteRecord();
+      }
+      this.selectedTip ? this.selectedTip?.save() : null;
     }
-
-    this.selectedTip ? this.selectedTip.save() : null;
-    this.selectedTip = null;
   }
 
   @action

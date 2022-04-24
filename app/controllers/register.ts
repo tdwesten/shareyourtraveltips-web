@@ -11,11 +11,13 @@ import {
 } from 'validated-changeset';
 import REGISTER_VALIDATIONS from '../validations/register';
 import SessionService from '../services/session';
+import { FlashMessageType } from '../enum/flash-message-type.enum';
 
 export default class Register extends Controller {
   @service private declare router: RouterService;
   @service private declare session: SessionService;
   public changeset: BufferedChangeset;
+  @tracked showVerifyEmailNotification = false;
   @tracked user = {
     email: '',
     first_name: '',
@@ -23,6 +25,7 @@ export default class Register extends Controller {
     password: '',
     invitedAsContributorForTrip: '',
   };
+  flashmessageTypes = FlashMessageType;
 
   // eslint-disable-next-line no-shadow-restricted-names
   constructor(args: object | undefined) {
@@ -56,10 +59,14 @@ export default class Register extends Controller {
             body: JSON.stringify(this.user),
           })
             .then(() => {
-              // this.session.authenticate('authenticator:jwt', {
-              //   email: this.user.email,
-              //   password: this.user.password,
-              // });
+              this.showVerifyEmailNotification = true;
+
+              setTimeout(() => {
+                this.session.authenticate('authenticator:jwt', {
+                  email: this.user.email,
+                  password: this.user.password,
+                });
+              }, 1000);
             })
             .catch((error) => console.error('Error:', error));
         });

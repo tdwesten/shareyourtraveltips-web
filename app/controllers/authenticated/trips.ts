@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import IntlService from 'ember-intl/services/intl';
+import { Modals } from '../../enum/modals.enum';
 import Trip from '../../models/trip';
 import SlideOverService from '../../services/slide-over';
 
@@ -23,14 +24,17 @@ export default class TripsController extends Controller {
 
   @action
   openSlideOver() {
-    this.slideOver.setTitle(this.intl.t('create_new_trip'));
-    this.slideOver.open();
+    this.slideOver.open({
+      modal: Modals.EditTrip,
+      model: this.model.newTrip,
+      title: this.intl.t('create_new_trip'),
+      showCloseButton: true,
+      showOverlay: false,
+      callback: this.closeSlideOver.bind(this),
+    });
   }
 
-  @action
   closeSlideOver() {
-    this.slideOver.close();
-
     this.model.newTrip = this.store.createRecord('trip');
   }
 

@@ -22,7 +22,7 @@
                   >
                     {{this.getTitle}}
                   </h2>
-                  {{!-- <div class='ml-3 h-7 flex items-center'>
+                  <div class='ml-3 h-7 flex items-center'>
                     <button
                       type='button'
                       class='bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500'
@@ -32,10 +32,19 @@
                       <span class='sr-only'>{{t 'close'}}</span>
                       <FaIcon @icon='times' class='h-5 w-5' />
                     </button>
-                  </div> --}}
+                  </div>
                 </div>
               </div>
               <div class='mt-6 relative flex-1 px-4 sm:px-6' id='slide-over'>
+                {{#if (eq this.getCurrentModal this.modals.EditContributors)}}
+                  <Modals::EditContributors @options={{this.getOptions}} />
+                {{/if}}
+                {{#if (eq this.getCurrentModal this.modals.EditTrip)}}
+                  <Modals::EditTrip @options={{this.getOptions}} />
+                {{/if}}
+                {{#if (eq this.getCurrentModal this.modals.EditTip)}}
+                  <Modals::EditTip @options={{this.getOptions}} />
+                {{/if}}
               </div>
             </div>
           </div>
