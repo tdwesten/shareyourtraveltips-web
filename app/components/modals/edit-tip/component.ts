@@ -7,6 +7,7 @@ import Store from '@ember-data/store';
 import CurrentUserService from '../../../services/current-user';
 import ModalOptions from '../../../interfaces/modal-options.interface';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 interface ModalsModalArgs<M> {
   options: ModalOptions<M>;
@@ -15,6 +16,7 @@ interface ModalsModalArgs<M> {
 export default class ModalsEditTip extends ModalsModal<Tip> {
   @service public declare store: Store;
   @service public declare currentUser: CurrentUserService;
+  @tracked public isLoading = false;
 
   validations = TIPVALIDATIONS;
   flashmessageTypes = FlashMessageType;
@@ -40,15 +42,25 @@ export default class ModalsEditTip extends ModalsModal<Tip> {
 
   @action
   addNewTrip() {
-    this.args.options.model.save().then(() => {
+    this.isLoading = true;
+    this.args.options.model?.save().then(() => {
+      this.isLoading = false;
       this.onSuccess();
     });
   }
 
   @action
   onDelete() {
-    this.args.options.model.deleteRecord();
-    this.args.options.model.save();
-    this.onCancel();
+    this.isLoading = true;
+    this.args.options.model?.deleteRecord();
+    this.args.options.model
+      ?.save()
+      .then(() => {
+        this.onCancel();
+        this.isLoading = false;
+      })
+      .catch(() => {
+        this.isLoading = false;
+      });
   }
 }

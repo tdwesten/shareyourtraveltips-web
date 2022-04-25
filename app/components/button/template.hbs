@@ -15,6 +15,10 @@
       {{this.sizeClasses}}'
     ...attributes
   >
+    {{#if @isLoading}}
+      <FaIcon @icon='spinner' class='animate-spin mr-3' />
+    {{/if}}
+
     {{yield}}
 
   </button>

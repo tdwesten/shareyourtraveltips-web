@@ -1,10 +1,15 @@
-<form {{on 'submit' this.submit}} ...attributes>
-  {{yield
-    (hash
-      changeset=this.changeset
-      isValid=this.isValid
-      isInvalid=this.isInvalid
-      errors=this.errors
-    )
-  }}
-</form>
+<div {{did-update this.updateComponent @model}}>
+  {{#if this.changeset}}
+    <form {{on 'submit' this.submit}} ...attributes>
+      {{yield
+        (hash
+          changeset=this.changeset
+          isValid=this.isValid
+          isInvalid=this.isInvalid
+          errors=this.errors
+          isLoading=@isLoading
+        )
+      }}
+    </form>
+  {{/if}}
+</div>

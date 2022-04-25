@@ -11,7 +11,7 @@ interface ModalsModalArgs<M> {
 export default class ModalsModal<M = unknown> extends Component<
   ModalsModalArgs<M>
 > {
-  @service private declare slideOver: SlideOverService;
+  @service public declare slideOver: SlideOverService;
 
   constructor(owner: unknown, args: ModalsModalArgs<M>) {
     super(owner, args);

@@ -4,17 +4,23 @@ import SlideOverService from '../../services/slide-over';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { Modals } from '../../enum/modals.enum';
+import RouterService from '@ember/routing/router-service';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SlideOverArgs {}
 
 export default class SlideOver extends Component<SlideOverArgs> {
   @service private declare slideOver: SlideOverService;
+  @service private declare router: RouterService;
   @tracked public declare elm: HTMLElement;
   public modals = Modals;
 
   constructor(owner: unknown, args: SlideOverArgs) {
     super(owner, args);
+
+    this.router.on('routeWillChange', () => {
+      this.closeSlideOver();
+    });
   }
 
   get getOptions() {

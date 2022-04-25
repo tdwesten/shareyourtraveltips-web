@@ -26,6 +26,7 @@ export default class Register extends Controller {
     invitedAsContributorForTrip: '',
   };
   flashmessageTypes = FlashMessageType;
+  @tracked isLoading = false;
 
   // eslint-disable-next-line no-shadow-restricted-names
   constructor(args: object | undefined) {
@@ -46,6 +47,9 @@ export default class Register extends Controller {
   @action
   register(event: Event) {
     event.preventDefault();
+
+    this.isLoading = true;
+
     const url = ENV.APP.apiHost + '/auth/register';
 
     this.changeset.validate().then(() => {

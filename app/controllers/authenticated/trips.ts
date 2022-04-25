@@ -28,8 +28,6 @@ export default class TripsController extends Controller {
       modal: Modals.EditTrip,
       model: this.model.newTrip,
       title: this.intl.t('create_new_trip'),
-      showCloseButton: true,
-      showOverlay: false,
       callback: this.closeSlideOver.bind(this),
     });
   }

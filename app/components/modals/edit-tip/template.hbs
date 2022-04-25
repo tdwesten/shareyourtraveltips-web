@@ -70,7 +70,7 @@
       >
         {{t 'cancel'}}
       </SecondaryButton>
-      <Button @type='submit' tabindex='4'>
+      <Button @type='submit' tabindex='4' @isLoading={{this.isLoading}}>
         {{t this.getSuccesButtonText}}
       </Button>
     </div>

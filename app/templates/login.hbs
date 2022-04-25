@@ -26,8 +26,9 @@
         @model={{this.model}}
         @onSubmit={{action this.authenticate}}
         @validations={{this.validations}}
+        @isLoading={{this.isLoading}}
         class='grid grid-cols-6 gap-6 w-full px-6'
-        as |form isInvalid|
+        as |form|
       >
         <div class='col-span-6'>
           <h1 class='text-3xl font-bold py-3'>{{t 'header_title.login'}}</h1>
@@ -59,7 +60,7 @@
           {{#if this.hasErrors}}
             <FlashMessage>{{t (concat 'errors.' this.errors)}}</FlashMessage>
           {{/if}}
-          <Button @type='submit' @disabled={{isInvalid}}>
+          <Button @type='submit' @isLoading={{form.isLoading}}>
             {{t 'login'}}
           </Button>
         </div>

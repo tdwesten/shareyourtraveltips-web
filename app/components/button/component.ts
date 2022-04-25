@@ -3,6 +3,7 @@ import Component from '@glimmer/component';
 interface ButtonArgs {
   type?: string;
   isLarge?: boolean;
+  isLoading?: boolean;
 }
 
 export default class Button extends Component<ButtonArgs> {

@@ -74,8 +74,6 @@ export default class TripController extends Controller {
       modal: Modals.EditTrip,
       model: this.model,
       title: this.intl.t('edit_trip'),
-      showCloseButton: true,
-      showOverlay: false,
     });
   }
 
@@ -85,8 +83,6 @@ export default class TripController extends Controller {
       modal: Modals.EditContributors,
       title: this.intl.t('invite_contributors') as string,
       model: this.model,
-      showCloseButton: true,
-      showOverlay: true,
     });
   }
 
@@ -102,8 +98,6 @@ export default class TripController extends Controller {
       modal: Modals.EditTip,
       model: tip,
       title: this.intl.t('edit_tip'),
-      showCloseButton: true,
-      showOverlay: false,
     });
   }
 
@@ -116,8 +110,6 @@ export default class TripController extends Controller {
       modal: Modals.EditTip,
       model: tip,
       title: this.intl.t('edit_tip'),
-      showCloseButton: true,
-      showOverlay: false,
     });
   }
 
@@ -146,8 +138,6 @@ export default class TripController extends Controller {
           modal: Modals.EditTip,
           model: this.selectedTip,
           title: this.intl.t('edit_tip'),
-          showCloseButton: true,
-          showOverlay: false,
           callback: this.markerModalClose.bind(this),
         });
       }
@@ -197,8 +187,6 @@ export default class TripController extends Controller {
       modal: Modals.EditTip,
       model: this.selectedTip,
       title: this.intl.t('edit_tip'),
-      showCloseButton: true,
-      showOverlay: false,
       callback: this.markerModalClose.bind(this),
     });
   }

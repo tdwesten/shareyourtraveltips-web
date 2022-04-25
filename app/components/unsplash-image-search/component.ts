@@ -24,19 +24,26 @@ export default class UnsplashImageSearch extends Component<UnsplashImageSearchAr
   constructor(owner: unknown, args: UnsplashImageSearchArgs) {
     super(owner, args);
 
-    if (this.args.image) {
-      this.unsplash.getImageById(this.args.image.id).then((img) => {
-        if (img) {
-          this.results = [img];
-        }
-      });
-    }
+    this.setDefaultImage();
 
     this.args.changeset.on('afterValidation', () => {
       this.errors = this.args.changeset.errors.filter(
         (error: { key: string }) => error.key === this.args.id
       );
     });
+  }
+
+  @action
+  setDefaultImage() {
+    if (this.args.image) {
+      this.unsplash.getImageById(this.args.image.id).then((img) => {
+        if (img) {
+          this.results = [img];
+        }
+      });
+    } else {
+      this.results = [];
+    }
   }
 
   get errorMessage() {

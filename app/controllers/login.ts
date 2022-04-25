@@ -10,6 +10,7 @@ export default class Login extends Controller {
   validations = LOGIN_VALIDATIONS;
   @tracked model = { email: '', password: '' };
   @tracked errors = '';
+  @tracked isLoading = false;
 
   get hasErrors() {
     return this.errors !== '';
@@ -17,6 +18,8 @@ export default class Login extends Controller {
 
   @action
   authenticate() {
+    this.isLoading = true;
+
     this.session
       .authenticate('authenticator:jwt', {
         email: this.model.email,

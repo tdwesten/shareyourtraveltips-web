@@ -1,5 +1,7 @@
-<div class='col-span-1 bg-white rounded-lg border border-gray-300'>
-
+<div
+  class='col-span-1 bg-white rounded-lg border border-gray-300'
+  {{did-update this.setDefaultImage @changeset}}
+>
   {{#if this.hasError}}
     <InputErrorMessage @message={{t this.errorMessage}} />
   {{/if}}

@@ -11,6 +11,7 @@ interface FormArgs {
   onSubmit: CallableFunction;
   validations: any;
   model: any;
+  isLoading: boolean;
 }
 
 export default class Form extends Component<FormArgs> {
@@ -34,6 +35,11 @@ export default class Form extends Component<FormArgs> {
       lookupValidator(this.args.validations),
       this.args.validations
     );
+  }
+
+  @action
+  updateComponent() {
+    this.createChangeset();
   }
 
   @action

@@ -10,12 +10,13 @@ export default class ModalsEditContributors extends ModalsModal<Trip> {
   flashmessageTypes = FlashMessageType;
   @tracked contributorSuccessfullAdded = false;
   @tracked errors = false;
+  @tracked isLoading = false;
   @tracked newContributor = {
     email: '',
   };
 
   get getContributors() {
-    return this.args.options.model.contributors;
+    return this.args.options.model?.contributors;
   }
 
   get getNewContributorModel() {
@@ -24,18 +25,21 @@ export default class ModalsEditContributors extends ModalsModal<Trip> {
 
   @action
   onSuccess(): void {
-    this.args.options.model
-      .inviteContributor(this.newContributor)
-      .then(() => {
-        this.contributorSuccessfullAdded = true;
-        this.newContributor = {
-          email: '',
-        };
+    this.isLoading = true;
+    if (this.args.options.model) {
+      this.args.options.model
+        .inviteContributor(this.newContributor)
+        .then(() => {
+          this.contributorSuccessfullAdded = true;
+          this.newContributor = {
+            email: '',
+          };
 
-        setTimeout(() => {
-          this.contributorSuccessfullAdded = false;
-        }, 3000);
-      })
-      .catch((error) => (this.errors = error));
+          setTimeout(() => {
+            this.contributorSuccessfullAdded = false;
+          }, 3000);
+        })
+        .catch((error) => (this.errors = error));
+    }
   }
 }

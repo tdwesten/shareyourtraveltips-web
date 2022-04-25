@@ -1,10 +1,8 @@
 import { Modals } from '../enum/modals.enum';
 
 export default interface ModalOptions<M> {
-  modal: Modals;
-  title: string;
-  model: M;
-  showCloseButton: boolean;
-  showOverlay: boolean;
-  callback?: CallableFunction;
+  modal: Modals | null;
+  title: string | null;
+  model: M | null;
+  callback?: CallableFunction | null;
 }

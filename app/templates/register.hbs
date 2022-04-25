@@ -80,7 +80,11 @@
             <div
               class='col-span-6 flex justify-between flex-row-reverse border-t border-gray-200 pt-4'
             >
-              <Button @type='submit' @disabled={{this.changeset.isInvalid}}>
+              <Button
+                @type='submit'
+                @disabled={{this.changeset.isInvalid}}
+                @isLoading={{this.isLoading}}
+              >
                 {{t 'register'}}
               </Button>
               <SecondaryButton {{on 'click' this.toLogin}}>
