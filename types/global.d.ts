@@ -12,6 +12,13 @@ declare module 'ember-simple-auth/session-stores/local-storage' {
   }
 }
 
+declare module 'ember-simple-auth-token/authenticators/jwt' {
+  import LocalStorageStore from 'ember-simple-auth/session-stores/local-storage';
+  export default class extends LocalStorageStore {
+    [x: string]: any;
+  }
+}
+
 declare module 'ember-page-title/services/page-title' {
   import EmberPageTitleService from 'ember-page-title/services/page-title';
   export default class extends EmberPageTitleService {

@@ -65,10 +65,10 @@ module.exports = function (environment) {
     serverTokenEndpoint: ENV['APP']['apiHost'] + '/auth/login',
     identificationField: 'email',
     tokenPropertyName: 'access_token',
-    tokenExpireName: 'expires_in',
     serverTokenRefreshEndpoint: ENV['APP']['apiHost'] + '/auth/refresh',
     refreshTokenPropertyName: 'access_token',
-    refreshAccessTokens: false,
+    tokenExpireName: 'exp',
+    refreshAccessTokens: true,
     refreshLeeway: 60,
   };
 
