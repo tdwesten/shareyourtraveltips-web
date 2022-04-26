@@ -57,6 +57,7 @@ export default class SlideOverService extends Service {
 
     this.setOptions(options);
     this.showOverlay = true;
+
     document.body.addEventListener('keyup', this.closeOnEscape.bind(this));
 
     later(() => {
@@ -67,8 +68,8 @@ export default class SlideOverService extends Service {
   close(timeout = 250) {
     this.isOpen = false;
 
-    if (this.options?.callback) {
-      this.options.callback();
+    if (this.callback) {
+      this.callback();
     }
 
     document.body.removeEventListener(

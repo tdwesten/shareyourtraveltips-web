@@ -66,10 +66,21 @@ export default class Register extends Controller {
               this.showVerifyEmailNotification = true;
 
               setTimeout(() => {
-                this.session.authenticate('authenticator:jwt', {
-                  email: this.user.email,
-                  password: this.user.password,
-                });
+                this.session
+                  .authenticate('authenticator:jwt', {
+                    email: this.user.email,
+                    password: this.user.password,
+                  })
+                  .then(() => {
+                    this.isLoading = false;
+                    this.user = {
+                      email: '',
+                      first_name: '',
+                      last_name: '',
+                      password: '',
+                      invitedAsContributorForTrip: '',
+                    };
+                  });
               }, 1000);
             })
             .catch((error) => console.error('Error:', error));

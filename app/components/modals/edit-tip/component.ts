@@ -36,8 +36,16 @@ export default class ModalsEditTip extends ModalsModal<Tip> {
     return this.args.options.model?.get('isNew') ? 'create' : 'save';
   }
 
-  get showDeleteButton() {
+  get isNew() {
     return !this.args.options.model?.get('isNew');
+  }
+
+  get userCanDelete() {
+    return this.currentUser.user.id === this.args.options.model?.get('user').id;
+  }
+
+  get showDeleteButton() {
+    return this.isNew && this.userCanDelete;
   }
 
   @action

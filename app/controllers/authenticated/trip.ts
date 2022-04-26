@@ -38,9 +38,6 @@ export default class TripController extends Controller {
 
   @tracked public declare selectedTip: Tip | null;
   @tracked public declare map: google.maps.Map;
-  @tracked public isEdittingTrip = false;
-  @tracked public isEdittingTip = false;
-  @tracked public isEdittingTripContributors = false;
   @tracked public searchQuery = '';
   @tracked public model!: Trip;
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
@@ -146,7 +143,6 @@ export default class TripController extends Controller {
 
   @action
   onMapClick(event: OnMapClickEvent) {
-    this.isEdittingTip = true;
     this.selectedTip = this.store.createRecord('tip', {
       location: {
         lat: event.googleEvent.latLng.lat(),
@@ -193,7 +189,7 @@ export default class TripController extends Controller {
 
   markerModalClose() {
     this.map.panBy(-200, 0);
-
+    debugger;
     if (this.selectedTip) {
       if (this.selectedTip.get('isNew') === true) {
         this.selectedTip.deleteRecord();

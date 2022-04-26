@@ -25,7 +25,12 @@ export default class Login extends Controller {
         email: this.model.email,
         password: this.model.password,
       })
+      .then(() => {
+        this.isLoading = false;
+        this.model = { email: '', password: '' };
+      })
       .catch((error) => {
+        this.isLoading = false;
         this.errors = error.json.error;
       });
   }
