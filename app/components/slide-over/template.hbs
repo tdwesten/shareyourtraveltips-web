@@ -45,6 +45,9 @@
                 {{#if (eq this.getCurrentModal this.modals.EditTip)}}
                   <Modals::EditTip @options={{this.getOptions}} />
                 {{/if}}
+                {{#if (eq this.getCurrentModal this.modals.ViewTip)}}
+                  <Modals::ViewTip @options={{this.getOptions}} />
+                {{/if}}
               </div>
             </div>
           </div>

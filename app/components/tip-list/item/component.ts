@@ -23,6 +23,14 @@ export default class TipListItem extends Component<TipListItemArgs> {
       : 'circle';
   }
 
+  get getUserFullName() {
+    return this.args.model.user.get('fullName');
+  }
+
+  get isAddedByContributor() {
+    return this.args.model.get('isAddedByContributor');
+  }
+
   @action
   toggleHoverState() {
     this.args.model.toggleProperty('isHovered');

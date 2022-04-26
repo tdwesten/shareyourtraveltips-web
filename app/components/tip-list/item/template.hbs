@@ -13,16 +13,16 @@
     <FaIcon @icon={{this.getIcon}} />
   </span>
   <span class='flex-1 overflow-hidden pl-3'>
-    <span class='font-bold text-orange-500 block text-base'>
+    <span class='font-medium text-orange-500 block text-base font-headings'>
       {{@model.title}}
-    </span>
-    <span
-      class='text-xs block text-gray-400 truncate text-ellipsis uppercase mt-0.5'
-    >
-      {{@model.address}}
     </span>
     <span class='text-sm block text-gray-600 truncate text-ellipsis my-0.5'>
       {{@model.description}}
     </span>
+    {{#if this.isAddedByContributor}}
+      <span class='text-xs block text-gray-400 truncate text-ellipsis my-0.5'>
+        {{t 'tip_by' name=this.getUserFullName}}
+      </span>
+    {{/if}}
   </span>
 </li>

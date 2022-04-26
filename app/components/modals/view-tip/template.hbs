@@ -1,0 +1,33 @@
+<div class='rounded border border-gray-300 p-4'>
+  <h3 class='text-2xl font-medium text-orange-500 font-headings mb-1'>
+    {{this.getModel.title}}
+  </h3>
+
+  <span
+    class='text-xs block text-gray-400 truncate text-ellipsis uppercase mb-1'
+  >
+    {{this.getModel.address}}
+  </span>
+  <div class='text-gray-600 mb-3'>
+    {{this.getModel.description}}
+  </div>
+
+  <div class='flex justify-between'>
+    <div class='flex items-center'>
+      <div class='flex-shrink-0 mr-2 text-sm'>
+        <FaIcon @icon={{this.getModel.category.icon}} class='text-gray-400' />
+      </div>
+      <div class='text-gray-600 text-sm'>
+        {{t (concat 'category.' this.getModel.category.name)}}
+      </div>
+    </div>
+    <div class='flex items-center'>
+      <div class='flex-shrink-0 mr-2 text-sm'>
+        <FaIcon @icon='user' class='text-gray-400' />
+      </div>
+      <div class='text-gray-600 text-sm'>
+        {{t 'tip_by' name=this.getUserFullName}}
+      </div>
+    </div>
+  </div>
+</div>

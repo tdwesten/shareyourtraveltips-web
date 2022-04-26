@@ -1,10 +1,14 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
+import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import CurrentUserService from '../services/current-user';
 import Category from './category';
 import Trip from './trip';
 import User from './user';
 
 export default class Tip extends Model {
+  @service public declare currentUser: CurrentUserService;
+
   public static modelName = 'tip';
 
   @attr('string') declare title: string;
@@ -24,6 +28,17 @@ export default class Tip extends Model {
 
   get getLng() {
     return this.location?.lng;
+  }
+
+  get userCanEdit() {
+    return (
+      this.currentUser.user.id === this.get('user.id') ||
+      this.currentUser.user.id === this.get('trip.user.id')
+    );
+  }
+
+  get isAddedByContributor() {
+    return this.currentUser.user.id !== this.get('user.id');
   }
 }
 

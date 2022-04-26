@@ -92,9 +92,11 @@ export default class TripController extends Controller {
     this.map.panBy(224, 0);
 
     this.slideOver.open({
-      modal: Modals.EditTip,
+      modal: tip.userCanEdit ? Modals.EditTip : Modals.ViewTip,
       model: tip,
-      title: this.intl.t('edit_tip'),
+      title: tip.userCanEdit
+        ? this.intl.t('edit_tip')
+        : this.intl.t('view_tip'),
     });
   }
 
@@ -104,9 +106,11 @@ export default class TripController extends Controller {
     this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
     this.map.panBy(224, 0);
     this.slideOver.open({
-      modal: Modals.EditTip,
+      modal: tip.userCanEdit ? Modals.EditTip : Modals.ViewTip,
       model: tip,
-      title: this.intl.t('edit_tip'),
+      title: tip.userCanEdit
+        ? this.intl.t('edit_tip')
+        : this.intl.t('view_tip'),
     });
   }
 
@@ -189,7 +193,6 @@ export default class TripController extends Controller {
 
   markerModalClose() {
     this.map.panBy(-200, 0);
-    debugger;
     if (this.selectedTip) {
       if (this.selectedTip.get('isNew') === true) {
         this.selectedTip.deleteRecord();
