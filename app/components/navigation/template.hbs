@@ -50,31 +50,28 @@
         <div class='flex space-x-4'>
 
           {{#if this.session.isAuthenticated}}
-            <span class='text-white py-2 px-3 text-sm font-medium'>
-              <FaIcon @icon='user' class='mr-1' />
-
+            <span class='text-white py-2 px-3 text-sm font-headings italic'>
               {{t 'menu.welcome_message' name=this.currentUser.user.firstName}}
             </span>
-
             <LinkTo
               @route='logout'
               @activeClass='bg-orange-700 text-white'
-              class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
+              class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-1.5 px-4 font-medium font-headings bg-orange-600 border border-white'
             >
               {{t 'menu.logout'}}
             </LinkTo>
           {{else}}
-            {{!-- <LinkTo
+            <LinkTo
               @route='register'
               @activeClass='bg-orange-700 text-white'
-              class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
+              class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-1.5 px-4 font-medium font-headings'
             >
               {{t 'menu.register'}}
-            </LinkTo> --}}
+            </LinkTo>
             <LinkTo
               @route='login'
               @activeClass='bg-orange-700 text-white'
-              class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium'
+              class='text-white hover:bg-orange-500 hover:bg-opacity-75 rounded-md py-1.5 px-4 font-medium font-headings bg-orange-600 border border-white'
             >
               {{t 'menu.login'}}
             </LinkTo>

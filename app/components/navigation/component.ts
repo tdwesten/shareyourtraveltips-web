@@ -19,12 +19,12 @@ export default class Navigation extends Component<NavigationArgs> {
     {
       title: 'menu.trips',
       route: 'authenticated.trips',
-      currentWhen: 'authenticated.trips',
+      currentWhen: 'authenticated.trip authenticated.trips',
     },
     {
       title: 'menu.shared_trips',
       route: 'authenticated.sharedtrips',
-      currentWhen: 'authenticated.sharedtrips',
+      currentWhen: 'authenticated.sharedtrip authenticated.sharedtrips',
     },
   ];
 

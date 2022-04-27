@@ -8,7 +8,7 @@ menu.login: Login
 menu.logout: Logout
 menu.register: Register
 menu.categories: Categories
-menu.welcome_message: Hi welcome {name}!
+menu.welcome_message: Hi {name}!
 page_title.login: Login
 page_title.register: Register
 page_title.trips: Your Trips
@@ -30,6 +30,7 @@ register.onSuccess: >-
   validate to your email. Have fun planning!
 label.email: Email
 label.password: Password
+label.password_confirmation: Password confirmation
 label.title: Title
 label.image: Image
 label.description: Description
@@ -40,6 +41,7 @@ label.cover_photo: Cover Photo
 label.public: Make this a public trip
 placeholder.email: Enter your email
 placeholder.password: Enter your password
+placeholder.password_confirmation: Enter your password again
 placeholder.new_trip_title: Enter a title for your trip
 placeholder.new_trip_description: Enter a fancy description for your trip
 placeholder.tip_title: Enter a title for your tip
@@ -54,6 +56,8 @@ validation.email: Enter a valid emailaddress
 validation.password: >-
   Please enter a bit stronger password with at least 8 characters, upper and
   lower case letters, and numbers
+validation.password_confirmation: >-
+  Please enter the same password as above
 validation.first_name: Please enter your first name
 validation.last_name: Please enter your last name
 validation.required: This field is required
@@ -118,6 +122,7 @@ emptyState:
 invite contributor: Invite contributor
 errors:
   inviteContributorsError: Oops something went wrong when inviting a contributor, please try again
+  emailAlreadyExists: This email address is already registered
 contributorSucessfullAdded: Contributor successfull added!
 view_tip: View Tip
 tip_from: 'Tip from: {name}'

@@ -7,7 +7,7 @@
 
     {{#each @model.trips as |trip|}}
       <LinkTo
-        @route='authenticated.trip'
+        @route='authenticated.sharedtrip'
         @model={{trip}}
         class='hover:scale-105 transition-transform duration-200'
       >

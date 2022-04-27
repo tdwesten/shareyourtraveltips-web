@@ -29,6 +29,8 @@
       autofocus={{@autofocus}}
       tabindex='{{@tabindex}}'
       @value={{@value}}
+      pattern={{@pattern}}
+      {{on 'blur' this.onBlur}}
     />
   {{/if}}
 </div>

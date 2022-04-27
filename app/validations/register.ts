@@ -2,6 +2,7 @@
 import {
   validateFormat,
   validatePresence,
+  validateConfirmation,
 } from 'ember-changeset-validations/validators';
 import validatePasswordStrength from '../validators/password-validator';
 
@@ -17,6 +18,12 @@ const REGISTER_VALIDATIONS = {
     validateFormat({ type: 'email', message: 'validation.email' }),
   ],
   password: [validatePasswordStrength()],
+  password_confirmation: [
+    validateConfirmation({
+      on: 'password',
+      message: 'validation.password_confirmation',
+    }),
+  ],
 };
 
 export default REGISTER_VALIDATIONS;

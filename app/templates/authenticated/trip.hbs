@@ -1,7 +1,6 @@
 {{page-title @model.title}}
 <div class='fixed h-screen w-screen'>
   <AppHeader @isSmall={{true}} />
-
   <main
     class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 right-0 grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
   >
@@ -13,7 +12,6 @@
         @editTrip={{action this.editTrip}}
         @showContributors={{action this.showContributors}}
       />
-
       <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
     </div>
     <div

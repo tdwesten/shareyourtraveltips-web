@@ -7,6 +7,7 @@ import CurrentUserService from '../../services/current-user';
 export default class SharedTripsRoute extends Route {
   @service public declare store: Store;
   @service private declare currentUser: CurrentUserService;
+  render: any;
 
   model() {
     return hash({

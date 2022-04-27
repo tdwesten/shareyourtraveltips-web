@@ -4649,11 +4649,6 @@ charm@^1.0.0:
   dependencies:
     inherits "^2.0.1"
 
-check-password-strength@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/check-password-strength/-/check-password-strength-2.0.5.tgz#bb10da01d24bd69e5e629c5cea2a6b729e5061af"
-  integrity sha512-b61T/+4OIGWSMRxJUsYOY44Cf9w7orIt2OQmF/WgH16qbJKIT1jG3XHx3jP+o090eH7rq13DRleKgXCiROBzMQ==
-
 chokidar@^2.1.8:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"

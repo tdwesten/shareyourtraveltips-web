@@ -4,27 +4,26 @@ import RouterService from '@ember/routing/router-service';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import ENV from '../config/environment';
-import {
-  BufferedChangeset,
-  Changeset,
-  lookupValidator,
-} from 'validated-changeset';
-import REGISTER_VALIDATIONS from '../validations/register';
-import SessionService from '../services/session';
 import { FlashMessageType } from '../enum/flash-message-type.enum';
+import SessionService from '../services/session';
+import REGISTER_VALIDATIONS from '../validations/register';
 
 export default class Register extends Controller {
   @service private declare router: RouterService;
   @service private declare session: SessionService;
-  public changeset: BufferedChangeset;
+  validations = REGISTER_VALIDATIONS;
+  passwordPattern =
+    '^(?=(.*[a-z]){3,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()-__+.]){1,}).{8,}$';
   @tracked showVerifyEmailNotification = false;
-  @tracked user = {
+  @tracked model = {
     email: '',
     first_name: '',
     last_name: '',
     password: '',
+    password_confirmation: '',
     invitedAsContributorForTrip: '',
   };
+  @tracked errors = '';
   flashmessageTypes = FlashMessageType;
   @tracked isLoading = false;
 
@@ -33,15 +32,13 @@ export default class Register extends Controller {
     super(args);
 
     const params = new URLSearchParams(window.location.search);
-    this.user.invitedAsContributorForTrip = params.get(
+    this.model.invitedAsContributorForTrip = params.get(
       'invitedAsContributorForTrip'
     ) as unknown as string;
+  }
 
-    this.changeset = Changeset(
-      this.user,
-      lookupValidator(REGISTER_VALIDATIONS),
-      REGISTER_VALIDATIONS
-    );
+  get hasErrors() {
+    return this.errors !== '';
   }
 
   @action
@@ -52,24 +49,23 @@ export default class Register extends Controller {
 
     const url = ENV.APP.apiHost + '/auth/register';
 
-    this.changeset.validate().then(() => {
-      if (this.changeset.isValid) {
-        this.changeset.save().then(() => {
-          fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.user),
-          })
-            .then(() => {
-              this.showVerifyEmailNotification = true;
-              this.isLoading = false;
-            })
-            .catch((error) => console.error('Error:', error));
-        });
-      }
-    });
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.model),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        this.isLoading = false;
+        if (response.errors) {
+          this.errors = response.errors;
+        } else {
+          this.showVerifyEmailNotification = true;
+        }
+      })
+      .catch((error) => console.error('Error:', error));
   }
 
   @action

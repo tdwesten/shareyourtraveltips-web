@@ -1,3 +1,4 @@
+import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { BufferedChangeset } from 'validated-changeset';
@@ -38,5 +39,10 @@ export default class ValidatedInput extends Component<ValidatedInputArgs> {
 
   get isTextarea() {
     return this.args.type === 'textarea';
+  }
+
+  @action
+  onBlur() {
+    this.hasBlurred = true;
   }
 }

@@ -11,70 +11,93 @@
     >
     </div>
     <div class='py-16 px-5 col-span-4 flex items-center'>
-      <form {{on 'submit' this.register}}>
+      <Form
+        @model={{this.model}}
+        @onSubmit={{action this.register}}
+        @validations={{this.validations}}
+        @isLoading={{this.isLoading}}
+        as |form|
+      >
         <div class='col-span-6 px-6 mb-4'>
           <h1 class='text-3xl font-bold py-3'>{{t 'header_title.register'}}</h1>
           <p>{{t 'register_message'}}</p>
         </div>
         {{#unless this.showVerifyEmailNotification}}
           <div class='grid grid-cols-6 gap-6 w-full px-6 min-h-[350px]'>
-
             <div class='col-span-3'>
               <ValidatedInput
-                @changeset={{this.changeset}}
+                @changeset={{form.changeset}}
                 @id='first_name'
                 @label={{t 'label.first_name'}}
                 @type='text'
                 @placeholder={{t 'placeholder.first_name'}}
                 @autocomplete='given-name'
                 @autofocus={{true}}
-                @value={{this.changeset.first_name}}
+                @value={{form.changeset.first_name}}
               />
             </div>
             <div class='col-span-3'>
               <ValidatedInput
-                @changeset={{this.changeset}}
+                @changeset={{form.changeset}}
                 @id='last_name'
                 @label={{t 'label.last_name'}}
                 @type='text'
                 @placeholder={{t 'placeholder.last_name'}}
                 @autocomplete='family-name'
                 @autofocus={{true}}
-                @value={{this.changeset.last_name}}
+                @value={{form.changeset.last_name}}
               />
             </div>
             <div class='col-span-6'>
               <ValidatedInput
-                @changeset={{this.changeset}}
+                @changeset={{form.changeset}}
                 @id='email'
                 @label={{t 'label.email'}}
                 @type='email'
                 @placeholder={{t 'placeholder.email'}}
                 @autocomplete='email'
                 @autofocus={{true}}
-                @value={{this.changeset.email}}
+                @value={{form.changeset.email}}
               />
             </div>
             <div class='col-span-6'>
               <ValidatedInput
-                @changeset={{this.changeset}}
+                @changeset={{form.changeset}}
                 @id='password'
                 @label={{t 'label.password'}}
                 @type='password'
                 @placeholder={{t 'placeholder.password'}}
                 @autocomplete='new-password'
                 @autofocus={{true}}
-                @value={{this.changeset.password}}
+                @pattern={{this.passwordPattern}}
+                @value={{form.changeset.password}}
               />
+            </div>
+            <div class='col-span-6'>
+              <ValidatedInput
+                @changeset={{form.changeset}}
+                @id='password_confirmation'
+                @label={{t 'label.password_confirmation'}}
+                @type='password'
+                @placeholder={{t 'placeholder.password_confirmation'}}
+                @autocomplete='off'
+                @autofocus={{true}}
+                @pattern={{this.passwordPattern}}
+                @value={{form.changeset.password_confirmation}}
+              />
+            </div>
+            <div class='col-span-6'>
+              {{#if this.hasErrors}}
+                <FlashMessage @type={{this.flashmessageTypes.Error}}>
+                  {{t (concat 'errors.' this.errors)}}
+                </FlashMessage>
+              {{/if}}
+
             </div>
             <div
               class='col-span-6 flex justify-between flex-row-reverse border-t border-gray-200 pt-4'
             >
-              <Button
-                @type='submit'
-                @disabled={{this.changeset.isInvalid}}
-                @isLoading={{this.isLoading}}
-              >
+              <Button @type='submit' @isLoading={{form.isLoading}}>
                 {{t 'register'}}
               </Button>
               <SecondaryButton {{on 'click' this.toLogin}}>
@@ -90,7 +113,7 @@
             {{t 'register.onSuccess'}}
           </FlashMessage>
         {{/unless}}
-      </form>
+      </Form>
     </div>
   </div>
 </PageWrapper>
