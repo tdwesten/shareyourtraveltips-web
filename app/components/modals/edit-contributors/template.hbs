@@ -22,16 +22,17 @@
     <h3
       class='text-lg font-medium flex justify-between mb-4 border-b border-gray-300 pb-2'
     >
-      {{t 'invite_contributors'}}
+      {{t 'inviteContributor'}}
     </h3>
     {{#if this.contributorSuccessfullAdded}}
-      <FlashMessage @type={{this.flashmessageTypes.Error}}>
-        {{t 'errors.inviteContributorsError'}}
-      </FlashMessage>
-    {{/if}}
-    {{#if this.errors}}
       <FlashMessage @type={{this.flashmessageTypes.Success}}>
         {{t 'contributorSucessfullAdded'}}
+      </FlashMessage>
+    {{/if}}
+
+    {{#if this.error}}
+      <FlashMessage @type={{this.flashmessageTypes.Error}}>
+        {{t (concat 'errors.' this.error)}}
       </FlashMessage>
     {{/if}}
     <div class='col-span-6'>
@@ -51,7 +52,7 @@
     >
       <div>
         <Button @type='submit' @isLoading={{this.isLoading}}>
-          {{t 'invite contributor'}}
+          {{t 'inviteContributor'}}
         </Button>
       </div>
     </div>

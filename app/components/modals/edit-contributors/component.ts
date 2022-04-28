@@ -9,7 +9,7 @@ export default class ModalsEditContributors extends ModalsModal<Trip> {
   validations = NEWCONTRIBUTOR;
   flashmessageTypes = FlashMessageType;
   @tracked contributorSuccessfullAdded = false;
-  @tracked errors = false;
+  @tracked error = false;
   @tracked isLoading = false;
   @tracked newContributor = {
     email: '',
@@ -29,17 +29,39 @@ export default class ModalsEditContributors extends ModalsModal<Trip> {
     if (this.args.options.model) {
       this.args.options.model
         .inviteContributor(this.newContributor)
-        .then(() => {
-          this.contributorSuccessfullAdded = true;
-          this.newContributor = {
-            email: '',
-          };
-
-          setTimeout(() => {
-            this.contributorSuccessfullAdded = false;
-          }, 3000);
+        .then((response: any) => {
+          if (response.errors === undefined) {
+            this.handleContributorAdded(response);
+          }
         })
-        .catch((error) => (this.errors = error));
+        .catch((response: any) => {
+          this.handleContributorError(response);
+        });
     }
+  }
+
+  handleContributorError(response: any) {
+    this.isLoading = false;
+    this.error = response.errors?.firstObject.code;
+    this.resetModel();
+    setTimeout(() => {
+      this.error = false;
+    }, 3000);
+  }
+
+  resetModel() {
+    this.newContributor = {
+      email: '',
+    };
+  }
+
+  handleContributorAdded(contributor: any) {
+    this.isLoading = false;
+    this.contributorSuccessfullAdded = true;
+    this.resetModel();
+
+    setTimeout(() => {
+      this.contributorSuccessfullAdded = false;
+    }, 3000);
   }
 }

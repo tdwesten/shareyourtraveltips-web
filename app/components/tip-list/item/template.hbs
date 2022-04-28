@@ -19,7 +19,7 @@
     <span class='text-sm block text-gray-600 truncate text-ellipsis my-0.5'>
       {{@model.description}}
     </span>
-    {{#if this.isAddedByContributor}}
+    {{#if (and this.isAddedByContributor this.getUserFullName)}}
       <span class='text-xs block text-gray-400 truncate text-ellipsis my-0.5'>
         {{t 'tip_by' name=this.getUserFullName}}
       </span>

@@ -119,10 +119,11 @@ placeholder:
   inviteContributorEmail: Email of the contributor you want to invite
 emptyState:
   noContributors: No contributors have been invited yet
-invite contributor: Invite contributor
+inviteContributor: Invite contributor
 errors:
   inviteContributorsError: Oops something went wrong when inviting a contributor, please try again
   emailAlreadyExists: This email address is already registered
+  youCannotInviteYourself: You cannot invite yourself, sorry no dubbles allowed!
 contributorSucessfullAdded: Contributor successfull added!
 view_tip: View Tip
 tip_from: 'Tip from: {name}'
