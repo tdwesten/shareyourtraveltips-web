@@ -128,3 +128,4 @@ view_tip: View Tip
 tip_from: 'Tip from: {name}'
 tip_by: By {name}
 no_shared_trips: No shared trips yet
+edit_mode: Edit mode

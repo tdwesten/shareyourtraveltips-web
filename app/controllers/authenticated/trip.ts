@@ -39,6 +39,7 @@ export default class TripController extends Controller {
   @tracked public declare selectedTip: Tip | null;
   @tracked public declare map: google.maps.Map;
   @tracked public searchQuery = '';
+  @tracked public editMode = false;
   @tracked public model!: Trip;
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
   public defaultMapZoom = 5;
@@ -147,6 +148,10 @@ export default class TripController extends Controller {
 
   @action
   onMapClick(event: OnMapClickEvent) {
+    if (!this.editMode) {
+      return;
+    }
+
     this.selectedTip = this.store.createRecord('tip', {
       location: {
         lat: event.googleEvent.latLng.lat(),
@@ -207,6 +212,11 @@ export default class TripController extends Controller {
     this.geocoder = new google.maps.Geocoder();
 
     this.centralize();
+  }
+
+  @action
+  toggleEditMode() {
+    this.editMode = !this.editMode;
   }
 
   @action

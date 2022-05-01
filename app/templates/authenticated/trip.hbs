@@ -18,11 +18,24 @@
       class='col-span-3 shadow-inner sticky top-0 scroll-mt-16 lg:col-span-5'
     >
       {{#if this.map}}
-        <Searchbox
-          @searchQuery={{this.searchQuery}}
-          @map={{this.map}}
-          @onSelect={{this.handleOnSearchSelect}}
-        />
+        <div class='absolute top-4 left-4 z-50 right-4 flex'>
+          <Searchbox
+            @searchQuery={{this.searchQuery}}
+            @map={{this.map}}
+            @onSelect={{this.handleOnSearchSelect}}
+          />
+          <SecondaryButton
+            {{on 'click' this.toggleEditMode}}
+            class='ml-3 shadow-lg'
+          >
+            <FaIcon
+              @icon={{if this.editMode 'toggle-on' 'toggle-off'}}
+              class='text-xl -ml-1 mr-2
+                {{if this.editMode "text-green-400" "text-gray-500"}}'
+            />
+            {{t 'edit_mode'}}
+          </SecondaryButton>
+        </div>
       {{/if}}
       <GMap
         @lat={{this.defaultMapCenterLocation.lat}}
