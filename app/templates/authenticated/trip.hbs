@@ -2,10 +2,10 @@
 <div class='fixed h-screen w-screen'>
   <AppHeader @isSmall={{true}} />
   <main
-    class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 right-0 grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
+    class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 flex flex-col right-0 sm:grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
   >
     <div
-      class='md:col-span-2 col-span-1 flex flex-col h-[calc(100vh-4rem)] border-r relative border-gray-300 overflow-x-scroll overflow-y-auto'
+      class='md:col-span-2 flex flex-col sm:h-[calc(100vh-4rem)] sm:border-r relative border-gray-300 overflow-x-scroll overflow-y-auto'
     >
       <TripHeader
         @model={{@model}}
@@ -14,9 +14,7 @@
       />
       <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
     </div>
-    <div
-      class='col-span-3 shadow-inner sticky top-0 scroll-mt-16 lg:col-span-5'
-    >
+    <div class='sm:col-span-3 relative lg:col-span-5 flex-1'>
       {{#if this.map}}
         <div class='absolute top-4 left-4 z-50 right-4 flex'>
           <Searchbox

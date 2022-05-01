@@ -31,15 +31,6 @@ export default class Tip extends Model {
   }
 
   get userCanEdit() {
-    console.log(
-      this.currentUser.user.id,
-      this?.user?.get('id'),
-      this.currentUser.user.id,
-      this?.trip.get('user')?.get('id'),
-      this.currentUser.user.id === this?.user?.get('id') ||
-        this.currentUser.user.id === this?.trip.get('user')?.get('id')
-    );
-
     return (
       this.currentUser.user.id === this?.user?.get('id') ||
       this.currentUser.user.id === this?.trip.get('user')?.get('id')

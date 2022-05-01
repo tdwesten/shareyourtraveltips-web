@@ -12,6 +12,7 @@ export default class User extends Model {
   @attr('string') declare email: string;
   @attr('string') declare password: string;
   @attr('string') declare locale: string;
+  @attr('string') declare role: string;
   @hasMany('trip') declare trips: [];
 
   get fullName() {
@@ -23,6 +24,10 @@ export default class User extends Model {
       filter: { contributors: { id: [this.id] } },
       include: 'tips,tips.category,tips.user',
     });
+  }
+
+  get isAdmin() {
+    return this.role === 'super-admin';
   }
 }
 

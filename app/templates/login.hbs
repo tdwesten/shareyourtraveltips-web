@@ -4,13 +4,14 @@
 
 <PageWrapper>
   <div class='grid grid-cols-9 -m-6'>
-
     <div
-      class='col-span-5 bg-cover flex items-end bg-gray-300 overflow-hidden rounded-l-lg'
+      class='col-span-5 bg-cover items-end bg-gray-300 overflow-hidden rounded-l-lg hidden sm:flex'
       style="background-image: url('/assets/images/ons-bus-avontuur-spain.jpeg');"
     >
     </div>
-    <div class='py-16 px-5 col-span-4 flex items-center'>
+    <div
+      class='py-10 sm:py-16 px-3 sm:px-5 col-span-9 sm:col-span-4 flex items-center'
+    >
       <Form
         @model={{this.model}}
         @onSubmit={{action this.authenticate}}

@@ -15,7 +15,7 @@
         <div class='hidden lg:block lg:ml-10'>
           <div class='flex space-x-4'>
             {{#if this.session.isAuthenticated}}
-              {{#each this.menuItems as |item|}}
+              {{#each this.getMenuItems as |item|}}
                 <LinkTo
                   @route={{item.route}}
                   @current-when={{item.currentWhen}}
@@ -39,7 +39,6 @@
           aria-expanded='false'
           {{on 'click' this.toggleMobileMenu}}
         >
-          <span class='sr-only'>Open main menu</span>
           <FaIcon
             @icon={{this.mobileMenuIcon}}
             class='text-3xl text-white w-7'
@@ -48,7 +47,6 @@
       </div>
       <div class='hidden lg:block lg:ml-4'>
         <div class='flex space-x-4'>
-
           {{#if this.session.isAuthenticated}}
             <span class='text-white py-2 px-3 text-sm font-headings italic'>
               {{t 'menu.welcome_message' name=this.currentUser.user.firstName}}
@@ -83,20 +81,18 @@
   </div>
 
   {{#if this.isMobileMenuOpen}}
-    <div class='lg:hidden' id='mobile-menu'>
+    <div class='lg:hidden z-50' id='mobile-menu'>
       <div class='px-2 pt-2 pb-3 space-y-1'>
-
         {{#each this.menuMobileItems as |item|}}
           <LinkTo
             @route={{item.route}}
             @current-when={{item.currentWhen}}
             @activeClass='bg-orange-700 text-white'
-            class='bg-orange-700 text-white block rounded-md py-2 px-3 text-base font-medium'
+            class='bg-orange-500 text-white block rounded-md py-2 px-3 text-base font-medium'
           >
             {{t item.title}}
           </LinkTo>
         {{/each}}
-
       </div>
     </div>
   {{/if}}

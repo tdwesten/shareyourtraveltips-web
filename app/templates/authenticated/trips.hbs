@@ -3,7 +3,7 @@
 <AppHeader @title={{t 'header_title.trips'}} />
 
 <PageWrapper>
-  <div class='grid grid-cols-3 gap-6 mb-6'>
+  <div class='grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6'>
     <EmptyTripCard {{on 'click' (action this.openSlideOver)}} />
 
     {{#each @model.trips as |trip|}}

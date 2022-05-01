@@ -3,7 +3,7 @@
 <AppHeader @title={{t 'header_title.shared_trips'}} />
 
 <PageWrapper>
-  <div class='grid grid-cols-3 gap-6 mb-6'>
+  <div class='grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6'>
 
     {{#unless @model.trips}}
       <div
@@ -19,7 +19,7 @@
       <LinkTo
         @route='authenticated.sharedtrip'
         @model={{trip}}
-        class='hover:scale-105 transition-transform duration-200'
+        class='hover:scale-105 transition-transform duration-200 w-full'
       >
         <TripCard @model={{trip}} />
       </LinkTo>

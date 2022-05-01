@@ -3,13 +3,22 @@
 <AppHeader @title={{t 'header_title.categories'}} />
 
 <PageWrapper>
-  <div class='p-3'>
-    <Table @headers={{this.tableHeaders}} @rows={{this.tableRows}} />
+  <div class='grid grid-cols-6 gap-6 mb-6'>
+    {{#each @model as |category|}}
+      <div
+        class='flex justify-center border rounded flex-col border-gray-200 items-center p-4 hover:scale-105 transition-transform duration-200 cursor-pointer'
+      >
+        <div
+          class='bg-{{category.backgroundColor}}-500 rounded-full w-10 h-10 flex justify-center items-center mb-4'
+        >
+          <FaIcon @icon={{category.icon}} class='text-white' />
+        </div>
+        <span class='text-sm font-medium text-gray-700 font-headings'>
+          {{t (concat 'category.' category.name)}}
+        </span>
 
+      </div>
+    {{/each}}
   </div>
 
 </PageWrapper>
-
-{{#ember-wormhole to='slide-over'}}
-  {{!-- <Forms::NewTrip @onSuccess={{action this.closeSlideOver}} /> --}}
-{{/ember-wormhole}}

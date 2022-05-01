@@ -9,13 +9,20 @@ interface NavigationArgs {
   isSmall: boolean;
 }
 
+type MenuItem = {
+  title: string;
+  route: string;
+  currentWhen?: string;
+  isAdmin?: boolean;
+};
+
 export default class Navigation extends Component<NavigationArgs> {
   @service public declare session: any;
   @service public declare currentUser: CurrentUserService;
 
   @tracked public isMobileMenuOpen = false;
 
-  menuItems = [
+  menuItems: MenuItem[] = [
     {
       title: 'menu.trips',
       route: 'authenticated.trips',
@@ -26,16 +33,31 @@ export default class Navigation extends Component<NavigationArgs> {
       route: 'authenticated.sharedtrips',
       currentWhen: 'authenticated.sharedtrip authenticated.sharedtrips',
     },
+    {
+      title: 'menu.categories',
+      route: 'authenticated.categories',
+      isAdmin: true,
+    },
   ];
 
   menuMobileItems = [
-    ...this.menuItems,
+    ...this.getMenuItems,
     {
       title: 'menu.logout',
       route: 'logout',
       currentWhen: 'logout',
     },
   ];
+
+  get getMenuItems() {
+    return this.menuItems.filter((item) => {
+      if (item.isAdmin) {
+        return this.currentUser?.user?.isAdmin;
+      } else {
+        return true;
+      }
+    });
+  }
 
   get mobileMenuIcon() {
     return this.isMobileMenuOpen ? 'times' : 'bars';
