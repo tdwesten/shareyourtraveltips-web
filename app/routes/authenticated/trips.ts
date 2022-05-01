@@ -13,6 +13,7 @@ export default class TripsRoute extends Route {
     return hash({
       trips: this.store.query(Trip.modelName, {
         userId: this.currentUser.user.id,
+        include: 'tips,tips.category,tips.user',
       }),
       newTrip: this.store.createRecord(Trip.modelName),
     });

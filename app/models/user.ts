@@ -21,6 +21,7 @@ export default class User extends Model {
   get tripsContributedTo() {
     return this.store.query('trip', {
       filter: { contributors: { id: [this.id] } },
+      include: 'tips,tips.category,tips.user',
     });
   }
 }
