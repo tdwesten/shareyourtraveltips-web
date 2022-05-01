@@ -5,6 +5,16 @@
 <PageWrapper>
   <div class='grid grid-cols-3 gap-6 mb-6'>
 
+    {{#unless @model.trips}}
+      <div
+        class='col-span-3 relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center'
+      >
+        <h3 class='font-headings text-gray-500 text-center text-lg italic'>
+          {{t 'no_shared_trips'}}
+        </h3>
+      </div>
+    {{/unless}}
+
     {{#each @model.trips as |trip|}}
       <LinkTo
         @route='authenticated.sharedtrip'

@@ -56,8 +56,7 @@ validation.email: Enter a valid emailaddress
 validation.password: >-
   Please enter a bit stronger password with at least 8 characters, upper and
   lower case letters, and numbers
-validation.password_confirmation: >-
-  Please enter the same password as above
+validation.password_confirmation: Please enter the same password as above
 validation.first_name: Please enter your first name
 validation.last_name: Please enter your last name
 validation.required: This field is required
@@ -128,3 +127,4 @@ contributorSucessfullAdded: Contributor successfull added!
 view_tip: View Tip
 tip_from: 'Tip from: {name}'
 tip_by: By {name}
+no_shared_trips: No shared trips yet

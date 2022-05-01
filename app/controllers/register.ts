@@ -9,11 +9,12 @@ import SessionService from '../services/session';
 import REGISTER_VALIDATIONS from '../validations/register';
 
 export default class Register extends Controller {
+  queryParams = ['invited_as_contributor_for_trip'];
+
   @service private declare router: RouterService;
   @service private declare session: SessionService;
   validations = REGISTER_VALIDATIONS;
-  passwordPattern =
-    '^(?=(.*[a-z]){3,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()-__+.]){1,}).{8,}$';
+
   @tracked showVerifyEmailNotification = false;
   @tracked model = {
     email: '',
@@ -32,8 +33,9 @@ export default class Register extends Controller {
     super(args);
 
     const params = new URLSearchParams(window.location.search);
+
     this.model.invitedAsContributorForTrip = params.get(
-      'invitedAsContributorForTrip'
+      'invited_as_contributor_for_trip'
     ) as unknown as string;
   }
 

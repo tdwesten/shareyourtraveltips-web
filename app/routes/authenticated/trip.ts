@@ -13,6 +13,9 @@ export default class TripRoute extends Route {
   model(params: TripRouteParams) {
     return this.store.findRecord(Trip.modelName, params.id, {
       include: 'tips,tips.category,tips.user',
+      sort: {
+        field: 'createdAt',
+      },
     });
   }
 }

@@ -42,7 +42,7 @@ export default class TripController extends Controller {
   @tracked public model!: Trip;
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
   public defaultMapZoom = 5;
-  public defaultMaxZoom = 15;
+  public defaultMaxZoom = 20;
   declare geocoder: google.maps.Geocoder;
 
   get getMapStyles() {
