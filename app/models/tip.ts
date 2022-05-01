@@ -31,14 +31,23 @@ export default class Tip extends Model {
   }
 
   get userCanEdit() {
+    console.log(
+      this.currentUser.user.id,
+      this?.user?.get('id'),
+      this.currentUser.user.id,
+      this?.trip.get('user')?.get('id'),
+      this.currentUser.user.id === this?.user?.get('id') ||
+        this.currentUser.user.id === this?.trip.get('user')?.get('id')
+    );
+
     return (
-      this.currentUser.user.id === this.get('user.id') ||
-      this.currentUser.user.id === this.get('trip.user.id')
+      this.currentUser.user.id === this?.user?.get('id') ||
+      this.currentUser.user.id === this?.trip.get('user')?.get('id')
     );
   }
 
   get isAddedByContributor() {
-    return this.currentUser.user.id !== this.get('user.id');
+    return this.currentUser.user.id !== this?.user?.get('id');
   }
 }
 
