@@ -39,8 +39,8 @@ export default class TripController extends Controller {
   @tracked public declare selectedTip: Tip | null;
   @tracked public declare map: google.maps.Map;
   @tracked public searchQuery = '';
-  @tracked public editMode = false;
   @tracked public model!: Trip;
+  @tracked public placeMarkerTimeout: any;
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
   public defaultMapZoom = 5;
   public defaultMaxZoom = 20;
@@ -147,11 +147,18 @@ export default class TripController extends Controller {
   }
 
   @action
-  onMapClick(event: OnMapClickEvent) {
-    if (!this.editMode) {
-      return;
-    }
+  onMapDblClick(event: OnMapClickEvent) {
+    clearTimeout(this.placeMarkerTimeout);
+  }
 
+  @action
+  onMapClick(event: OnMapClickEvent) {
+    this.placeMarkerTimeout = setTimeout(() => {
+      this.placeMarker(event);
+    }, 200);
+  }
+
+  placeMarker(event: OnMapClickEvent) {
     this.selectedTip = this.store.createRecord('tip', {
       location: {
         lat: event.googleEvent.latLng.lat(),
@@ -212,11 +219,6 @@ export default class TripController extends Controller {
     this.geocoder = new google.maps.Geocoder();
 
     this.centralize();
-  }
-
-  @action
-  toggleEditMode() {
-    this.editMode = !this.editMode;
   }
 
   @action

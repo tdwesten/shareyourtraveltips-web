@@ -22,17 +22,6 @@
             @map={{this.map}}
             @onSelect={{this.handleOnSearchSelect}}
           />
-          <SecondaryButton
-            {{on 'click' this.toggleEditMode}}
-            class='ml-3 shadow-lg'
-          >
-            <FaIcon
-              @icon={{if this.editMode 'toggle-on' 'toggle-off'}}
-              class='text-xl -ml-1 mr-2
-                {{if this.editMode "text-green-400" "text-gray-500"}}'
-            />
-            {{t 'edit_mode'}}
-          </SecondaryButton>
         </div>
       {{/if}}
       <GMap
@@ -48,6 +37,7 @@
         @styles={{this.getMapStyles}}
         @maxZoom={{this.defaultMaxZoom}}
         @onClick={{action this.onMapClick}}
+        @onDblclick={{action this.onMapDblClick}}
         @onceOnIdle={{this.onMapLoad}}
         as |map|
       >
