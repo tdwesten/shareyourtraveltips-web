@@ -49,4 +49,4 @@ jobs:
         run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
 
       - name: Notify
-        run: curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"New deployment: Frontend => ${{secrets.ENV_NAME}} \"}" ${{secrets.SLACK_WEBHOOK}}
+        run: 'curl -X POST -H "Content-type: application/json" --data "{\"text\":\"New deployment: Frontend => ${{secrets.ENV_NAME}} \"}" ${{secrets.SLACK_WEBHOOK}}'
