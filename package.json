@@ -133,6 +133,7 @@
     "@types/google.maps": "^3.48.3",
     "@types/google__maps": "^0.5.16",
     "@types/googlemaps": "^3.43.3",
+    "@types/tailwindcss": "^3.0.10",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",

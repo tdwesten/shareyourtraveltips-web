@@ -28,30 +28,37 @@ register_message: Enter your details below to register or login if you already h
 register.onSuccess: >-
   Nice, your account has been successfully created! And we've sent an email to
   validate to your email. Have fun planning!
-label.email: Email
-label.password: Password
-label.password_confirmation: Password confirmation
-label.title: Title
-label.image: Image
-label.description: Description
-label.category: Category
-label.first_name: First Name
-label.last_name: Last Name
-label.cover_photo: Cover Photo
-label.public: Make this a public trip
-placeholder.email: Enter your email
-placeholder.password: Enter your password
-placeholder.password_confirmation: Enter your password again
-placeholder.new_trip_title: Enter a title for your trip
-placeholder.new_trip_description: Enter a fancy description for your trip
-placeholder.tip_title: Enter a title for your tip
-placeholder.tip_description: Enter a fancy description for your tip
-placeholder.search_for_cover_photo: Search for a cover photo, eg. "London"
-placeholder.category: Select a category
-placeholder.first_name: Enter your first name
-placeholder.last_name: Enter your last name
-placeholder.public: Make this a public trip
-placeholder.search: Search on map
+label:
+  email: Email
+  password: Password
+  password_confirmation: Password confirmation
+  title: Title
+  image: Image
+  description: Description
+  category: Category
+  first_name: First Name
+  last_name: Last Name
+  cover_photo: Cover Photo
+  public: Make this a public trip
+  color: Color
+  icon: Icon
+placeholder:
+  email: Enter your email
+  password: Enter your password
+  password_confirmation: Enter your password again
+  new_trip_title: Enter a title for your trip
+  new_trip_description: Enter a fancy description for your trip
+  tip_title: Enter a title for your tip
+  tip_description: Enter a fancy description for your tip
+  search_for_cover_photo: Search for a cover photo, eg. "London"
+  category: Select a category
+  first_name: Enter your first name
+  last_name: Enter your last name
+  public: Make this a public trip
+  search: Search on map
+  name: Name
+  color: Color
+  icon: Icon
 validation.email: Enter a valid emailaddress
 validation.password: >-
   Please enter a bit stronger password with at least 8 characters, upper and
@@ -114,8 +121,10 @@ page_title:
 inviteContributors:
   title: Let's share this trip!
   description: ' This tool was built to ask others for there the best tips for this trip. Using the form below you can invite contributors to share their tips.'
-placeholder:
+
   inviteContributorEmail: Email of the contributor you want to invite
+  category_name: Name
+  color: Color
 emptyState:
   noContributors: No contributors have been invited yet
 inviteContributor: Invite contributor
@@ -129,3 +138,4 @@ tip_from: 'Tip from: {name}'
 tip_by: Added by {name}
 no_shared_trips: No shared trips yet
 edit_mode: Edit mode
+edit_category: Edit category

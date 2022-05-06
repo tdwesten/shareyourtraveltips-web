@@ -3,4 +3,5 @@ export enum Modals {
   EditTrip = 'EDITTRIP',
   EditTip = 'EDITTIP',
   ViewTip = 'VIEWTIP',
+  EditCategory = 'EDITCATEGORY',
 }

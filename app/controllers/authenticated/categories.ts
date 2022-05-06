@@ -1,25 +1,26 @@
+import Store from '@ember-data/store';
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import IntlService from 'ember-intl/services/intl';
+import { Modals } from '../../enum/modals.enum';
 import Category from '../../models/category';
+import SlideOverService from '../../services/slide-over';
 
 export default class CategoriesController extends Controller {
   @service private declare intl: IntlService;
+  @service private declare slideOver: SlideOverService;
+  @service public declare store: Store;
 
-  model!: Category[];
+  @action
+  openEditModal(category: Category) {
+    console.log(category);
 
-  get tableRows() {
-    return this.model.map((category) => {
-      return [category.name, category.backgroundColor, category.icon];
+    this.slideOver.open({
+      modal: Modals.EditCategory,
+      model: category,
+      title: this.intl.t('edit_category'),
     });
-  }
-
-  get tableHeaders() {
-    return [
-      this.intl.t('name'),
-      this.intl.t('background_color'),
-      this.intl.t('icon'),
-    ];
   }
 }
 
