@@ -59,6 +59,7 @@ placeholder:
   name: Name
   color: Color
   icon: Icon
+  inviteContributorEmail: Contributor's email
 validation.email: Enter a valid emailaddress
 validation.password: >-
   Please enter a bit stronger password with at least 8 characters, upper and
@@ -121,7 +122,6 @@ page_title:
 inviteContributors:
   title: Let's share this trip!
   description: ' This tool was built to ask others for there the best tips for this trip. Using the form below you can invite contributors to share their tips.'
-
   inviteContributorEmail: Email of the contributor you want to invite
   category_name: Name
   color: Color
