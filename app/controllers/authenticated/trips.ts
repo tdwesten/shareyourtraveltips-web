@@ -13,8 +13,8 @@ export default class TripsController extends Controller {
   @service private declare intl: IntlService;
   @service public declare store: Store;
 
-  declare model: { newTrip: Trip };
-
+  // Props
+  @tracked public declare newTrip: Trip;
   @tracked public declare primaryCountry: string;
 
   constructor() {
@@ -24,22 +24,18 @@ export default class TripsController extends Controller {
 
   @action
   openSlideOver() {
+    this.newTrip = this.store.createRecord('trip');
+
     this.slideOver.open({
       modal: Modals.EditTrip,
-      model: this.model.newTrip,
+      model: this.newTrip,
       title: this.intl.t('create_new_trip'),
       callback: this.closeSlideOver.bind(this),
     });
   }
 
   closeSlideOver() {
-    this.model.newTrip = this.store.createRecord('trip');
-  }
-
-  @action
-  closeSlideOverOnCancel() {
-    this.slideOver.close();
-    this.model.newTrip.rollbackAttributes();
+    this.newTrip.destroyRecord();
   }
 }
 
