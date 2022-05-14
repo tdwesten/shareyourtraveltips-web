@@ -46,12 +46,8 @@ export default class TripController extends Controller {
   public defaultMaxZoom = 20;
   declare geocoder: google.maps.Geocoder;
 
-  get getMapStyles() {
-    return MAPSTYLES;
-  }
-
   get getTips() {
-    return this.model.tips;
+    return this.model.tips.sortBy('createdAt').reverse();
   }
 
   get getTipsWithoutNew() {

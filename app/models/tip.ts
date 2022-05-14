@@ -14,6 +14,7 @@ export default class Tip extends Model {
   @attr('string') declare title: string;
   @attr('string') declare description: string;
   @attr('string') declare address: string;
+  @attr('date') declare createdAt: string;
   @attr() declare location: { lat: number; lng: number };
   @belongsTo('trip') declare trip: Trip;
   @belongsTo('user') declare user: User;
