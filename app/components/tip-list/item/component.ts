@@ -27,8 +27,8 @@ export default class TipListItem extends Component<TipListItemArgs> {
     return this.args.model.user.get('fullName');
   }
 
-  get isAddedByContributor() {
-    return this.args.model.get('isAddedByContributor');
+  get tripHasContributors() {
+    return this.args.model.get('tripHasContributors');
   }
 
   @action

@@ -37,8 +37,8 @@ export default class Tip extends Model {
     );
   }
 
-  get isAddedByContributor() {
-    return this.currentUser.user.id !== this?.user?.get('id');
+  get tripHasContributors() {
+    return this.trip.get('contributors').length > 0;
   }
 }
 
