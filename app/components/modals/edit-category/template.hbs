@@ -25,7 +25,7 @@
       @tabindex='3'
       @selected={{this.getCurrentColor}}
       @options={{this.getColors}}
-      @onChange={{action (mut form.changeset.backgroundColor)}}
+      @onChange={{action this.setColor}}
       @placeholder={{t 'placeholder.color'}}
       as |color|
     >

@@ -84,6 +84,13 @@ export default class ModalsEditCategory extends ModalsModal<Category> {
   }
 
   @action
+  setColor(color: { name: string; value: string }) {
+    if (this.getModel?.backgroundColor) {
+      this.getModel.backgroundColor = color.value;
+    }
+  }
+
+  @action
   saveCategory() {
     this.isLoading = true;
     this.args.options.model?.save().then(() => {
