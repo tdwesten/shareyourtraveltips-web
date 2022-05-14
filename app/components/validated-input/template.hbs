@@ -1,10 +1,7 @@
-<div>
+<div class='relative mb-1'>
   <label for={{@id}} class='block text-sm font-medium text-gray-700'>
     {{@label}}
   </label>
-  {{#if this.hasError}}
-    <InputErrorMessage @message={{t this.errorMessage}} />
-  {{/if}}
   {{#if this.isTextarea}}
     <Textarea
       id={{@id}}
@@ -30,7 +27,11 @@
       tabindex='{{@tabindex}}'
       @value={{@value}}
       pattern={{@pattern}}
-      {{on 'blur' this.onBlur}}
     />
+  {{/if}}
+  {{#if this.hasError}}
+    <div class='-mb-5 translate-y-1'>
+      <InputErrorMessage @message={{t this.errorMessage}} />
+    </div>
   {{/if}}
 </div>

@@ -15,7 +15,7 @@ page_title.trips: Your Trips
 page_title.shared_trips: Shared Trips
 page_title.categories: Categories
 page_title.email.verify.success: Email address verified
-page_description.email.verify.success: Top, your email address has been verified successfully.
+page_description.email.verify.success: Great, your email address has been verified successfully.
 header_title.login: Sign in
 header_title.register: Register
 header_title.trips: Your Trips
@@ -61,9 +61,12 @@ placeholder:
   icon: Icon
   inviteContributorEmail: Contributor's email
 validation.email: Enter a valid emailaddress
-validation.password: >-
-  Please enter a bit stronger password with at least 8 characters, upper and
-  lower case letters, and numbers
+validation:
+  password:
+    upperLowerCase: For a strong password please add some lowercase and uppercase characters.
+    numbers: For a strong password please add a number.
+    specials: For a strong password please add a special character like !@#$%^&*.
+    length: For a strong password your password must be 8 or more characters long.
 validation.password_confirmation: Please enter the same password as above
 validation.first_name: Please enter your first name
 validation.last_name: Please enter your last name
