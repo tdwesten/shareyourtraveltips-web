@@ -1,16 +1,10 @@
-{{!-- <div
-    class='shadow-lg rounded-md bg-white p-6 w-40 translate-x-1/2 absolute bottom-14'
-  >
-    {{@tip.title}}
-    {{@tip.description}}
-  </div> --}}
 <div class='{{this.getClasses}}' ...attributes>
 
   <div class='z-10 text-lg'>
     <FaIcon @icon={{this.getIcon}} />
   </div>
   <div
-    class='absolute w-10 h-10 rounded-tl-full rounded-tr-full rounded-bl-full rounded-br-none bg-red-500 transform rotate-45
+    class='absolute w-10 h-10 rounded-tl-full rounded-tr-full rounded-bl-full rounded-br-none transform rotate-45
       {{this.bgColor}}'
   ></div>
 </div>
