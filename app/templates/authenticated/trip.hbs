@@ -51,6 +51,7 @@
             <MapMarker
               @tip={{tip}}
               {{on 'click' (action this.onMarkerClick tip map)}}
+              {{on 'touchStart' (action this.onMarkerClick tip map)}}
             />
 
           </map.overlay>

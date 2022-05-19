@@ -66,10 +66,12 @@ export default class SlideOver extends Component<SlideOverArgs> {
   }
 
   get animationClasses() {
+    const base = 'transform transition ease-in-out duration-500 ';
     const entering =
-      'transform transition ease-in-out duration-500 translate-x-full';
+      base +
+      'translate-x-0 md:translate-x-full translate-y-full md:translate-y-0';
     const leaving =
-      'transform transition ease-in-out duration-500 translate-x-0';
+      base + 'translate-x-0 md:translate-x-0 translate-y-1/4 md:translate-y-0';
 
     return this.isSlideOverOpen ? leaving : entering;
   }

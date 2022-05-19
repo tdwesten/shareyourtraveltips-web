@@ -26,4 +26,5 @@ Router.map(function () {
       this.route('success');
     });
   });
+  this.route('public-trip', { path: 'public-trip/:id' });
 });

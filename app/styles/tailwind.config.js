@@ -14,6 +14,9 @@ module.exports = {
     {
       pattern: /^bg-/,
     },
+    {
+      pattern: /^translate-/,
+    },
   ],
   theme: {
     fontFamily: {

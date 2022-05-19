@@ -1,0 +1,18 @@
+<div
+  class='bg-white shadow fixed left-0 right-0 bottom-0 h-16 flex text-gray-600 md:hidden'
+>
+
+  {{#each this.getMenuItems as |item|}}
+    <LinkTo
+      @route={{item.route}}
+      @current-when={{item.currentWhen}}
+      @activeClass='text-orange-500'
+      class='flex items-center justify-center flex-1 flex-col'
+    >
+      <FaIcon @icon={{item.icon}} class='text-2xl' />
+      <span class='font-headings text-xs pt-1.5 text-gray-500'>
+        {{t item.title}}
+      </span>
+    </LinkTo>
+  {{/each}}
+</div>

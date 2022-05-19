@@ -1,16 +1,16 @@
 import Store from '@ember-data/store';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import Trip from '../../models/trip';
+import Trip from '../models/trip';
 
-interface SharedTripParams {
+interface PublicTripParams {
   id: string;
 }
 
-export default class SharedTripRoute extends Route {
+export default class PublicTripRoute extends Route {
   @service public declare store: Store;
 
-  model(params: SharedTripParams) {
+  model(params: PublicTripParams) {
     return this.store.findRecord(Trip.modelName, params.id, {
       include: 'tips,tips.category,tips.user',
     });

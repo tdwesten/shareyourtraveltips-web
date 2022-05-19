@@ -31,7 +31,7 @@ export default class ModalsEditContributors extends ModalsModal<Trip> {
         .inviteContributor(this.newContributor)
         .then((response: any) => {
           if (response.errors === undefined) {
-            this.handleContributorAdded(response);
+            this.handleContributorAdded();
           }
         })
         .catch((response: any) => {
@@ -55,7 +55,7 @@ export default class ModalsEditContributors extends ModalsModal<Trip> {
     };
   }
 
-  handleContributorAdded(contributor: any) {
+  handleContributorAdded() {
     this.isLoading = false;
     this.contributorSuccessfullAdded = true;
     this.resetModel();

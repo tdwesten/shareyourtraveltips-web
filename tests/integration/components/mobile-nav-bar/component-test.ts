@@ -3,22 +3,22 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | modals/edit-category', function (hooks) {
+module('Integration | Component | mobile-nav-bar', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`{{modals/edit-category}}`);
+    await render(hbs`{{mobile-nav-bar}}`);
 
     assert.equal(this.element.textContent?.trim(), '');
 
     // Template block usage:
     await render(hbs`
-      {{#modals/edit-category}}
+      {{#mobile-nav-bar}}
         template block text
-      {{/modals/edit-category}}
+      {{/mobile-nav-bar}}
     `);
 
     assert.equal(this.element.textContent?.trim(), 'template block text');

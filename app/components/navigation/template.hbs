@@ -30,21 +30,6 @@
         </div>
       </div>
 
-      <div class='flex lg:hidden'>
-        <!-- Mobile menu button -->
-        <button
-          type='button'
-          class='bg-orange-600 p-2 rounded-md inline-flex items-center justify-center text-orange-200 hover:text-white hover:bg-orange-500 hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-orange-600 focus:ring-white'
-          aria-controls='mobile-menu'
-          aria-expanded='false'
-          {{on 'click' this.toggleMobileMenu}}
-        >
-          <FaIcon
-            @icon={{this.mobileMenuIcon}}
-            class='text-3xl text-white w-7'
-          />
-        </button>
-      </div>
       <div class='hidden lg:block lg:ml-4'>
         <div class='flex space-x-4'>
           {{#if this.session.isAuthenticated}}
@@ -79,21 +64,4 @@
 
     </div>
   </div>
-
-  {{#if this.isMobileMenuOpen}}
-    <div class='lg:hidden z-50' id='mobile-menu'>
-      <div class='px-2 pt-2 pb-3 space-y-1'>
-        {{#each this.menuMobileItems as |item|}}
-          <LinkTo
-            @route={{item.route}}
-            @current-when={{item.currentWhen}}
-            @activeClass='bg-orange-700 text-white'
-            class='bg-orange-500 text-white block rounded-md py-2 px-3 text-base font-medium'
-          >
-            {{t item.title}}
-          </LinkTo>
-        {{/each}}
-      </div>
-    </div>
-  {{/if}}
 </nav>

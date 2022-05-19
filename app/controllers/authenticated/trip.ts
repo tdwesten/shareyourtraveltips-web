@@ -5,7 +5,6 @@ import RouterService from '@ember/routing/router-service';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import IntlService from 'ember-intl/services/intl';
-import { MAPSTYLES } from '../../components/map-wrapper/map-styles';
 import { Modals } from '../../enum/modals.enum';
 import Tip from '../../models/tip';
 import Trip from '../../models/trip';
@@ -51,6 +50,7 @@ export default class TripController extends Controller {
   }
 
   get getTipsWithoutNew() {
+    // @ts-expect-error isNew is not typed
     return this.getTips.filterBy('isNew', false);
   }
 
@@ -82,6 +82,8 @@ export default class TripController extends Controller {
 
   @action
   onMarkerClick(tip: Tip, _map: any, event: PointerEvent) {
+    console.log(event);
+
     event.stopPropagation();
 
     this.selectedTip = tip;
@@ -143,7 +145,7 @@ export default class TripController extends Controller {
   }
 
   @action
-  onMapDblClick(event: OnMapClickEvent) {
+  onMapDblClick() {
     clearTimeout(this.placeMarkerTimeout);
   }
 
