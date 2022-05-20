@@ -40,6 +40,7 @@ export default class TripController extends Controller {
   @tracked public searchQuery = '';
   @tracked public model!: Trip;
   @tracked public placeMarkerTimeout: any;
+  @tracked public isEdittingTip = false;
   public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
   public defaultMapZoom = 5;
   public defaultMaxZoom = 20;
@@ -82,13 +83,13 @@ export default class TripController extends Controller {
 
   @action
   onMarkerClick(tip: Tip, _map: any, event: PointerEvent) {
-    console.log(event);
+    this.isEdittingTip = true;
 
     event.stopPropagation();
 
     this.selectedTip = tip;
     this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
-    this.map.panBy(224, 0);
+    // this.map.panBy(224, 0);
 
     this.slideOver.open({
       modal: tip.userCanEdit ? Modals.EditTip : Modals.ViewTip,
@@ -96,6 +97,7 @@ export default class TripController extends Controller {
       title: tip.userCanEdit
         ? this.intl.t('edit_tip')
         : this.intl.t('view_tip'),
+      callback: this.markerModalClose.bind(this),
     });
   }
 
@@ -103,13 +105,14 @@ export default class TripController extends Controller {
   onTipClick(tip: Tip) {
     this.selectedTip = tip;
     this.map.panTo({ lat: tip.location.lat, lng: tip.location.lng });
-    this.map.panBy(224, 0);
+    // this.map.panBy(224, 0);
     this.slideOver.open({
       modal: tip.userCanEdit ? Modals.EditTip : Modals.ViewTip,
       model: tip,
       title: tip.userCanEdit
         ? this.intl.t('edit_tip')
         : this.intl.t('view_tip'),
+      callback: this.markerModalClose.bind(this),
     });
   }
 
@@ -157,6 +160,10 @@ export default class TripController extends Controller {
   }
 
   placeMarker(event: OnMapClickEvent) {
+    if (this.isEdittingTip) {
+      return;
+    }
+
     this.selectedTip = this.store.createRecord('tip', {
       location: {
         lat: event.googleEvent.latLng.lat(),
@@ -202,7 +209,8 @@ export default class TripController extends Controller {
   }
 
   markerModalClose() {
-    this.map.panBy(-200, 0);
+    this.isEdittingTip = false;
+
     if (this.selectedTip) {
       if (this.selectedTip.get('isNew') === true) {
         this.selectedTip.deleteRecord();

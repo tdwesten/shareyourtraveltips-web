@@ -1,11 +1,29 @@
 {{page-title @model.title}}
 <div class='fixed h-screen w-screen'>
-  <AppHeader @isSmall={{true}} />
+  <div class='hidden sm:block'>
+    <AppHeader @isSmall={{true}} />
+  </div>
+  <MobileTopBar @title={{@model.title}}>
+    {{#if @model.isTripOwner}}
+      <button
+        class='w-10 h-10 text-white bg-orange-500 rounded-md mr-1'
+        {{on 'click' this.showContributors}}
+      >
+        <FaIcon @icon='user-group' />
+      </button>
+      <button
+        class='w-10 h-10 text-white bg-orange-500 rounded-md mr-1'
+        {{on 'click' this.editTrip}}
+      >
+        <FaIcon @icon='pen' />
+      </button>
+    {{/if}}
+  </MobileTopBar>
   <main
-    class='bg-gray-100 shadow absolute top-16 bottom-0 left-0 flex flex-col right-0 sm:grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
+    class='bg-gray-100 shadow absolute top-16 bottom-16 sm:bottom-0 left-0 flex flex-col right-0 sm:grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
   >
     <div
-      class='md:col-span-2 flex flex-col sm:h-[calc(100vh-4rem)] sm:border-r relative border-gray-300 overflow-x-scroll overflow-y-auto'
+      class='hidden md:col-span-2 sm:flex flex-col sm:h-[calc(100vh-4rem)] sm:border-r relative border-gray-300 overflow-x-scroll overflow-y-auto'
     >
       <TripHeader
         @model={{@model}}
@@ -16,7 +34,7 @@
     </div>
     <div class='sm:col-span-3 relative lg:col-span-5 flex-1'>
       {{#if this.map}}
-        <div class='absolute top-4 left-4 z-50 right-4 flex'>
+        <div class='absolute top-4 left-4 z-50 right-4 sm:flex hidden'>
           <Searchbox
             @searchQuery={{this.searchQuery}}
             @map={{this.map}}
@@ -33,7 +51,7 @@
         @fullscreenControl={{false}}
         @streetViewControl={{false}}
         @disableDefaultUI={{true}}
-        @zoomControl={{true}}
+        @zoomControl={{false}}
         @maxZoom={{this.defaultMaxZoom}}
         @onClick={{action this.onMapClick}}
         @onDblclick={{action this.onMapDblClick}}
@@ -51,7 +69,6 @@
             <MapMarker
               @tip={{tip}}
               {{on 'click' (action this.onMarkerClick tip map)}}
-              {{on 'touchStart' (action this.onMarkerClick tip map)}}
             />
 
           </map.overlay>

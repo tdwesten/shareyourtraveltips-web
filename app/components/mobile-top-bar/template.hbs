@@ -1,0 +1,16 @@
+<header class='p-3 h-16 flex items-center bg-topography sm:hidden'>
+  <div class='flex-shrink-0'>
+    <LinkTo
+      @route='index'
+      class='text-white rounded-md border border-white w-10 h-10 flex items-center justify-center font-headings font-semibold text-xl mr-3'
+    >
+      S
+    </LinkTo>
+  </div>
+  <div class='flex-1 text-center overflow-ellipsis'>
+    <h1 class='text-white font-headings font-medium text-lg'>{{@title}}</h1>
+  </div>
+  <div class='ml-3 flex-shrink-0'>
+    {{yield}}
+  </div>
+</header>
