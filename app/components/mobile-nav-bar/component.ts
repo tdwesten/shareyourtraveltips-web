@@ -14,6 +14,7 @@ type MenuItem = {
 
 export default class MobileNavBar extends Component<MobileNavBarArgs> {
   @service public declare currentUser: CurrentUserService;
+  @service public declare session: any;
 
   menuItems: MenuItem[] = [
     {

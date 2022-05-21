@@ -41,13 +41,16 @@ export default class TripController extends Controller {
   @tracked public model!: Trip;
   @tracked public placeMarkerTimeout: any;
   @tracked public isEdittingTip = false;
-  public defaultMapCenterLocation = { lat: 48.155004, lng: 11.4717963 };
   public defaultMapZoom = 5;
   public defaultMaxZoom = 20;
   declare geocoder: google.maps.Geocoder;
 
   get getTips() {
     return this.model.tips.sortBy('createdAt').reverse();
+  }
+
+  get defaultMapCenterLocation() {
+    return this.getTips.firstObject;
   }
 
   get getTipsWithoutNew() {
@@ -61,6 +64,28 @@ export default class TripController extends Controller {
     return `${window.location.protocol}//${
       window.location.host
     }${this.router.urlFor('trip-invite', this.model)}`;
+  }
+
+  get getCurrentLocation(): { lat: string; lng: string } | boolean {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position: GeolocationPosition) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          return pos;
+        },
+        () => {
+          return false;
+        }
+      );
+
+      return false;
+    } else {
+      return false;
+    }
   }
 
   @action
