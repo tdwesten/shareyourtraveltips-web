@@ -138,6 +138,7 @@
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "autoprefixer": "^10.4.4",
+    "ember-promise-helpers": "^2.0.0",
     "ember-promise-modals": "^3.0.1",
     "postcss": "^8.4.12",
     "postcss-import": "^14.1.0",

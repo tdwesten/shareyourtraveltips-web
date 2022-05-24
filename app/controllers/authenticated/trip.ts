@@ -41,6 +41,7 @@ export default class TripController extends Controller {
   @tracked public model!: Trip;
   @tracked public placeMarkerTimeout: any;
   @tracked public isEdittingTip = false;
+  @tracked public declare currentLocation: { lat: number; lng: number };
   public defaultMapZoom = 5;
   public defaultMaxZoom = 20;
   declare geocoder: google.maps.Geocoder;
@@ -66,26 +67,16 @@ export default class TripController extends Controller {
     }${this.router.urlFor('trip-invite', this.model)}`;
   }
 
-  get getCurrentLocation(): { lat: string; lng: string } | boolean {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position: GeolocationPosition) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
+  get getCurrentLocation() {
+    return this.currentLocation;
+  }
 
-          return pos;
-        },
-        () => {
-          return false;
-        }
-      );
-
-      return false;
-    } else {
-      return false;
-    }
+  navigatorLocation() {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      this.currentLocation = { lat: lat, lng: lng };
+    });
   }
 
   @action
@@ -250,6 +241,7 @@ export default class TripController extends Controller {
     this.geocoder = new google.maps.Geocoder();
 
     this.centralize();
+    this.navigatorLocation();
   }
 
   @action

@@ -1,18 +1,18 @@
 {{page-title @model.title}}
-<div class='fixed h-screen w-screen'>
+<div class='fixed w-screen h-screen'>
   <div class='hidden sm:block'>
     <AppHeader @isSmall={{true}} />
   </div>
   <MobileTopBar @title={{@model.title}}>
     {{#if @model.isTripOwner}}
       <button
-        class='w-10 h-10 text-white bg-orange-500 rounded-md mr-1'
+        class='w-10 h-10 mr-1 text-white bg-orange-500 rounded-md'
         {{on 'click' this.showContributors}}
       >
         <FaIcon @icon='user-group' />
       </button>
       <button
-        class='w-10 h-10 text-white bg-orange-500 rounded-md mr-1'
+        class='w-10 h-10 mr-1 text-white bg-orange-500 rounded-md'
         {{on 'click' this.editTrip}}
       >
         <FaIcon @icon='pen' />
@@ -20,7 +20,7 @@
     {{/if}}
   </MobileTopBar>
   <main
-    class='bg-gray-100 shadow absolute top-16 bottom-16 sm:bottom-0 left-0 flex flex-col right-0 sm:grid md:grid-cols-5 lg:grid-cols-7 grid-cols-1'
+    class='absolute left-0 right-0 flex flex-col grid-cols-1 bg-gray-100 shadow top-16 bottom-16 sm:bottom-0 sm:grid md:grid-cols-5 lg:grid-cols-7'
   >
     <div
       class='hidden md:col-span-2 sm:flex flex-col sm:h-[calc(100vh-4rem)] sm:border-r relative border-gray-300 overflow-x-scroll overflow-y-auto'
@@ -32,9 +32,9 @@
       />
       <TipList @tips={{this.getTipsWithoutNew}} @onOpen={{this.onTipClick}} />
     </div>
-    <div class='sm:col-span-3 relative lg:col-span-5 flex-1'>
+    <div class='relative flex-1 sm:col-span-3 lg:col-span-5'>
       {{#if this.map}}
-        <div class='absolute top-4 left-4 z-50 right-4 sm:flex hidden'>
+        <div class='absolute z-50 hidden top-4 left-4 right-4 sm:flex'>
           <Searchbox
             @searchQuery={{this.searchQuery}}
             @map={{this.map}}
@@ -75,6 +75,7 @@
             </map.overlay>
           {{/each}}
           {{#if this.getCurrentLocation}}
+            {{log this.getCurrentLocation}}
             <map.overlay
               {{! @ts-ignore }}
               @lat={{this.getCurrentLocation.lat}}
