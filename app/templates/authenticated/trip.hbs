@@ -42,51 +42,51 @@
           />
         </div>
       {{/if}}
-      {{#if this.getTips}}
-        <GMap
-          @lat={{this.defaultMapCenterLocation.lat}}
-          @lng={{this.defaultMapCenterLocation.lng}}
-          class='w-full h-full'
-          @zoom={{this.defaultMapZoom}}
-          @panControl={{false}}
-          @fullscreenControl={{false}}
-          @streetViewControl={{false}}
-          @disableDefaultUI={{true}}
-          @zoomControl={{false}}
-          @maxZoom={{this.defaultMaxZoom}}
-          @onClick={{action this.onMapClick}}
-          @onDblclick={{action this.onMapDblClick}}
-          @onceOnIdle={{this.onMapLoad}}
-          as |map|
-        >
-          {{#each this.getTips as |tip|}}
-            <map.overlay
-              @lat={{tip.getLat}}
-              @lng={{tip.getLng}}
-              @onMouseover={{fn (mut tip.isHovered) true}}
-              @onMouseleave={{fn (mut tip.isHovered) false}}
-              @draggable={{true}}
-            >
-              <MapMarker
-                @tip={{tip}}
-                {{on 'click' (action this.onMarkerClick tip map)}}
-              />
 
-            </map.overlay>
-          {{/each}}
-          {{#if this.getCurrentLocation}}
-            {{log this.getCurrentLocation}}
-            <map.overlay
-              {{! @ts-ignore }}
-              @lat={{this.getCurrentLocation.lat}}
-              {{! @ts-ignore }}
-              @lng={{this.getCurrentLocation.lng}}
-            >
-              <CurrentLocationMarker />
-            </map.overlay>
-          {{/if}}
-        </GMap>
-      {{/if}}
+      <GMap
+        @lat={{this.defaultMapCenterLocation.lat}}
+        @lng={{this.defaultMapCenterLocation.lng}}
+        class='w-full h-full'
+        @zoom={{this.defaultMapZoom}}
+        @panControl={{false}}
+        @fullscreenControl={{false}}
+        @streetViewControl={{false}}
+        @disableDefaultUI={{true}}
+        @zoomControl={{false}}
+        @maxZoom={{this.defaultMaxZoom}}
+        @onClick={{action this.onMapClick}}
+        @onDblclick={{action this.onMapDblClick}}
+        @onceOnIdle={{this.onMapLoad}}
+        as |map|
+      >
+        {{#each this.getTips as |tip|}}
+          <map.overlay
+            @lat={{tip.getLat}}
+            @lng={{tip.getLng}}
+            @onMouseover={{fn (mut tip.isHovered) true}}
+            @onMouseleave={{fn (mut tip.isHovered) false}}
+            @draggable={{true}}
+          >
+            <MapMarker
+              @tip={{tip}}
+              {{on 'click' (action this.onMarkerClick tip map)}}
+            />
+
+          </map.overlay>
+        {{/each}}
+        {{#if this.getCurrentLocation}}
+          {{log this.getCurrentLocation}}
+          <map.overlay
+            {{! @ts-ignore }}
+            @lat={{this.getCurrentLocation.lat}}
+            {{! @ts-ignore }}
+            @lng={{this.getCurrentLocation.lng}}
+          >
+            <CurrentLocationMarker />
+          </map.overlay>
+        {{/if}}
+      </GMap>
+
     </div>
   </main>
 </div>
