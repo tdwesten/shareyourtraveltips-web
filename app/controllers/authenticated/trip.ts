@@ -51,20 +51,15 @@ export default class TripController extends Controller {
   }
 
   get defaultMapCenterLocation() {
-    return this.getTips.firstObject;
+    return {
+      lat: 49.8453321,
+      lng: 9.9034641,
+    };
   }
 
   get getTipsWithoutNew() {
     // @ts-expect-error isNew is not typed
     return this.getTips.filterBy('isNew', false);
-  }
-
-  get shareLink() {
-    this.model.inviteContributor({ email: 'henk@example.com' });
-
-    return `${window.location.protocol}//${
-      window.location.host
-    }${this.router.urlFor('trip-invite', this.model)}`;
   }
 
   get getCurrentLocation() {
